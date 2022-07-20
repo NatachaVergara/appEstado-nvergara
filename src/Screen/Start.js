@@ -18,7 +18,7 @@ const Start = ({ onLogin, onRegister }) => {
             <Card style={styles.cardContainer}>
                 <View style={styles.buttonContainer}>
                     <Button title='Login' onPress={onHandleLogin} color={Colors.secondary} />
-                    <Button title='Register' onPress={onHandleRegister} color={Colors.secondary} />
+                    <Button title='Registro' onPress={onHandleRegister} color={Colors.secondary} />
                 </View>
             </Card>
         </SafeAreaView>

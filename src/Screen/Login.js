@@ -5,7 +5,7 @@ import Input from '../Components/Input'
 import TextLAbel from '../Components/TextLabel'
 import Title from '../Components/Title'
 import Colors from '../Constants/Colors'
-const Login = ({ onRegister, onLogin }) => {
+const Login = ({ onRegister, onLogin, onHome }) => {
   const [email, onChangeEmail] = useState('')
   const [password, onChangePassword] = useState('')
   const register = () => {
@@ -24,6 +24,7 @@ const Login = ({ onRegister, onLogin }) => {
     setTimeout(() => {
       onRegister(false)
       onLogin(false)
+      onHome(true)
     }, 3000)
 
 
@@ -36,8 +37,10 @@ const Login = ({ onRegister, onLogin }) => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView >
+    <SafeAreaView style={styles.container} >
+      <ScrollView 
+       showsVerticalScrollIndicator={false}
+      >
         <Title
           title={'Login'}
           style={styles.title}
@@ -72,6 +75,7 @@ const Login = ({ onRegister, onLogin }) => {
           change={register}
           onReturn={onReturn}
         />
+        
       </ScrollView>
     </SafeAreaView>
   )

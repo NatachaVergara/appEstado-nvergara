@@ -44,7 +44,9 @@ const Register = ({ onRegister, onLogin }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView >
+      <ScrollView 
+       showsVerticalScrollIndicator={false}
+       >
         <Title
           title={'Registro'}
           style={styles.title}

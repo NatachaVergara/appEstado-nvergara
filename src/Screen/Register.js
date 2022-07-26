@@ -6,16 +6,17 @@ import TextLAbel from '../Components/TextLabel'
 import Title from '../Components/Title'
 import Colors from '../Constants/Colors'
 
-const Register = ({ onRegister, onLogin }) => {
+const Register = () => {
+  // { onRegister, onLogin }
   const [email, onChangeEmail] = useState('')
   const [password, onChangePassword] = useState('')
   const [confirmedPassword, onChangeConfirmedPassword] = useState('')
   const [nombre, onChangeName] = useState('')
 
-  const login = () => {
-    onRegister(false)
-    onLogin(true)
-  }
+  // const login = () => {
+  //   onRegister(false)
+  //   onLogin(true)
+  // }
 
 
 
@@ -30,17 +31,17 @@ const Register = ({ onRegister, onLogin }) => {
       return
     }
 
-    Alert.alert(`Bienvenido/a ${nombre}`)
-    setTimeout(() => {
-      onRegister(false)
-      onLogin(true)
-    }, 3000)
+    // Alert.alert(`Bienvenido/a ${nombre}`)
+    // setTimeout(() => {
+    //   onRegister(false)
+    //   onLogin(true)
+    // }, 3000)
 
   }
-  const onReturn = () => {
-    onRegister(false)
-    onLogin(false)
-  }
+  // const onReturn = () => {
+  //   onRegister(false)
+  //   onLogin(false)
+  // }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -99,7 +100,7 @@ const Register = ({ onRegister, onLogin }) => {
           />
 
 
-          <Button title='Entrar' onPress={handleRegister} color={Colors.secondary} />
+          <Button title='Entrar' color={Colors.secondary} />
         </Card>
         <TextLAbel
           text={'Ya tengo cuenta'}

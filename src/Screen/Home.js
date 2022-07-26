@@ -3,10 +3,11 @@ import { Button, FlatList, Image, SafeAreaView, StyleSheet, Text, View } from 'r
 import Card from '../Components/Card'
 import Colors from '../Constants/Colors'
 
-const Home = ({ onHome, onLogin, onRegister }) => {
-  const logOut = () => {
-    onHome(false), onLogin(false), onRegister(false)
-  }
+const Home = () => {
+  // { onHome, onLogin, onRegister }
+  // const logOut = () => {
+  //   onHome(false), onLogin(false), onRegister(false)
+  // }
 
 
   const libros = [{
@@ -26,7 +27,7 @@ const Home = ({ onHome, onLogin, onRegister }) => {
       <View style={styles.buttonContainer}  >
         <Button
           title="Salir"
-          onPress={logOut}
+         
           color={Colors.primary}
         />
       </View>

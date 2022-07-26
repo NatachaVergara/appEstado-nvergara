@@ -3,10 +3,11 @@ import { Button, SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import Card from '../Components/Card'
 import Title from '../Components/Title'
 import Colors from '../Constants/Colors'
-const Start = ({ onLogin, onRegister }) => {
-    const onHandleLogin = () => onLogin(true)
+const Start = () => {
+    // { onLogin, onRegister }
+    // const onHandleLogin = () => onLogin(true)
 
-    const onHandleRegister = () => onRegister(true)
+    // const onHandleRegister = () => onRegister(true)
 
 
     return (
@@ -17,8 +18,8 @@ const Start = ({ onLogin, onRegister }) => {
             />
             <Card style={styles.cardContainer}>
                 <View style={styles.buttonContainer}>
-                    <Button title='Login' onPress={onHandleLogin} color={Colors.secondary} />
-                    <Button title='Registro' onPress={onHandleRegister} color={Colors.secondary} />
+                    <Button title='Login'color={Colors.secondary} />
+                    <Button title='Registro' color={Colors.secondary} />
                 </View>
             </Card>
         </SafeAreaView>

@@ -5,13 +5,14 @@ import Input from '../Components/Input'
 import TextLAbel from '../Components/TextLabel'
 import Title from '../Components/Title'
 import Colors from '../Constants/Colors'
-const Login = ({ onRegister, onLogin, onHome }) => {
+const Login = () => {
+  // { onRegister, onLogin, onHome }
   const [email, onChangeEmail] = useState('')
   const [password, onChangePassword] = useState('')
-  const register = () => {
-    onRegister(true)
-    onLogin(false)
-  }
+  // const register = () => {
+  //   onRegister(true)
+  //   onLogin(false)
+  // }
 
   const login = () => {
 
@@ -21,20 +22,20 @@ const Login = ({ onRegister, onLogin, onHome }) => {
     }
 
    
-    setTimeout(() => {
-      onRegister(false)
-      onLogin(false)
-      onHome(true)
-    }, 3000)
+    // setTimeout(() => {
+    //   onRegister(false)
+    //   onLogin(false)
+    //   onHome(true)
+    // }, 3000)
 
 
   }
 
 
-  const onReturn = () => {
-    onRegister(false)
-    onLogin(false)
-  }
+  // const onReturn = () => {
+  //   onRegister(false)
+  //   onLogin(false)
+  // }
 
   return (
     <SafeAreaView style={styles.container} >
@@ -68,12 +69,12 @@ const Login = ({ onRegister, onLogin, onHome }) => {
             value={password}
             onChangeText={onChangePassword}
           />
-          <Button title='Entrar' onPress={login} color={Colors.secondary} />
+          <Button title='Entrar' color={Colors.secondary} />
         </Card>
         <TextLAbel
           text={'No tengo cuenta'}
-          change={register}
-          onReturn={onReturn}
+          // change={register}
+          // onReturn={onReturn}
         />
         
       </ScrollView>

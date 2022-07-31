@@ -2,32 +2,15 @@ import React from 'react'
 import { Button, FlatList, Image, SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import Card from '../Components/Card'
 import Colors from '../Constants/Colors'
-
+import {libros} from '../Data/Libros'
 const Home = () => {
-  // { onHome, onLogin, onRegister }
-  // const logOut = () => {
-  //   onHome(false), onLogin(false), onRegister(false)
-  // }
 
-
-  const libros = [{
-    id: 1,
-    titulo: 'El principito',
-    url: 'https://cdn.culturagenial.com/es/imagenes/4475-el-principito-3c_sm.jpg',
-    autor: ' Antoine de Saint-Exupéry'
-  },
-
-  {
-    id: 2, titulo: 'Persuación',
-    url: 'https://images.cdn2.buscalibre.com/fit-in/360x360/67/50/67506f52061e2746c0b6b40b5dfebdba.jpg', autor: 'Jane Austen'
-  }]
 
   return (
     <SafeAreaView style={styles.container} >
       <View style={styles.buttonContainer}  >
         <Button
           title="Salir"
-         
           color={Colors.primary}
         />
       </View>
@@ -38,12 +21,16 @@ const Home = () => {
         keyExtractor={item => item.id}
         showsVerticalScrollIndicator={false}
         renderItem={
-          ({ item, index }) =>
+          ({ item }) =>
             <Card style={styles.card}>
               <Text style={styles.label}> {item.titulo} </Text>
               <Image source={{ uri: item.url }}
                 style={{ width: 100, height: 100 }} />
               <Text style={styles.label}> {item.autor} </Text>
+              <Text style={styles.label}>Precio ${item.precio} </Text>
+              <Button 
+                title={'Ver mas..'}
+              />
             </Card>
 
         }
@@ -64,7 +51,7 @@ const styles = StyleSheet.create({
     marginTop: '10%',
     justifyContent: "center",
     alignItems: "center",
-   marginLeft: 30
+    marginLeft: 30
   },
   label: {
     color: 'red',
@@ -76,7 +63,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     paddingHorizontal: 15,
-    marginBottom:15
+    marginBottom: 15
   }
 
 })

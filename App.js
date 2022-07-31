@@ -1,13 +1,7 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Header from './src/Components/Header';
-import Login from './src/Screen/Login';
-import Register from './src/Screen/Register';
-import Start from './src/Screen/Start';
-
+import { StyleSheet } from 'react-native';
 import { useFonts } from 'expo-font'
 import AppLoading from 'expo-app-loading'
-import Home from './src/Screen/Home';
 import AppNavigator from './src/Navigation/AppNavigator';
 
 

@@ -6,7 +6,7 @@ import TextLAbel from '../Components/TextLabel'
 import Title from '../Components/Title'
 import Colors from '../Constants/Colors'
 
-const Register = () => {
+const Register = ({ navigation }) => {
   // { onRegister, onLogin }
   const [email, onChangeEmail] = useState('')
   const [password, onChangePassword] = useState('')
@@ -22,32 +22,30 @@ const Register = () => {
 
   const handleRegister = () => {
 
-    if(email === ''|| password === '' || confirmedPassword === '' || nombre === ''){
+    if (email === '' || password === '' || confirmedPassword === '' || nombre === '') {
       Alert.alert('No deje campos vacios')
       return
     }
-    if(password !==confirmedPassword){
+    if (password !== confirmedPassword) {
       Alert.alert('Las contraseñas no coinciden')
       return
     }
 
-    // Alert.alert(`Bienvenido/a ${nombre}`)
-    // setTimeout(() => {
-    //   onRegister(false)
-    //   onLogin(true)
-    // }, 3000)
+
+   
+    setTimeout(() => {
+      navigation.navigate('Home')
+      Alert.alert(`Bienvenido/a ${nombre}`)
+    }, 3000)
 
   }
-  // const onReturn = () => {
-  //   onRegister(false)
-  //   onLogin(false)
-  // }
+
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView 
-       showsVerticalScrollIndicator={false}
-       >
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+      >
         <Title
           title={'Registro'}
           style={styles.title}
@@ -74,7 +72,7 @@ const Register = () => {
             value={password}
             onChangeText={onChangePassword}
             maxLength={10}
-            
+
           />
           <Text style={styles.label}>Repetir contraseña</Text>
           <Input
@@ -85,7 +83,7 @@ const Register = () => {
             autoCorrect={false}
             secureTextEntry={true}
             value={confirmedPassword}
-            onChangeText={onChangeConfirmedPassword}            
+            onChangeText={onChangeConfirmedPassword}
             maxLength={10}
           />
           <Text style={styles.label}>Nombre completo</Text>
@@ -100,12 +98,12 @@ const Register = () => {
           />
 
 
-          <Button title='Entrar' color={Colors.secondary} />
+          <Button title='Entrar' color={Colors.secondary} onPress={handleRegister} />
         </Card>
         <TextLAbel
           text={'Ya tengo cuenta'}
-          change={login}
-          onReturn={onReturn}
+          change={() => { navigation.navigate('Login') }}
+          onReturn={() => { navigation.navigate('Inicio') }}
         />
       </ScrollView>
     </SafeAreaView>
@@ -118,14 +116,15 @@ const styles = StyleSheet.create({
 
   },
   title: {
-    marginLeft: 50
+    marginLeft: 60
   },
 
   card: {
     marginTop: '20%',
     width: 300,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginLeft: '8%'
   },
   label: {
     color: Colors.text,

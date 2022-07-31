@@ -5,42 +5,32 @@ import Input from '../Components/Input'
 import TextLAbel from '../Components/TextLabel'
 import Title from '../Components/Title'
 import Colors from '../Constants/Colors'
-const Login = () => {
-  // { onRegister, onLogin, onHome }
+const Login = ({ navigation }) => {
+
   const [email, onChangeEmail] = useState('')
   const [password, onChangePassword] = useState('')
-  // const register = () => {
-  //   onRegister(true)
-  //   onLogin(false)
-  // }
 
-  const login = () => {
+  const handleLogin = () => {
 
     if (email === '' || password === '') {
       Alert.alert('No deje campos vacios')
       return
     }
 
-   
-    // setTimeout(() => {
-    //   onRegister(false)
-    //   onLogin(false)
-    //   onHome(true)
-    // }, 3000)
+
+    setTimeout(() => {
+      navigation.navigate('Home')
+      Alert.alert(`Bienvenido/a`)
+    }, 3000)
 
 
   }
 
 
-  // const onReturn = () => {
-  //   onRegister(false)
-  //   onLogin(false)
-  // }
-
   return (
     <SafeAreaView style={styles.container} >
-      <ScrollView 
-       showsVerticalScrollIndicator={false}
+      <ScrollView
+        showsVerticalScrollIndicator={false}
       >
         <Title
           title={'Login'}
@@ -69,14 +59,14 @@ const Login = () => {
             value={password}
             onChangeText={onChangePassword}
           />
-          <Button title='Entrar' color={Colors.secondary} />
+          <Button title='Entrar' color={Colors.secondary} onPress={handleLogin} />
         </Card>
         <TextLAbel
           text={'No tengo cuenta'}
-          // change={register}
-          // onReturn={onReturn}
+          change={() => { navigation.navigate('Register') }}
+          onReturn={() => { navigation.navigate('Inicio') }}
         />
-        
+
       </ScrollView>
     </SafeAreaView>
   )
@@ -85,18 +75,19 @@ const Login = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
+   
   },
   title: {
     marginTop: 50,
-    marginLeft: 65
+    marginLeft: 90
   },
 
   card: {
     marginTop: '20%',
     width: 300,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginLeft: '8%'
   },
   label: {
     color: Colors.text,

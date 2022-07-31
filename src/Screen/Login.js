@@ -19,8 +19,7 @@ const Login = ({ navigation }) => {
 
 
     setTimeout(() => {
-      navigation.navigate('Home')
-      Alert.alert(`Bienvenido/a`)
+      navigation.navigate('Home')     
     }, 3000)
 
 

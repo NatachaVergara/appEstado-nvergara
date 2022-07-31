@@ -1,7 +1,7 @@
 export const autores = [
     {
         id: 1,
-        autor: 'J.K.Rowling',
+        autor: 'J. K. Rowling',
        
     },
     {

@@ -3,13 +3,14 @@ import { FlatList } from 'react-native'
 import LibrosxAutorItem from '../Components/LibrosxAutorItem'
 import { libros } from '../Data/libros'
 
-const LibrosXAutor = ({ navigation, route }) => {
+const LibrosXAutorScreen = ({ navigation, route }) => {
   const books = libros.filter(libro => libro.autor === route.params.autorId)
 
   const handleSelected = (item) => {
     navigation.navigate('Detalle'), {
       productId: item.id,
-      titulo: item.titulo
+      titulo: item.titulo,
+      item: item
     }
   }
 
@@ -33,4 +34,4 @@ const LibrosXAutor = ({ navigation, route }) => {
   )
 }
 
-export default LibrosXAutor
+export default LibrosXAutorScreen

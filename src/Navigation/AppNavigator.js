@@ -6,7 +6,8 @@ import Register from '../Screen/Register';
 import Login from '../Screen/Login';
 import Colors from '../Constants/Colors';
 import AutoresScreen from '../Screen/AutoresScreen';
-import LibrosXAutor from '../Screen/LibrosXAutor';
+import LibrosXAutorScreen from '../Screen/LibrosXAutorScreen';
+import LibroDetailSCreen from '../Screen/LibroDetailSCreen';
 
 
 
@@ -33,15 +34,24 @@ const AppNavigator = () => {
                 <Stack.Screen name="Register" component={Register} />
                 <Stack.Screen name="Home" component={AutoresScreen}
                     options={{
-                        title: 'Libros por autor'
+                        title: 'Autores'
                     }} />
 
                 <Stack.Screen
                     name='LibrosxAutor'
-                    component={LibrosXAutor}
+                    component={LibrosXAutorScreen}
                     options={({ route }) => ({
-                        options: route.params.autor
+                        title: route.params.autor
                     })}
+                />
+                <Stack.Screen
+                    name='Detalle'
+                    component={LibroDetailSCreen}
+                    options={({ route }) =>
+                    ({
+                        title: route.params.titulo,
+                    })
+                    }
                 />
 
 

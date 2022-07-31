@@ -8,7 +8,7 @@ const AutoresScreen = ({ navigation }) => {
   const handleAutor = (item) => {
     navigation.navigate('LibrosxAutor', {
       autorId: item.id,
-      nombre: item.autor
+      autor: item.autor
     })
   }
 

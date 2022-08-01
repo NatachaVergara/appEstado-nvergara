@@ -1,25 +1,20 @@
 import React from 'react'
 import { FlatList } from 'react-native'
-import LibrosxAutorItem from '../Components/LibrosxAutorItem'
+import LibroItem from '../Components/LibroItem'
 import { libros } from '../Data/libros'
+
 
 const LibrosXAutorScreen = ({ navigation, route }) => {
   const books = libros.filter(libro => libro.autor === route.params.autorId)
 
   const handleSelected = (item) => {
-    navigation.navigate('Detalle'), {
-      productId: item.id,
-      titulo: item.titulo,
-      item: item
-    }
+    console.log(item)
+    navigation.navigate('Detalle', {
+      libro: item  
+    })
   }
 
-  const renderLibrosxAutor = ({ item }) => (
-    <LibrosxAutorItem
-      item={item}
-      onSelected={handleSelected}
-    />
-  )
+  const renderLibrosxAutor = ({ item }) => (<LibroItem  item={item} onSelected={handleSelected} /> )
 
 
   return (

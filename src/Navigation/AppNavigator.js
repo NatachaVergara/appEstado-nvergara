@@ -47,11 +47,9 @@ const AppNavigator = () => {
                 <Stack.Screen
                     name='Detalle'
                     component={LibroDetailSCreen}
-                    options={({ route }) =>
-                    ({
-                        title: route.params.titulo,
-                    })
-                    }
+                    options={({ route }) => ({
+                        title: route.params.libro.titulo
+                    })}
                 />
 
 

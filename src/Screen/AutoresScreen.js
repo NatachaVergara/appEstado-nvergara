@@ -12,12 +12,7 @@ const AutoresScreen = ({ navigation }) => {
     })
   }
 
-  const renderGridItem = ({ item }) => (
-    <GridItem
-      item={item}
-      onSelected={handleAutor}
-    />
-    )
+  const renderGridItem = ({ item }) => ( <GridItem  item={item}  onSelected={handleAutor} />  )
   
   return (
     <FlatList

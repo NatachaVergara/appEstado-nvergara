@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
-const LibrosxAutorItem = ({ item, onSelected }) => {
+const LibroItem = ({ item, onSelected }) => {
     return (
         <TouchableOpacity onPress={() => onSelected(item)}>
             <View style={styles.autorItem}>
@@ -12,14 +12,14 @@ const LibrosxAutorItem = ({ item, onSelected }) => {
                     <Text style={styles.detail}>${item.precio} </Text>
                 </View>
                 <View>
-                    <Text style={styles.detail}>Dispobible: {item.dispobible === 0 ? 'no' : 'si'}  </Text>
+                    <Text style={styles.detail}>Dispobible: {item.stock <= 0 ? 'NO' : 'SI'}  </Text>
                 </View>
             </View>
         </TouchableOpacity>
     )
 }
 
-export default LibrosxAutorItem
+export default LibroItem
 
 const styles = StyleSheet.create({
     autorItem: {

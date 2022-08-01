@@ -19,7 +19,7 @@ const Login = ({ navigation }) => {
 
 
     setTimeout(() => {
-      navigation.navigate('Home')     
+      navigation.navigate('ShopTab')     
     }, 3000)
 
 

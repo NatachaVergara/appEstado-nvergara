@@ -10,7 +10,9 @@ const LibrosXAutorScreen = ({ navigation, route }) => {
   const handleSelected = (item) => {
     console.log(item)
     navigation.navigate('Detalle', {
-      libro: item  
+      libro: item,
+      volver: 'LibrosxAutor'
+     
     })
   }
 

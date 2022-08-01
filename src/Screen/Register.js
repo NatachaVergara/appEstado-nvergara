@@ -34,7 +34,7 @@ const Register = ({ navigation }) => {
 
    
     setTimeout(() => {
-      navigation.navigate('Home')
+      navigation.navigate('ShopTab')
       Alert.alert(`Bienvenido/a ${nombre}`)
     }, 3000)
 

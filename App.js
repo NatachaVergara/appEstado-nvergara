@@ -1,8 +1,9 @@
-import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useFonts } from 'expo-font'
 import AppLoading from 'expo-app-loading'
-import AppNavigator from './src/Navigation/AppNavigator';
+import MainNavigation from './src/Navigation/MainNavigation';
+
+
 
 
 
@@ -14,7 +15,7 @@ export default function App() {
   if (!loaded) return <AppLoading />
 
   return (
-    <AppNavigator />
+    <MainNavigation />
 
   );
 }

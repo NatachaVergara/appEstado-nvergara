@@ -4,6 +4,7 @@ import { Button, Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 
 const LibroDetailSCreen = ({ route }) => {
   const { libro } = route.params
 
+  console.log(route.params)
 
   return (
 
@@ -22,12 +23,12 @@ const LibroDetailSCreen = ({ route }) => {
           <Text style={styles.precio} > ${libro.precio} </Text>
         </View>
 
-      <View style={styles.diponibleContainer}>
-      <Text style={libro.stock <= 0 ? styles.noStock : null}> Stock: {libro.stock <= 0 ? 'Fuera de Stock' : libro.stock}  </Text>
-      </View>
+        <View style={styles.diponibleContainer}>
+          <Text style={libro.stock <= 0 ? styles.noStock : null}> Stock: {libro.stock <= 0 ? 'Fuera de Stock' : libro.stock}  </Text>
+        </View>
 
         <View style={styles.buttons}>
-          <Button title={'volver'} />
+          <Button title={'volver'}  />
           <Button title={'Agregar'} />
         </View>
       </ScrollView>
@@ -73,13 +74,13 @@ const styles = StyleSheet.create({
   precio: {
     fontSize: 20,
   },
-  noStock:{
-    color:'red'
+  noStock: {
+    color: 'red'
   },
   buttons: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginBottom: 10,
+    marginBottom: 150,
     alignItems: 'center',
     margin: 20
   }

@@ -17,7 +17,7 @@ const AutoresScreen = ({ navigation }) => {
   const handleAutor = (item) => {
    // console.log('item', item)
     dispatch(selectAutor(item.id))
-    navigation.navigate('LibrosxAutor', {     
+    navigation.navigate('LibrosScreen', {     
       autor: item.autor
     })
   }

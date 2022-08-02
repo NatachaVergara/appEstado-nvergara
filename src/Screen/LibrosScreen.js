@@ -10,7 +10,7 @@ import { selectLibro, filteredLibros } from '../Store/actions/libros.action'
 
 
 
-const LibrosXAutorScreen = ({ navigation }) => {
+const LibrosScreen = ({ navigation }) => {
   const dispatch = useDispatch()
   const librosFIltrados = useSelector(store => store.libros.filteredLibros)
   const autor = useSelector(store => store.autores.selected)
@@ -27,9 +27,9 @@ const LibrosXAutorScreen = ({ navigation }) => {
   const handleSelected = (item) => {
     console.log('item', item)
     dispatch(selectLibro(item.id))
-    navigation.navigate('Detalle', {
+    navigation.navigate('LibroDetalleScreen', {
       libro: item,
-      volver: 'LibrosxAutor'
+      volver: 'LibrosScreen'
 
     })
   }
@@ -52,4 +52,4 @@ const LibrosXAutorScreen = ({ navigation }) => {
   )
 }
 
-export default LibrosXAutorScreen
+export default LibrosScreen

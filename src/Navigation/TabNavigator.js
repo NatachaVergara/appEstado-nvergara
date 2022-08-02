@@ -5,7 +5,7 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 import { StyleSheet, Text, View } from 'react-native'
 import ShopNavigator from './ShopNavigator'
 import InicioNavigator from './InicioNavigator'
-import CartNavigator from './CartNavigator';
+import CarritoNavigator from './CarritoNavigator';
 import OrdersNavigator from './OrdersNavigator';
 
 
@@ -51,8 +51,8 @@ const TabNavigator = () => {
 
 
             <BottomsTabs.Screen
-                name="CartTab"
-                component={CartNavigator}
+                name="CarritoTab"
+                component={CarritoNavigator}
                 options={{
                     tabBarIcon: () => (
                         <View style={styles.IconContainer}>

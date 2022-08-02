@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 const CarritoScreen = () => {
     const items = useSelector(store => store.carrito.carrito)
+    
     console.log('carrito', items)
     const total = 2000
 

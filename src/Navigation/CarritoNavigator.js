@@ -6,9 +6,9 @@ import CarritoScreen from '../Screen/CarritoScreen';
 
 const Stack = createNativeStackNavigator();
 
-const CartNavigator = () => 
+const CarritoNavigator = () => 
     (
-        <Stack.Navigator initialRouteName="Cart"
+        <Stack.Navigator initialRouteName="Carrito"
             screenOptions={{
                 headerStyle: {
                     backgroundColor: Platform.OS === 'android' ? Colors.primary : '',
@@ -22,7 +22,7 @@ const CartNavigator = () =>
         >
 
             <Stack.Screen
-                name='Cart'
+                name='Carrito'
                 component={CarritoScreen}
                 options={{
                     title: 'Carrito'
@@ -38,4 +38,4 @@ const CartNavigator = () =>
 
     )
 
-export default CartNavigator
+export default CarritoNavigator

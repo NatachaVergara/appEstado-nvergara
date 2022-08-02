@@ -1,7 +1,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AutoresScreen from '../Screen/AutoresScreen';
-import LibrosXAutorScreen from '../Screen/LibrosXAutorScreen';
+import LibrosScreen from '../Screen/LibrosScreen';
 import LibroDetailSCreen from '../Screen/LibroDetailSCreen';
 
 
@@ -13,21 +13,21 @@ const ShopNavigator = () => {
     return (
 
         <Stack.Navigator>
-            <Stack.Screen name="Home"
+            <Stack.Screen name="AutoresScreen"
                 component={AutoresScreen}
                 options={{
                     title: 'Autores'
                 }} />
 
             <Stack.Screen
-                name='LibrosxAutor'
-                component={LibrosXAutorScreen}
+                name='LibrosScreen'
+                component={LibrosScreen}
                 options={({ route }) => ({
                     title: route.params.autor
                 })}
             />
             <Stack.Screen
-                name='Detalle'
+                name='LibroDetalleScreen'
                 component={LibroDetailSCreen}
                 options={({ route }) => ({
                     title: route.params.libro.titulo

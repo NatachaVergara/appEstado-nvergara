@@ -7,16 +7,12 @@ import Title from '../Components/Title'
 import Colors from '../Constants/Colors'
 
 const Register = ({ navigation }) => {
-  // { onRegister, onLogin }
+ 
   const [email, onChangeEmail] = useState('')
   const [password, onChangePassword] = useState('')
   const [confirmedPassword, onChangeConfirmedPassword] = useState('')
   const [nombre, onChangeName] = useState('')
 
-  // const login = () => {
-  //   onRegister(false)
-  //   onLogin(true)
-  // }
 
 
 

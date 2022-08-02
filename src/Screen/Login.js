@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Alert, Button, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Alert, Button, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import Card from '../Components/Card'
 import Input from '../Components/Input'
 import TextLAbel from '../Components/TextLabel'
@@ -19,8 +19,8 @@ const Login = ({ navigation }) => {
 
 
     setTimeout(() => {
-      navigation.navigate('ShopTab')     
-    }, 3000)
+      navigation.navigate('ShopTab')
+    }, 2000)
 
 
   }
@@ -58,7 +58,9 @@ const Login = ({ navigation }) => {
             value={password}
             onChangeText={onChangePassword}
           />
-          <Button title='Entrar' color={Colors.secondary} onPress={handleLogin} />
+          <TouchableOpacity onPress={handleLogin}  >
+            <Text style={styles.button}>Entrar</Text>
+          </TouchableOpacity>
         </Card>
         <TextLAbel
           text={'No tengo cuenta'}
@@ -74,7 +76,7 @@ const Login = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-   
+
   },
   title: {
     marginTop: 50,
@@ -107,10 +109,10 @@ const styles = StyleSheet.create({
 
   },
   button: {
-    padding: 10,
-    backgroundColor: 'white',
-    color: 'black',
-    width: 100
+    color: Colors.secondary,
+    fontSize: 20,
+    marginTop: 20,
+    fontFamily: 'CormorantSCBold'
   }
 
 

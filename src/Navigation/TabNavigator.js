@@ -1,14 +1,17 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
+import Ionicons from '@expo/vector-icons/Ionicons'
 import { StyleSheet, Text, View } from 'react-native'
 import ShopNavigator from './ShopNavigator'
 import InicioNavigator from './InicioNavigator'
+import CartNavigator from './CartNavigator';
+import OrdersNavigator from './OrdersNavigator';
 
 
 
 const BottomsTabs = createBottomTabNavigator()
+
 const TabNavigator = () => {
     return (
         <BottomsTabs.Navigator
@@ -19,7 +22,7 @@ const TabNavigator = () => {
             }}>
 
             <BottomsTabs.Screen
-                name='Inicio'
+                name='InicioTab'
                 component={InicioNavigator}
                 options={{
                     tabBarIcon: () => (
@@ -45,6 +48,35 @@ const TabNavigator = () => {
             />
 
 
+
+
+            <BottomsTabs.Screen
+                name="CartTab"
+                component={CartNavigator}
+                options={{
+                    tabBarIcon: () => (
+                        <View style={styles.IconContainer}>
+                            <Ionicons name='md-cart' style={styles.icon} />
+                        </View>
+                    )
+                }}
+            />
+
+
+
+
+            <BottomsTabs.Screen
+                name='OrdersTab'
+                component={OrdersNavigator}
+                options={{
+                    tabBarIcon: () => (
+                        <View styles={styles.IconContainer}>
+                            <Ionicons name='library-outline' style={styles.icon} />
+                        </View>
+                    )
+                }}
+
+            />
         </BottomsTabs.Navigator>
 
 

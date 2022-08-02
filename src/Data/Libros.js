@@ -11,7 +11,8 @@ export const libros = [
     },
 
     {
-        id: 2, titulo: 'Persuación',
+        id: 2, 
+        titulo: 'Persuación',
         url: 'https://images.cdn2.buscalibre.com/fit-in/360x360/67/50/67506f52061e2746c0b6b40b5dfebdba.jpg',
         precio: 750,
         autor: 2,
@@ -30,7 +31,8 @@ export const libros = [
         stock: 0
     },
     {
-        id: 4, titulo: 'Harry Potter 1',
+        id: 4, 
+        titulo: 'Harry Potter 1',
         subTitulo: 'Harry Potter y la piedra filosofal',
         url: 'https://images-na.ssl-images-amazon.com/images/I/51lEw8wGCPL._SX312_BO1,204,203,200_.jpg',
         precio: 1000,
@@ -40,14 +42,15 @@ export const libros = [
         stock: 50
     },
     {
-        id: 5, titulo: 'Harry Potter 2',
+        id: 5,
+         titulo: 'Harry Potter 2',
         subTitulo: 'Harry Potter y la cámara secreta',
         url: 'https://static.wikia.nocookie.net/esharrypotter/images/b/b6/Harry_Potter_y_la_Camara_Secreta_Portada_Espa%C3%B1ol.PNG/revision/latest/scale-to-width-down/313?cb=20151020165931',
         precio: 1000,
         autor: 1,
         dispobible: 0,
         sinopsis: 'Terminado el verano, Harry no ve la hora de abandonar la casa de sus odiosos tíos. Inesperadamente se presenta en su dormitorio Dobby, un elfo doméstico, que le anuncia que correrá un gran peligro si vuelve a Hogwarts.',
-        stock: 0
+        stock: 1
     },
 ]
 

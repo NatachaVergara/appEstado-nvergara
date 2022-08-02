@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Alert, Button, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Alert, Button, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import Card from '../Components/Card'
 import Input from '../Components/Input'
 import TextLAbel from '../Components/TextLabel'
@@ -32,12 +32,10 @@ const Register = ({ navigation }) => {
     }
 
 
-   
+
     setTimeout(() => {
       navigation.navigate('ShopTab')
-      Alert.alert(`Bienvenido/a ${nombre}`)
-    }, 3000)
-
+    }, 2000)
   }
 
 
@@ -97,8 +95,10 @@ const Register = ({ navigation }) => {
 
           />
 
+          <TouchableOpacity onPress={handleRegister}  >
+            <Text style={styles.button}>Entrar</Text>
+          </TouchableOpacity>
 
-          <Button title='Entrar' color={Colors.secondary} onPress={handleRegister} />
         </Card>
         <TextLAbel
           text={'Ya tengo cuenta'}
@@ -145,10 +145,11 @@ const styles = StyleSheet.create({
 
   },
   button: {
-    padding: 10,
-    backgroundColor: 'white',
-    color: 'black',
-    width: 100
+    color: Colors.secondary,
+    fontSize: 20,
+    marginTop: 20,
+    fontFamily:'CormorantSCBold'
+   
   }
 
 

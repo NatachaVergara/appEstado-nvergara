@@ -15,7 +15,7 @@ const Inicio = ({ navigation }) => {
             <Card style={styles.cardContainer}>
                 <View style={styles.buttonContainer}>
                     <Button title='Login' color={Colors.secondary} onPress={() => { navigation.navigate('Login') }} />
-                    
+
                     <Button title='Registro' color={Colors.secondary} onPress={() => { navigation.navigate('Register') }} />
                 </View>
             </Card>
@@ -38,8 +38,10 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingHorizontal: 15,
         marginTop: 20,
-        padding: 10
+        padding: 10,
+
     },
+
 
 })
 

@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native';
 import { useFonts } from 'expo-font'
 import AppLoading from 'expo-app-loading'
+//AppNavigation
 import MainNavigation from './src/Navigation/MainNavigation';
-
-
-
-
+//Redux
+import { Provider } from 'react-redux'
+import store from './src/Store'
 
 
 export default function App() {
@@ -13,18 +13,11 @@ export default function App() {
   const [loaded] = useFonts({ CormorantSCBold: require('./assets/fonts/CormorantSC-Bold.ttf'), SemiBold: require('./assets/fonts/CormorantSC-SemiBold.ttf'), light: require('./assets/fonts/CormorantSC-Light.ttf') })
 
   if (!loaded) return <AppLoading />
-
+  console.log(store)
   return (
-    <MainNavigation />
-
+    <Provider store={store}>
+      <MainNavigation />
+    </Provider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

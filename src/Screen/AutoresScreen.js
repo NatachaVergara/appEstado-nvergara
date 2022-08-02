@@ -1,19 +1,31 @@
 import React from 'react'
-import {FlatList} from 'react-native'
-import { autores } from '../Data/autores'
+import { FlatList } from 'react-native'
 import GridItem from '../Components/GridItem'
+
+//Reducer-Store
+import { useSelector, useDispatch } from 'react-redux'
+import { selectAutor } from '../Store/actions/autores.action'
+
+
 
 const AutoresScreen = ({ navigation }) => {
 
+  const autores = useSelector((store) =>  store.autores.autores )
+  //console.log('autores', autores)
+  const dispatch = useDispatch()
+
   const handleAutor = (item) => {
-    navigation.navigate('LibrosxAutor', {
-      autorId: item.id,
+   // console.log('item', item)
+    dispatch(selectAutor(item.id))
+    navigation.navigate('LibrosxAutor', {     
       autor: item.autor
     })
   }
 
-  const renderGridItem = ({ item }) => ( <GridItem  item={item}  onSelected={handleAutor} />  )
-  
+
+
+  const renderGridItem = ({ item }) => (<GridItem item={item} onSelected={handleAutor} />)
+
   return (
     <FlatList
       data={autores}

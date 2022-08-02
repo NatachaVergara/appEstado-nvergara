@@ -1,28 +1,49 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FlatList } from 'react-native'
 import LibroItem from '../Components/LibroItem'
-import { libros } from '../Data/libros'
 
 
-const LibrosXAutorScreen = ({ navigation, route }) => {
-  const books = libros.filter(libro => libro.autor === route.params.autorId)
+//Reducer-Store
+import { useSelector, useDispatch } from 'react-redux'
+//actions
+import { selectLibro, filteredLibros } from '../Store/actions/libros.action'
+
+
+
+const LibrosXAutorScreen = ({ navigation }) => {
+  const dispatch = useDispatch()
+  const librosFIltrados = useSelector(store => store.libros.filteredLibros)
+  const autor = useSelector(store => store.autores.selected)
+
+  console.log('Pantalla LibrosXAutorScreen')
+  console.log("librosFIltrados", librosFIltrados)
+  console.log("autor", autor)
+
+
+  useEffect(() => {
+    dispatch(filteredLibros(autor.id))
+  }, [])
 
   const handleSelected = (item) => {
-    console.log(item)
+    console.log('item', item)
+    dispatch(selectLibro(item.id))
     navigation.navigate('Detalle', {
       libro: item,
       volver: 'LibrosxAutor'
-     
+
     })
   }
 
-  const renderLibrosxAutor = ({ item }) => (<LibroItem  item={item} onSelected={handleSelected} /> )
+
+
+
+  const renderLibrosxAutor = ({ item }) => (<LibroItem item={item} onSelected={handleSelected} />)
 
 
   return (
 
     <FlatList
-      data={books}
+      data={librosFIltrados}
       keyExtractor={item => item.id}
       renderItem={renderLibrosxAutor}
     />

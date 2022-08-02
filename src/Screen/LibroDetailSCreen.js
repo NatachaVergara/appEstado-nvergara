@@ -1,10 +1,16 @@
 import React from 'react'
 import { Button, Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
+//redux
+import {useSelector} from 'react-redux'
 
-const LibroDetailSCreen = ({ route }) => {
-  const { libro } = route.params
 
-  console.log(route.params)
+
+const LibroDetailSCreen = () => {
+  const libro = useSelector(store => store.libros.selected)
+
+  
+
+  
 
   return (
 

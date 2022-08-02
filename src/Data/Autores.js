@@ -10,6 +10,6 @@ export const autores = [
     },
     {
         id: 3,
-        autor: ' Antoine de Saint-Exupéry',
+        autor: 'Antoine de Saint-Exupéry',
     }
 ]

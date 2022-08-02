@@ -13,7 +13,7 @@ export default function App() {
   const [loaded] = useFonts({ CormorantSCBold: require('./assets/fonts/CormorantSC-Bold.ttf'), SemiBold: require('./assets/fonts/CormorantSC-SemiBold.ttf'), light: require('./assets/fonts/CormorantSC-Light.ttf') })
 
   if (!loaded) return <AppLoading />
-  console.log(store)
+
   return (
     <Provider store={store}>
       <MainNavigation />

@@ -1,21 +1,28 @@
 import React from 'react'
 import { FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import CartItem from '../Components/CartItem'
-import { cart } from '../Data/Cart'
-const CartScreen = () => {
-    const items = cart
+//Reducer-Store
+import { useSelector, useDispatch } from 'react-redux'
+
+
+const CarritoScreen = () => {
+    const items = useSelector(store => store.carrito.carrito)
+    console.log('carrito', items)
     const total = 2000
 
     const handlerConfirm = () => { console.log('Confirmar carrito') }
     const handleDeleteItem = () => { console.log('Eliminar carrito') }
 
 
+
+
     const renderItem = ({ item }) => (
         <CartItem item={item} onDelete={handleDeleteItem} />
+
     )
 
     return (
-        <SafeAreaView  style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <View style={styles.listContainer}>
                 <FlatList
                     data={items}
@@ -44,7 +51,7 @@ const styles = StyleSheet.create({
         padding: 12,
         paddingBottom: 120,
         backgroundColor: '#fff',
-        
+
     },
     list: {
         flex: 1,
@@ -53,7 +60,7 @@ const styles = StyleSheet.create({
         padding: 12,
         borderColor: '#ccc',
         borderTopWidth: 1,
-        marginTop:50,
+        marginTop: 50,
         paddingBottom: 120
     },
     confirm: {
@@ -74,4 +81,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default CartScreen
+export default CarritoScreen

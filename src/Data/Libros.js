@@ -11,7 +11,7 @@ export const libros = [
     },
 
     {
-        id: 2, 
+        id: 2,
         titulo: 'Persuación',
         url: 'https://images.cdn2.buscalibre.com/fit-in/360x360/67/50/67506f52061e2746c0b6b40b5dfebdba.jpg',
         precio: 750,
@@ -31,7 +31,7 @@ export const libros = [
         stock: 0
     },
     {
-        id: 4, 
+        id: 4,
         titulo: 'Harry Potter 1',
         subTitulo: 'Harry Potter y la piedra filosofal',
         url: 'https://images-na.ssl-images-amazon.com/images/I/51lEw8wGCPL._SX312_BO1,204,203,200_.jpg',
@@ -43,7 +43,7 @@ export const libros = [
     },
     {
         id: 5,
-         titulo: 'Harry Potter 2',
+        titulo: 'Harry Potter 2',
         subTitulo: 'Harry Potter y la cámara secreta',
         url: 'https://static.wikia.nocookie.net/esharrypotter/images/b/b6/Harry_Potter_y_la_Camara_Secreta_Portada_Espa%C3%B1ol.PNG/revision/latest/scale-to-width-down/313?cb=20151020165931',
         precio: 1000,

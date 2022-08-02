@@ -12,20 +12,18 @@ import { selectLibro, filteredLibros } from '../Store/actions/libros.action'
 
 const LibrosScreen = ({ navigation }) => {
   const dispatch = useDispatch()
-  const librosFIltrados = useSelector(store => store.libros.filteredLibros)
+  const librosFiltrados = useSelector(store => store.libros.filteredLibros)
   const autor = useSelector(store => store.autores.selected)
 
-  console.log('Pantalla LibrosXAutorScreen')
-  console.log("librosFIltrados", librosFIltrados)
-  console.log("autor", autor)
 
+ 
 
   useEffect(() => {
     dispatch(filteredLibros(autor.id))
   }, [])
 
   const handleSelected = (item) => {
-    console.log('item', item)
+  
     dispatch(selectLibro(item.id))
     navigation.navigate('LibroDetalleScreen', {
       libro: item,
@@ -35,15 +33,13 @@ const LibrosScreen = ({ navigation }) => {
   }
 
 
-
-
   const renderLibrosxAutor = ({ item }) => (<LibroItem item={item} onSelected={handleSelected} />)
 
 
   return (
 
     <FlatList
-      data={librosFIltrados}
+      data={librosFiltrados}
       keyExtractor={item => item.id}
       renderItem={renderLibrosxAutor}
     />

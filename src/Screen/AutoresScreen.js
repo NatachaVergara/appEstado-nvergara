@@ -1,7 +1,6 @@
 import React from 'react'
 import { FlatList } from 'react-native'
 import GridItem from '../Components/GridItem'
-
 //Reducer-Store
 import { useSelector, useDispatch } from 'react-redux'
 import { selectAutor } from '../Store/actions/autores.action'
@@ -10,14 +9,14 @@ import { selectAutor } from '../Store/actions/autores.action'
 
 const AutoresScreen = ({ navigation }) => {
 
-  const autores = useSelector((store) =>  store.autores.autores )
-  //console.log('autores', autores)
+  const autores = useSelector(store => store.autores.autores)
   const dispatch = useDispatch()
 
+
   const handleAutor = (item) => {
-   // console.log('item', item)
+    // console.log('item', item)
     dispatch(selectAutor(item.id))
-    navigation.navigate('LibrosScreen', {     
+    navigation.navigate('LibrosScreen', {
       autor: item.autor
     })
   }

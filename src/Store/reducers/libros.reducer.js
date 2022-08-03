@@ -1,4 +1,4 @@
-import { libros } from '../../Data/libros'
+import { libros } from '../../Data/Libros'
 
 import { SELECT_LIBRO, FILTERED_LIBRO } from '../actions/libros.action'
 

@@ -1,8 +1,20 @@
-export const SELECT_ITEM = 'select_item'
-export const FILTERED_ITEM = 'filter_item'
+import {URL_API} from '../../Constants/database'
 
-export const selectItem = (id) => ({
-    type: SELECT_ITEM,
-    itemID: id
+export const ADD_ITEM = 'ADD_ITEM'
+export const REMOVE_ITEM = 'REMOVE_ITEM'
+export const CONFIRM_CARRITO = ' CONFIRM_CARRITO'
+
+export const addItem = (item) => ({
+    type: ADD_ITEM,
+    item
+})
+
+export const removeItem = (itemID) => ({
+    type: REMOVE_ITEM,
+    itemID
+})
+export const confirmCarrito = () => ({
+    type:   CONFIRM_CARRITO,
+    payload
 })
 

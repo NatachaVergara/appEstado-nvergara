@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, SafeAreaView, StyleSheet } from 'react-native'
 import GridItem from '../Components/GridItem'
 //Reducer-Store
 import { useSelector, useDispatch } from 'react-redux'
@@ -26,13 +26,23 @@ const AutoresScreen = ({ navigation }) => {
   const renderGridItem = ({ item }) => (<GridItem item={item} onSelected={handleAutor} />)
 
   return (
-    <FlatList
-      data={autores}
-      keyExtractor={item => item.id}
-      numColumns={2}
-      renderItem={renderGridItem}
-    />
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        data={autores}
+        keyExtractor={item => item.id}
+        numColumns={2}
+        renderItem={renderGridItem}
+      />
+    </SafeAreaView>
   )
 }
 
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginVertical:50,   
+  },
+ 
+});
 export default AutoresScreen

@@ -3,7 +3,7 @@ import { SELECT_ITEM } from '../actions/carrito.action'
 
 const initialState = {
     carrito: carrito,
-    filteredCarrito: [],
+    // filteredCarrito: [],
     selected: null
 }
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import CartItem from '../Components/CartItem'
 //Reducer-Store
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 
 const CarritoScreen = () => {

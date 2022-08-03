@@ -1,24 +1,33 @@
 import React from 'react'
 import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import Colors from '../Constants/Colors'
+
 
 
 const GridItem = ({ item, onSelected }) => {
+
     return (
 
         <View style={styles.gridItem}>
             <TouchableOpacity
-                style={{ ...styles.container }}
+                style={{ ...styles.flatList }}
                 onPress={() => onSelected(item)}
             >
-                <ImageBackground
-                    style={styles.container}
-                    source={require('../../assets/img/closeBook1.png')}
-                >
-                    <View>
-                        <Text style={styles.autor}> {item.autor} </Text>
-                    </View>
-                </ImageBackground>
+                <View >
+
+                    <ImageBackground
+                        style={styles.containerIMG}
+                        source={{ uri: item.img }}
+                        resizeMode="cover"
+
+                    >
+                        <View>
+                            <Text style={styles.autor}> {item.autor} </Text>
+                        </View>
+
+                    </ImageBackground>
+
+
+                </View>
             </TouchableOpacity>
         </View>
     )
@@ -27,25 +36,22 @@ const GridItem = ({ item, onSelected }) => {
 const styles = StyleSheet.create({
     gridItem: {
         flex: 1,
-        borderRadius: 6,
-        margin: 15,
-       
+        margin: 5,
     },
-    container: {
+    containerIMG: {
         flex: 1,
-        
-       
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 8,
-        width: 160,
-        height: 150,
-        
+        width: 170,
+        height: 200,
+
     },
+
     autor: {
         fontFamily: 'SemiBold',
-        color: 'red',
-        fontSize: 15
+        color: 'white',
+        fontSize: 15,
+        textAlign: 'center',
+        backgroundColor: 'black'
+
     }
 
 

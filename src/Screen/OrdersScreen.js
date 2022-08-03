@@ -1,12 +1,13 @@
 import React from 'react'
 import { FlatList, StyleSheet, View } from 'react-native'
 import OrderItem from '../Components/OrderItem'
-import { orders } from '../Data/Orders'
 
+import { useSelector } from 'react-redux'
 const OrdersScreen = () => {
     const onHandlerDelete = () => { console.log('Orden Eliminada') }
 
-
+    const orders = useSelector(store => store.orders.orders)
+    console.log('orders', orders)
     const renderOrderItem = ({ item }) => (
         <OrderItem
             item={item}
@@ -27,7 +28,7 @@ const OrdersScreen = () => {
         </View>
     )
 
-    
+
 }
 
 

@@ -21,7 +21,7 @@ const TabNavigator = () => {
                 tabBarStyle: styles.tabBar
             }}>
 
-            <BottomsTabs.Screen
+            {/* <BottomsTabs.Screen
                 name='InicioTab'
                 component={InicioNavigator}
                 options={{
@@ -33,7 +33,7 @@ const TabNavigator = () => {
                     tabBarStyle: { display: "none" }
                 }}
 
-            />
+            /> */}
 
             <BottomsTabs.Screen
                 name="ShopTab"

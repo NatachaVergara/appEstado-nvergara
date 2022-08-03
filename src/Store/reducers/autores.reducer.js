@@ -3,7 +3,7 @@ import { SELECT_AUTOR } from '../actions/autores.action'
 
 const initialState = {
     autores: autores,
-    selected: undefined
+    selected: null
 }
 
 const AutoresReducer = (state = initialState, action) => {

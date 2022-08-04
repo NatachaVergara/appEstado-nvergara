@@ -98,7 +98,7 @@ const Register = ({ navigation }) => {
         </Card>
         <TextLAbel
           text={'Ya tengo cuenta'}
-          change={() => { navigation.navigate('Login') }}
+          change={() => { navigation.navigate('LoginScreen') }}
           onReturn={() => { navigation.navigate('Inicio') }}
         />
       </ScrollView>

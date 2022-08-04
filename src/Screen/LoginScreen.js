@@ -64,7 +64,7 @@ const Login = ({ navigation }) => {
         </Card>
         <TextLAbel
           text={'No tengo cuenta'}
-          change={() => { navigation.navigate('Register') }}
+          change={() => { navigation.navigate('RegisterScreen') }}
           onReturn={() => { navigation.navigate('Inicio') }}
         />
 

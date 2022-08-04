@@ -2,7 +2,7 @@ import { carrito } from '../../Data/carrito'
 import { ADD_ITEM, REMOVE_ITEM } from '../actions/carrito.action'
 
 const initialState = {
-    carrito: carrito,
+    carrito: [],
     total: 0
 }
 
@@ -30,7 +30,7 @@ const CarritoReducer = (state = initialState, action) => {
                 total: sumTotal(updateCarrito)
             };
         case REMOVE_ITEM:
-            const carritoFiltrado = state.carrito.filter(item => item.id === action.itemID)
+            const carritoFiltrado = state.carrito.filter(item => item.id !== action.itemID)
             return {
                 ...state,
                 carrito: carritoFiltrado,

@@ -12,16 +12,8 @@ const CarritoScreen = () => {
     const items = useSelector(store => store.carrito.carrito)
     const total = useSelector(store => store.carrito.total)    
     // console.log('carrito', items)
-   
-
-
-
-
     const handlerConfirm = () => { console.log('Confirmar carrito') }
     const handleDeleteItem = (id) => dispatch(removeItem(id))
-
-
-
 
     const renderItem = ({ item }) => (
         <CartItem item={item} onDelete={handleDeleteItem} />

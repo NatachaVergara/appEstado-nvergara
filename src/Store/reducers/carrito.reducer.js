@@ -1,5 +1,5 @@
 import { carrito } from '../../Data/carrito'
-import { ADD_ITEM, REMOVE_ITEM } from '../actions/carrito.action'
+import { ADD_ITEM, REMOVE_ITEM, CONFIRM_CARRITO } from '../actions/carrito.action'
 
 const initialState = {
     carrito: [],
@@ -36,6 +36,8 @@ const CarritoReducer = (state = initialState, action) => {
                 carrito: carritoFiltrado,
                 total: sumTotal(carritoFiltrado)
             }
+        case CONFIRM_CARRITO:
+            return state
         default:
             return state
     }

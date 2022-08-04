@@ -2,17 +2,17 @@ import React from 'react'
 import { FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import CartItem from '../Components/CartItem'
 //Reducer-Store
-import { useSelector, useDispatch} from 'react-redux'
-import {removeItem} from '../Store/actions/carrito.action'
+import { useSelector, useDispatch } from 'react-redux'
+import { removeItem, confirmCarrito } from '../Store/actions/carrito.action'
 
 
 const CarritoScreen = () => {
 
     const dispatch = useDispatch()
     const items = useSelector(store => store.carrito.carrito)
-    const total = useSelector(store => store.carrito.total)    
-    // console.log('carrito', items)
-    const handlerConfirm = () => { console.log('Confirmar carrito') }
+    const total = useSelector(store => store.carrito.total)
+  
+    const handlerConfirm = () => dispatch(confirmCarrito(items, total))
     const handleDeleteItem = (id) => dispatch(removeItem(id))
 
     const renderItem = ({ item }) => (

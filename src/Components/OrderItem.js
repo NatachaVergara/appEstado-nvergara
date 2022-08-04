@@ -4,15 +4,16 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 
 
 const OrderItem = ({ item, onDelete }) => {
+    console.log('Order ITEM: ', item)
     const formatDate = (time) => {
-        const date = new Date(time)
-        return date.toLocaleDateString()
+        const date = Date.parse(time)
+        return date
     }
 
     return (
         <View style={styles.order}>
             <View>
-                <Text style={styles.date}> {formatDate(item.fecha)}  </Text>
+                <Text style={styles.date}> {formatDate(item.date)}  </Text>
                 <Text style={styles.total}> ${item.total}  </Text>
             </View>
             <View style={styles.actions}>

@@ -65,7 +65,7 @@ const Login = ({ navigation }) => {
         <TextLAbel
           text={'No tengo cuenta'}
           change={() => { navigation.navigate('RegisterScreen') }}
-          onReturn={() => { navigation.navigate('Inicio') }}
+          onReturn={() => { navigation.navigate('InicioScreen') }}
         />
 
       </ScrollView>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Inicio from '../Screen/Inicio';
+import InicioScreen from '../Screen/InicioScreen';
 import RegisterScreen from '../Screen/RegisterScreen';
 import LoginScreen from '../Screen/LoginScreen';
 import Colors from '../Constants/Colors';
@@ -22,7 +22,7 @@ const InicioNavigator = () =>
             }
         }}
     >
-        <Stack.Screen name="Inicio" component={Inicio} />
+        <Stack.Screen name="InicioScreen" component={InicioScreen} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
 

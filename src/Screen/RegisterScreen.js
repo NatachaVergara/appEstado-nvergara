@@ -99,7 +99,7 @@ const Register = ({ navigation }) => {
         <TextLAbel
           text={'Ya tengo cuenta'}
           change={() => { navigation.navigate('LoginScreen') }}
-          onReturn={() => { navigation.navigate('Inicio') }}
+          onReturn={() => { navigation.navigate('InicioScreen') }}
         />
       </ScrollView>
     </SafeAreaView>

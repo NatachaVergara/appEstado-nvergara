@@ -1,4 +1,4 @@
-import { autores } from '../../Data/Autores'
+import { autores } from '../../Data/autores'
 import { SELECT_AUTOR } from '../actions/autores.action'
 
 const initialState = {

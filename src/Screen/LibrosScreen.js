@@ -16,8 +16,6 @@ const LibrosScreen = ({ navigation }) => {
   const autor = useSelector(store => store.autores.selected)
 
 
-
-
   useEffect(() => {
     dispatch(filteredLibros(autor.id))
   }, [])

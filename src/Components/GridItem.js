@@ -1,58 +1,74 @@
 import React from 'react'
-import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 
 const GridItem = ({ item, onSelected }) => {
 
     return (
+        <TouchableOpacity style={styles.card} onPress={() => onSelected(item)} >
+            <Image style={styles.image} source={{ uri: item.img }} />
+            <View style={styles.cardContent}>
+                <Text style={styles.name}> {item.autor} </Text>
+            </View>
+        </TouchableOpacity>
 
-        <View style={styles.gridItem}>
-            <TouchableOpacity
-                style={{ ...styles.flatList }}
-                onPress={() => onSelected(item)}
-            >
-                <View >
-
-                    <ImageBackground
-                        style={styles.containerIMG}
-                        source={{ uri: item.img }}
-                        resizeMode="cover"
-
-                    >
-                        <View>
-                            <Text style={styles.autor}> {item.autor} </Text>
-                        </View>
-
-                    </ImageBackground>
-
-
-                </View>
-            </TouchableOpacity>
-        </View>
     )
 }
 
 const styles = StyleSheet.create({
     gridItem: {
-        flex: 1,
-        margin: 5,
-    },
-    containerIMG: {
-        flex: 1,
-        width: 170,
-        height: 200,
+        shadowColor: '#00000021',
+        shadowOffset: {
+            width: 0,
+            height: 6,
+        },
+        shadowOpacity: 0.37,
+        shadowRadius: 7.49,
+        elevation: 12,
 
+        marginVertical: 10,
+        marginHorizontal: 20,
+        backgroundColor: "white",
+        flexBasis: '46%',
+        padding: 10,
+        flexDirection: 'row'
     },
+    card: {
+        shadowColor: '#00000021',
+        shadowOffset: {
+            width: 0,
+            height: 6,
+        },
+        shadowOpacity: 0.37,
+        shadowRadius: 7.49,
+        elevation: 12,
 
-    autor: {
-        fontFamily: 'SemiBold',
-        color: 'white',
+        marginVertical: 10,
+        marginHorizontal: 20,
+        backgroundColor: "white",
+        flexBasis: '46%',
+        padding: 10,
+        flexDirection: 'row'
+    },
+    image: {
+        width: 90,
+        height: 90,
+        borderRadius: 45,
+    },
+    cardContent: {
+        marginLeft: 20,
+        marginTop: 30,
+       
+    },
+    name: {
         fontSize: 15,
-        textAlign: 'center',
-        backgroundColor: 'black'
-
-    }
+        flex: 1,
+        alignSelf: 'center',
+        color: "#008080",
+        fontWeight: 'bold',
+        fontFamily: "SemiBold",
+        
+    },
 
 
 })

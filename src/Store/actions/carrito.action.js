@@ -38,7 +38,7 @@ export const confirmCarrito = (payload, total) => {
                 confirm: true
             });
         } catch (error) {
-            console.log(error.message)
+            console.log('carrito.action', error.message)
         }
     }
 }

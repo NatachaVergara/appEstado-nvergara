@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, StyleSheet, View } from 'react-native'
 import LibroItem from '../Components/LibroItem'
 
 
@@ -35,15 +35,35 @@ const LibrosScreen = ({ navigation }) => {
 
 
   return (
-
-    <FlatList
-      data={librosFiltrados}
-      keyExtractor={item => item.id}
-      renderItem={renderLibrosxAutor}
-    />
-
+    <View style={styles.container}>
+      <FlatList
+        style={styles.list}
+        contentContainerStyle={styles.listContainer}
+        horizontal={false}
+        numColumns={2}
+        data={librosFiltrados}
+        keyExtractor={item => item.id}
+        renderItem={renderLibrosxAutor}
+      />
+    </View>
 
   )
 }
 
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    
+    backgroundColor: '#f6f6f6',
+  }, 
+  list: {
+    paddingHorizontal: 5,
+    backgroundColor: "#f6f6f6",
+  },
+  listContainer: {
+    alignItems: 'center'
+  },
+
+})
 export default LibrosScreen

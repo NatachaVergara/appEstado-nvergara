@@ -4,7 +4,7 @@ import Colors from '../Constants/Colors'
 import Ionicons from '@expo/vector-icons/Ionicons'
 
 const CartItem = ({ item, onDelete }) => {
-    console.log(item.id)
+    // console.log(item.id)
     return (
         <View styles={styles.item}>
             <View styles={styles.item}>

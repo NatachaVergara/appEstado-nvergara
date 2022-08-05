@@ -46,7 +46,7 @@ export const deleteOrder = (id) => {
 
 
         } catch (error) {
-            console.log(error.message)
+            console.log('Order.actions',error.message)
         }
 
     }

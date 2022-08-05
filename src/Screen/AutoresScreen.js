@@ -30,8 +30,9 @@ const AutoresScreen = ({ navigation }) => {
       <FlatList
         data={autores}
         keyExtractor={item => item.id}
-        numColumns={2}
+        
         renderItem={renderGridItem}
+        style={styles.userList}
       />
     </SafeAreaView>
   )
@@ -40,8 +41,12 @@ const AutoresScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginVertical:50,   
+    flex:1,
+    marginTop:20,
+    backgroundColor:"#eeeeee"
+  },
+  userList:{
+    flex:1,
   },
  
 });

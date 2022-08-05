@@ -32,8 +32,7 @@ const styles = StyleSheet.create({
         elevation: 12,
         marginVertical: 50,
         marginHorizontal: 20,
-        backgroundColor: "white",
-        //flexBasis: '42%',
+        backgroundColor: "white",       
         width: 140,
         height: 140,
         borderRadius: 100,
@@ -55,10 +54,10 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     titulo: {
-        fontSize: 15,        
+        fontSize: 15,
         alignSelf: 'center',
         color: "black",
-        fontFamily:'CormorantSCBold'
+        fontFamily: 'CormorantSCBold'
     },
 
 

@@ -1,14 +1,13 @@
 export const libros = [
     {
         id: 1,
-        titulo: 'Harry Potter 2',
-        subTitulo: 'Harry Potter y la cámara secreta',
-        url: 'https://static.wikia.nocookie.net/esharrypotter/images/b/b6/Harry_Potter_y_la_Camara_Secreta_Portada_Espa%C3%B1ol.PNG/revision/latest/scale-to-width-down/313?cb=20151020165931',
-        precio: 1000,
-        autorID: 1,
-        dispobible: 0,
-        sinopsis: 'Terminado el verano, Harry no ve la hora de abandonar la casa de sus odiosos tíos. Inesperadamente se presenta en su dormitorio Dobby, un elfo doméstico, que le anuncia que correrá un gran peligro si vuelve a Hogwarts.',
-        stock: 1
+        titulo: 'El principito',
+        url: 'https://cdn.culturagenial.com/es/imagenes/4475-el-principito-3c_sm.jpg',
+        precio: 500,
+        autorID: 3,
+        dispobible: 1,
+        sinopsis: 'El aviador cuenta que una vez, cuando era un niño, hizo un dibujo de una boa que digería a un elefante; sin embargo, todos los adultos que veían el dibujo lo interpretaban erróneamente como un sombrero. Cuando el aviador trata de corregir esta confusión, se le aconseja que deje de lado los dibujos y se dedique a algo más productivo. El aviador entonces se lamenta de la poca comprensión que tienen los adultos por la creatividad.    Ya de adulto, el aviador se ha convertido en un piloto y un día su avión sufre una avería en el desierto del Sahara, lejos de la civilización. Sin embargo, de la nada aparece un pequeño niño al que el aviador llama «el principito». Este le pide que le dibuje una oveja (o cordero, dependiendo de la traducción) pero en su lugar, el aviador decide mostrarle su viejo dibujo del elefante dentro de la boa, que, para su sorpresa, el príncipe interpreta correctamente. Después de varios intentos fallidos de elaborar una oveja, el aviador, en su frustración, termina por dibujarle una caja y le explica que el cordero se encuentra en su interior; el principito lo acepta y le responde que eso era lo que quería.',
+        stock: 10
     },
     {
         id: 2,
@@ -41,15 +40,17 @@ export const libros = [
         sinopsis: 'El día de su cumpleaños, Harry Potter descubre que es hijo de dos conocidos hechiceros, de los que ha heredado poderes mágicos. Debe asistir a una famosa escuela de magia y hechicería, donde entabla una amistad con dos jóvenes que se convertirán en sus compañeros de aventura. Durante su primer año en Hogwarts, descubre que un malévolo y poderoso mago llamado Voldemort está en busca de una piedra filosofal que alarga la vida de quien la posee.',
         stock: 50
     },
+    
     {
         id: 5,
-        titulo: 'El principito',
-        url: 'https://cdn.culturagenial.com/es/imagenes/4475-el-principito-3c_sm.jpg',
-        precio: 500,
-        autorID: 3,
-        dispobible: 1,
-        sinopsis: 'El aviador cuenta que una vez, cuando era un niño, hizo un dibujo de una boa que digería a un elefante; sin embargo, todos los adultos que veían el dibujo lo interpretaban erróneamente como un sombrero. Cuando el aviador trata de corregir esta confusión, se le aconseja que deje de lado los dibujos y se dedique a algo más productivo. El aviador entonces se lamenta de la poca comprensión que tienen los adultos por la creatividad.    Ya de adulto, el aviador se ha convertido en un piloto y un día su avión sufre una avería en el desierto del Sahara, lejos de la civilización. Sin embargo, de la nada aparece un pequeño niño al que el aviador llama «el principito». Este le pide que le dibuje una oveja (o cordero, dependiendo de la traducción) pero en su lugar, el aviador decide mostrarle su viejo dibujo del elefante dentro de la boa, que, para su sorpresa, el príncipe interpreta correctamente. Después de varios intentos fallidos de elaborar una oveja, el aviador, en su frustración, termina por dibujarle una caja y le explica que el cordero se encuentra en su interior; el principito lo acepta y le responde que eso era lo que quería.',
-        stock: 10
+        titulo: 'Harry Potter 2',
+        subTitulo: 'Harry Potter y la cámara secreta',
+        url: 'https://static.wikia.nocookie.net/esharrypotter/images/b/b6/Harry_Potter_y_la_Camara_Secreta_Portada_Espa%C3%B1ol.PNG/revision/latest/scale-to-width-down/313?cb=20151020165931',
+        precio: 1000,
+        autorID: 1,
+        dispobible: 0,
+        sinopsis: 'Terminado el verano, Harry no ve la hora de abandonar la casa de sus odiosos tíos. Inesperadamente se presenta en su dormitorio Dobby, un elfo doméstico, que le anuncia que correrá un gran peligro si vuelve a Hogwarts.',
+        stock: 1
     },
 ]
 

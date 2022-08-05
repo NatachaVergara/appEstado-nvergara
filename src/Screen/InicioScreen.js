@@ -14,9 +14,9 @@ const Inicio = ({ navigation }) => {
             />
             <Card style={styles.cardContainer}>
                 <View style={styles.buttonContainer}>
-                    <Button title='Login' color={Colors.secondary} onPress={() => { navigation.navigate('Login') }} />
+                    <Button title='Login' color={Colors.secondary} onPress={() => { navigation.navigate('LoginScreen') }} />
 
-                    <Button title='Registro' color={Colors.secondary} onPress={() => { navigation.navigate('Register') }} />
+                    <Button title='Registro' color={Colors.secondary} onPress={() => { navigation.navigate('RegisterScreen') }} />
                 </View>
             </Card>
         </SafeAreaView>

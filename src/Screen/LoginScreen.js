@@ -1,49 +1,41 @@
 import React, { useState } from 'react'
-import { Alert, Button, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, Button, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import Card from '../Components/Card'
 import Input from '../Components/Input'
 import TextLAbel from '../Components/TextLabel'
 import Title from '../Components/Title'
 import Colors from '../Constants/Colors'
+const Login = ({ navigation }) => {
 
-const Register = ({ navigation }) => {
- 
   const [email, onChangeEmail] = useState('')
   const [password, onChangePassword] = useState('')
-  const [confirmedPassword, onChangeConfirmedPassword] = useState('')
-  const [nombre, onChangeName] = useState('')
 
+  const handleLogin = () => {
 
-
-
-  const handleRegister = () => {
-
-    if (email === '' || password === '' || confirmedPassword === '' || nombre === '') {
+    if (email === '' || password === '') {
       Alert.alert('No deje campos vacios')
       return
     }
-    if (password !== confirmedPassword) {
-      Alert.alert('Las contraseñas no coinciden')
-      return
-    }
-
 
 
     setTimeout(() => {
       navigation.navigate('ShopTab')
     }, 2000)
+
+
   }
 
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} >
       <ScrollView
         showsVerticalScrollIndicator={false}
       >
         <Title
-          title={'Registro'}
+          title={'Login'}
           style={styles.title}
         />
+        {/* <Text style={styles.title}>Login</Text> */}
         <Card style={styles.card}>
           <Text style={styles.label}>Email</Text>
           <Input
@@ -65,42 +57,17 @@ const Register = ({ navigation }) => {
             secureTextEntry={true}
             value={password}
             onChangeText={onChangePassword}
-            maxLength={10}
-
           />
-          <Text style={styles.label}>Repetir contraseña</Text>
-          <Input
-            style={styles.input}
-            blurOnSubmit
-            keyboardType='default'
-            autoCapitalize='none'
-            autoCorrect={false}
-            secureTextEntry={true}
-            value={confirmedPassword}
-            onChangeText={onChangeConfirmedPassword}
-            maxLength={10}
-          />
-          <Text style={styles.label}>Nombre completo</Text>
-          <Input
-            style={styles.input}
-            blurOnSubmit
-            keyboardType='default'
-            autoCorrect={false}
-            value={nombre}
-            onChangeText={onChangeName}
-
-          />
-
-          <TouchableOpacity onPress={handleRegister}  >
+          <TouchableOpacity onPress={handleLogin}  >
             <Text style={styles.button}>Entrar</Text>
           </TouchableOpacity>
-
         </Card>
         <TextLAbel
-          text={'Ya tengo cuenta'}
-          change={() => { navigation.navigate('Login') }}
-          onReturn={() => { navigation.navigate('Inicio') }}
+          text={'No tengo cuenta'}
+          change={() => { navigation.navigate('RegisterScreen') }}
+          onReturn={() => { navigation.navigate('InicioScreen') }}
         />
+
       </ScrollView>
     </SafeAreaView>
   )
@@ -112,7 +79,8 @@ const styles = StyleSheet.create({
 
   },
   title: {
-    marginLeft: 60
+    marginTop: 50,
+    marginLeft: 90
   },
 
   card: {
@@ -144,12 +112,10 @@ const styles = StyleSheet.create({
     color: Colors.secondary,
     fontSize: 20,
     marginTop: 20,
-    fontFamily:'CormorantSCBold'
-   
+    fontFamily: 'CormorantSCBold'
   }
 
 
 })
 
-
-export default Register
+export default Login

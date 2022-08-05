@@ -1,6 +1,57 @@
-export const SELECT_ORDER = 'select_order'
+import { URL_API } from '../../Constants/database'
+export const GET_ORDERS = 'GET_ORDERS'
+export const DELETE_ORDERS = 'DELETE_ORDERS'
 
-export const selectOrder = (id) => ({
-    type: SELECT_ORDER,
-    orderID: id,
-})
+export const getOrders = () => {
+    return async dispatch => {
+        try {
+            const response = await fetch(`${URL_API}/ordenes.json`, {
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const result = await response.json();
+            const orders = Object.keys(result).map(key => ({
+                ...result[key],
+                id: key,
+            }));
+
+
+            dispatch({
+                type: GET_ORDERS,
+                payload: orders,
+            })
+
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+}
+
+
+export const deleteOrder = (id) => {
+    return async dispatch => {
+        try {
+            await fetch(`${URL_API}/ordenes/${id}.json`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+
+
+            dispatch({
+                type: DELETE_ORDERS,
+                orderID: id
+            })
+
+
+
+        } catch (error) {
+            console.log(error.message)
+        }
+
+    }
+
+
+
+
+}

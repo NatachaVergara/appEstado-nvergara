@@ -16,14 +16,14 @@ const LibrosScreen = ({ navigation }) => {
   const autor = useSelector(store => store.autores.selected)
 
 
- 
+
 
   useEffect(() => {
     dispatch(filteredLibros(autor.id))
   }, [])
 
   const handleSelected = (item) => {
-  
+
     dispatch(selectLibro(item.id))
     navigation.navigate('LibroDetalleScreen', {
       libro: item,

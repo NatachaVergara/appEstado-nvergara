@@ -1,12 +1,29 @@
 import React from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native'
 //redux
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { Button, Card, Paragraph } from 'react-native-paper';
+import { addItem } from '../Store/actions/carrito.action'
+
 
 const LibroDetailSCreen = () => {
+  const dispatch = useDispatch()
   const libro = useSelector(store => store.libros.selected)
+  // console.log('Libro  ',libro)
+
+  const libros = useSelector(store => store.libros.libros)
+  // console.log('Libros  ',libros)
+  const libroID = useSelector(store => store.libros.selected.id)
+  // console.log('ID  ', libroID)
+
+  const addlibro = libros.find(item => item.id === libroID)
+  // console.log('addlibro  ', addlibro)
+
+
+  const handleAddLibro = () => dispatch(addItem(addlibro))
+
+
 
   return (
 
@@ -40,7 +57,9 @@ const LibroDetailSCreen = () => {
             style={styles.buttons}
           >
             <Button>Volver</Button>
-            <Button disabled={libro.stock <= 0 ? true : false}>Agregar</Button>
+            <Button disabled={libro.stock <= 0 ? true : false}
+              onPress={handleAddLibro}
+            >Agregar</Button>
           </Card.Actions>
         </Card>
 

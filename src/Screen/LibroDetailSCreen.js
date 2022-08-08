@@ -42,7 +42,7 @@ const LibroDetailSCreen = () => {
           </Card.Content>
           <View style={styles.cardCover}>
             <Card.Cover source={{ uri: libro.url }} style={styles.img} />
-            <Card.Cover source={{ uri: libro.url }} style={styles.img} />
+
           </View>
           <Card.Content>
 
@@ -56,38 +56,15 @@ const LibroDetailSCreen = () => {
           <Card.Actions
             style={styles.buttons}
           >
-            <Button>Volver</Button>
-            <Button disabled={libro.stock <= 0 ? true : false}
+
+            <Button
+              style={libro.stock <= 0 ? { backgroundColor: 'grey' } : { backgroundColor: 'red' }}
+              disabled={libro.stock <= 0 ? true : false} mode="contained"
               onPress={handleAddLibro}
             >Agregar</Button>
           </Card.Actions>
         </Card>
 
-
-
-
-
-        {/* <View style={styles.imgTitle}>
-          <Image source={{ uri: libro.url }} style={{ width: 150, height: 200 }} />
-          <View style={styles.tituloContainer}>
-            <Text style={styles.titulo}> {libro.titulo} </Text>
-            <Text style={styles.titulo}> {libro.subTitulo} </Text>
-          </View>
-        </View>
-
-        <Text style={styles.sinopsis}>{libro.sinopsis} </Text>
-        <View style={styles.precioContainer}>
-          <Text style={styles.precio} > ${libro.precio} </Text>
-        </View>
-
-        <View style={styles.diponibleContainer}>
-          <Text style={libro.stock <= 0 ? styles.noStock : null}> Stock: {libro.stock <= 0 ? 'Fuera de Stock' : libro.stock}  </Text>
-        </View>
-
-        <View style={styles.buttons}>
-          <Button title={'volver'}  />
-          <Button title={'Agregar'} />
-        </View> */}
       </ScrollView>
     </SafeAreaView >
 
@@ -105,15 +82,16 @@ const styles = StyleSheet.create({
     marginVertical: 50,
   },
   cardCover: {
+    width: '50%',
+
     flexDirection: 'row',
     justifyContent: 'space-around',
+    backgroundColor: "#eeeeee",
+    marginLeft: 100,
+    borderBottomLeftRadius: 20,
+    borderTopLeftRadius: 20
   },
-  // tituloContainer: {
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  //   width: '60%',
 
-  // },
   titulo: {
     fontSize: 30,
     fontFamily: 'CormorantSCBold',
@@ -122,7 +100,12 @@ const styles = StyleSheet.create({
 
   },
   img: {
-    width: '50%'
+    width: '110%',
+    marginLeft: 150,
+    borderBottomLeftRadius: 20,
+    borderTopLeftRadius: 20,
+    height: 250,
+
   },
   sinopsis: {
     padding: 20,
@@ -156,5 +139,8 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     alignItems: 'center',
 
+  },
+  button: {
+    color: 'red'
   }
 })

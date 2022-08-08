@@ -21,7 +21,7 @@ export const getOrders = () => {
             })
 
         } catch (error) {
-            console.log(error.message)
+            console.log('getOrders.actions', error.message)
         }
     }
 }
@@ -36,8 +36,6 @@ export const deleteOrder = (id) => {
                     'Content-Type': 'application/json'
                 },
             })
-
-
             dispatch({
                 type: DELETE_ORDERS,
                 orderID: id
@@ -46,7 +44,7 @@ export const deleteOrder = (id) => {
 
 
         } catch (error) {
-            console.log('Order.actions',error.message)
+            console.log('Order.actions', error.message)
         }
 
     }

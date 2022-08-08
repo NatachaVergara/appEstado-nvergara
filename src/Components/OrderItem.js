@@ -7,15 +7,15 @@ const OrderItem = ({ item, onDelete }) => {
     console.log('Order ITEM: ', item)
 
     const formatDate = (time) => {
-        const date = Date.parse(time)
+        const date = new Date(time).toLocaleDateString()
         return date
     }
 
     return (
         <View style={styles.order}>
             <View>
-                <Text style={styles.date}> {formatDate(item.date)}  </Text>
-                <Text style={styles.total}> ${item.total}  </Text>
+                <Text style={styles.date}>Fecha: {formatDate(item.date)}</Text>
+                <Text style={styles.total}>Monto: ${item.total}  </Text>
             </View>
             <View style={styles.actions}>
                 <TouchableOpacity onPress={() => onDelete(item.id)}>

@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react'
-import { FlatList, StyleSheet, View } from 'react-native'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
 import OrderItem from '../Components/OrderItem'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { getOrders, deleteOrder } from '../Store/actions/orders.action'
+import Title from '../Components/Title'
 
 const OrdersScreen = () => {
 
-    const onHandlerDelete = (id) => dispatch(deleteOrder(id)) 
+    const onHandlerDelete = (id) => dispatch(deleteOrder(id))
 
     const dispatch = useDispatch()
     const orders = useSelector(store => store.orders.orders)
-   
+
 
     useEffect(() => {
         dispatch(getOrders());
@@ -29,12 +30,15 @@ const OrdersScreen = () => {
 
     return (
         <View style={styles.container}>
-            <FlatList
-                data={orders}
-                keyExtractor={item => item.id}
-                renderItem={renderOrderItem}
-                numColumns={1}
-            />
+            {orders.length <= 0 || orders === undefined ?
+                <Title title={'No hay ordenes procesadas'} style={styles.title} /> :
+                <FlatList
+                    data={orders}
+                    keyExtractor={item => item.id}
+                    renderItem={renderOrderItem}
+                    numColumns={1}
+                />}
+
         </View>
     )
 
@@ -49,6 +53,14 @@ const styles = StyleSheet.create({
         paddingBottom: 120,
         backgroundColor: '#fff',
 
+    }, 
+    title: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        color:'red',
+        fontSize: 30,
+        marginHorizontal:50,      
+        width: '100%',
     }
 })
 export default OrdersScreen

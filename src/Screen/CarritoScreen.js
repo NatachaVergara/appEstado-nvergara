@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import CartItem from '../Components/CartItem'
 //Reducer-Store
@@ -20,6 +20,8 @@ const CarritoScreen = () => {
 
     )
 
+    console.log(items)
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.listContainer}>
@@ -31,7 +33,13 @@ const CarritoScreen = () => {
             </View>
 
             <View style={styles.footer}>
-                <TouchableOpacity onPress={handlerConfirm} style={styles.confirm}>
+
+                <TouchableOpacity
+                    onPress={handlerConfirm}
+                    style={styles.confirm}
+                     disabled={items === undefined || items.length <= 0  ? true : false}
+                    // disabled={true}
+                >
                     <Text>Confirmar</Text>
                     <View>
                         <Text style={styles.text}>Total</Text>

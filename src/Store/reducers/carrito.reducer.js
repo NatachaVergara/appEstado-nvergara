@@ -24,6 +24,7 @@ const CarritoReducer = (state = initialState, action) => {
                 const item = { ...action.item, cantidad: 1 }
                 updateCarrito = [...state.carrito, item]
             }
+            
             return {
                 ...state,
                 carrito: updateCarrito,
@@ -38,8 +39,7 @@ const CarritoReducer = (state = initialState, action) => {
             }
         case CONFIRM_CARRITO:
             return {
-                state,
-                msg: 'carrito reducer confirm carrito'
+                state
             }
         default:
             return state

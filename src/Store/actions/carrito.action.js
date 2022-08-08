@@ -25,7 +25,7 @@ export const confirmCarrito = (payload, total) => {
                 },
                 body: JSON.stringify({
                     date: Date.now(),
-                    items: {...payload},
+                    items: payload,
                     total
                 }),
             })

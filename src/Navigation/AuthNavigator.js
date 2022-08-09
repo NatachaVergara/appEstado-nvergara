@@ -1,16 +1,16 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import InicioScreen from '../Screen/InicioScreen';
-import RegisterScreen from '../Screen/RegisterScreen';
-import LoginScreen from '../Screen/LoginScreen';
+import InicioScreen from '../Screen/user/InicioScreen';
+import RegisterScreen from '../Screen/user/RegisterScreen';
+import LoginScreen from '../Screen/user/LoginScreen';
 import Colors from '../Constants/Colors';
 
 const Stack = createNativeStackNavigator();
 
-const InicioNavigator = () =>
+const AuthNavigator = () =>
 (
     <Stack.Navigator
-        initialRouteName="Inicio"
+        initialRouteName="Auth"
         screenOptions={{
             headerStyle: {
                 backgroundColor: Platform.OS === 'android' ? Colors.primary : '',
@@ -22,7 +22,7 @@ const InicioNavigator = () =>
             }
         }}
     >
-        <Stack.Screen name="InicioScreen" component={InicioScreen} />
+        <Stack.Screen name="AuthScreen" component={InicioScreen} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
 
@@ -31,4 +31,4 @@ const InicioNavigator = () =>
 )
 
 
-export default InicioNavigator
+export default AuthNavigator

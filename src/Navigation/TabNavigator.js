@@ -4,9 +4,10 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { StyleSheet, Text, View } from 'react-native'
 import ShopNavigator from './ShopNavigator'
-import InicioNavigator from './InicioNavigator'
+
 import CarritoNavigator from './CarritoNavigator';
 import OrdersNavigator from './OrdersNavigator';
+// import AuthNavigator from './AuthNavigator';
 
 
 
@@ -22,8 +23,8 @@ const TabNavigator = () => {
             }}>
 
             {/* <BottomsTabs.Screen
-                name='InicioTab'
-                component={InicioNavigator}
+                name='AuthTab'
+                component={AuthNavigator}
                 options={{
                     tabBarIcon: () => (
                         <View style={styles.IconContainer}>

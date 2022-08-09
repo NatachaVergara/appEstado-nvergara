@@ -1,8 +1,8 @@
 import React from 'react'
 import { Button, SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import Card from '../Components/Card'
-import Title from '../Components/Title'
-import Colors from '../Constants/Colors'
+import Card from '../../Components/Card'
+import Title from '../../Components/Title'
+import Colors from '../../Constants/Colors'
 const Inicio = ({ navigation }) => {
 
 

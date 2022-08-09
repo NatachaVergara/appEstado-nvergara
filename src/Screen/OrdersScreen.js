@@ -37,6 +37,8 @@ const OrdersScreen = () => {
                     keyExtractor={item => item.id}
                     renderItem={renderOrderItem}
                     numColumns={1}
+                    onRefresh={() => dispatch(getOrders())}
+                    refreshing={false}
                 />}
 
         </View>

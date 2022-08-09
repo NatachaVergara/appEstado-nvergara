@@ -6,7 +6,7 @@ const initialState = {
     total: 0
 }
 
-const sumTotal = (list) => list
+const sumTotal = (carrito) => carrito
     .map(item => item.cantidad * item.precio)
     .reduce((a, b) => a + b, 0);
 

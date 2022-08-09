@@ -7,6 +7,7 @@ import LibroItem from '../Components/LibroItem'
 import { useSelector, useDispatch } from 'react-redux'
 //actions
 import { selectLibro, filteredLibros } from '../Store/actions/libros.action'
+import ImageBackgoundBook from '../Components/ImageBackgoundBook'
 
 
 
@@ -36,7 +37,7 @@ const LibrosScreen = ({ navigation }) => {
   const img = { uri: 'https://firebasestorage.googleapis.com/v0/b/buscolibro-rn.appspot.com/o/libros%2Fcloseup-books-wellorganized-shelves-bookstore%20(1).jpg?alt=media&token=8103b03d-f530-4cfe-a16b-9d0ad55ac64e' }
   return (
     <View style={styles.container}>
-      <ImageBackground source={img} resizeMode="cover" style={styles.image}>
+      <ImageBackgoundBook source={img} resizeMode="cover" style={styles.image}>
         <FlatList
           style={styles.list}
           contentContainerStyle={styles.listContainer}
@@ -46,7 +47,7 @@ const LibrosScreen = ({ navigation }) => {
           keyExtractor={item => item.id}
           renderItem={renderLibrosxAutor}
         />
-      </ImageBackground>
+      </ImageBackgoundBook>
     </View>
 
   )
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
   },
   list: {
     paddingHorizontal: 5,
-  
+
   },
   listContainer: {
     alignItems: 'center'

@@ -1,42 +1,20 @@
 import React, { useState } from 'react'
-import { Alert, Button, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, Button, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, KeyboardAvoidingView } from 'react-native'
+
 import Card from '../../Components/Card'
 import Input from '../../Components/Input'
+import InputForm from '../../Components/InputForm'
 import TextLAbel from '../../Components/TextLabel'
 import Title from '../../Components/Title'
 import Colors from '../../Constants/Colors'
 
 const Register = ({ navigation }) => {
 
-  const [email, onChangeEmail] = useState('')
-  const [password, onChangePassword] = useState('')
-  const [confirmedPassword, onChangeConfirmedPassword] = useState('')
-  const [nombre, onChangeName] = useState('')
-
-
-
-
-  const handleRegister = () => {
-
-    if (email === '' || password === '' || confirmedPassword === '' || nombre === '') {
-      Alert.alert('No deje campos vacios')
-      return
-    }
-    if (password !== confirmedPassword) {
-      Alert.alert('Las contraseñas no coinciden')
-      return
-    }
-
-
-
-    setTimeout(() => {
-      navigation.navigate('ShopTab')
-    }, 2000)
-  }
+  const handleRegister = () => console.log('hola')
 
 
   return (
-    <SafeAreaView style={styles.container}>
+    <KeyboardAvoidingView style={styles.container} behavior='height'>
       <ScrollView
         showsVerticalScrollIndicator={false}
       >
@@ -45,51 +23,32 @@ const Register = ({ navigation }) => {
           style={styles.title}
         />
         <Card style={styles.card}>
-          <Text style={styles.label}>Email</Text>
-          <Input
-            style={styles.input}
-            blurOnSubmit
+          <InputForm
+            id='email'
+            label='Email'
             keyboardType='email-address'
+            required
+            email
             autoCapitalize='none'
-            autoCorrect={false}
-            value={email}
-            onChangeText={onChangeEmail}
+            errorMsg='Por favor ingrese un email'
+            onInputChange={() => { }}
+            initialValue=''
           />
-          <Text style={styles.label}>Contraseña</Text>
-          <Input
-            style={styles.input}
-            blurOnSubmit
+          <InputForm
+            id='password'
+            label='Contraseña'
             keyboardType='default'
+            secureTextEntry
+            required
+            minLength={6}
             autoCapitalize='none'
-            autoCorrect={false}
-            secureTextEntry={true}
-            value={password}
-            onChangeText={onChangePassword}
-            maxLength={10}
+            errorMsg='Cree una contraseña'
+            onInputChange={() => { }}
+            initialValue=''
+          />
 
-          />
-          <Text style={styles.label}>Repetir contraseña</Text>
-          <Input
-            style={styles.input}
-            blurOnSubmit
-            keyboardType='default'
-            autoCapitalize='none'
-            autoCorrect={false}
-            secureTextEntry={true}
-            value={confirmedPassword}
-            onChangeText={onChangeConfirmedPassword}
-            maxLength={10}
-          />
-          <Text style={styles.label}>Nombre completo</Text>
-          <Input
-            style={styles.input}
-            blurOnSubmit
-            keyboardType='default'
-            autoCorrect={false}
-            value={nombre}
-            onChangeText={onChangeName}
 
-          />
+
 
           <TouchableOpacity onPress={handleRegister}  >
             <Text style={styles.button}>Entrar</Text>
@@ -102,13 +61,15 @@ const Register = ({ navigation }) => {
           onReturn={() => { navigation.navigate('AuthScreen') }}
         />
       </ScrollView>
-    </SafeAreaView>
+    </KeyboardAvoidingView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
 
   },
   title: {
@@ -122,20 +83,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginLeft: '8%'
   },
-  label: {
-    color: Colors.text,
-    margin: 10,
-    fontFamily: 'light'
-  },
-  input: {
-    width: 200,
-    textAlign: 'center',
-    fontSize: 15,
 
-  },
-  labelRegister: {
-    marginTop: 20,
-  },
   volver: {
     fontSize: 20,
 

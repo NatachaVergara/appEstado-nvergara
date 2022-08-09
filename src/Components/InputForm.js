@@ -28,19 +28,19 @@ const InputForm = props => {
     const [inputState, dispatch] = useReducer(inputReducer, {
         value: props.initialValue ? props.initialValue : '',
         isValid: props.isValid,
-        tourched: true
+        tourched: false
     })
 
     const { onInputChange, id } = props;
 
     useEffect(() => {
         if (inputState.touched) {
-            onInputChange(inputState.value, inputState.isValid)
+            onInputChange(id, inputState.value, inputState.isValid)
         }
     }, [inputState, onInputChange])
 
     const textChangeHandler = text => {
-
+     
         const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         let isValid = true;
 
@@ -48,11 +48,11 @@ const InputForm = props => {
 
         if (props.email && !emailRegex.test(text.toLowerCase())) isValid = false;
 
-        if (props.min != null && +text < props.min) isValid = false;
+        // if (props.min != null && +text < props.min) isValid = false;
 
-        if (props.max != null && +text > props.max) isValid = false;
+        // if (props.max != null && +text > props.max) isValid = false;
 
-        if (props.minLength != null && text.length < props.minLength) isValid = false;
+        // if (props.minLength != null && text.length < props.minLength) isValid = false;
 
         dispatch({
             type: INPUT_CHANGE,
@@ -99,8 +99,8 @@ const styles = StyleSheet.create({
         borderBottomColor: "#ccc",
         borderBottomWidth: 1,
         color: 'white',
-      
-       
+
+
     },
     errorContainer: {
         width: '100%',

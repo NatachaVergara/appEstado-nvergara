@@ -1,16 +1,94 @@
-import React, { useState } from 'react'
-import { Alert, Button, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, KeyboardAvoidingView } from 'react-native'
+import React, { useCallback, useReducer } from 'react'
+import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
 
 import Card from '../../Components/Card'
-import Input from '../../Components/Input'
 import InputForm from '../../Components/InputForm'
 import TextLAbel from '../../Components/TextLabel'
 import Title from '../../Components/Title'
 import Colors from '../../Constants/Colors'
+import { useDispatch } from 'react-redux'
+
+import * as auth from '../../Store/actions/auth.actions'
+const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE'
+
+const formReducer = (state, action) => {
+  if (action.type === FORM_INPUT_UPDATE) {
+    const updateValues = {
+      ...state.inputValues,
+      [action.input]: action.value,
+    };
+
+    const updateValidities = {
+      ...state.inputValidities,
+      [action.input]: action.isValid
+    };
+
+    let updateFormIsValid = true;
+
+    for (const key in updateValidities) {
+      updateFormIsValid = updateFormIsValid && updateValidities[key]
+    }
+
+    return {
+      formIsValid: updateFormIsValid,
+      inputValidities: updateValidities,
+      inputValues: updateValues,
+
+    }
+  }
+
+
+  return state;
+
+}
+
+
+
 
 const Register = ({ navigation }) => {
+  const dispatch = useDispatch()
+  const [formState, formDispatch] = useReducer(formReducer, {
+    inputValues: {
+      email: '',
+      password: '',
+      repetirPassword: ''
+    },
+    inputValidities: {
+      email: false,
+      password: false,
+      repetirPassword: false
+    },
+    formIsValid: false,
+  });
 
-  const handleRegister = () => console.log('hola')
+
+
+
+
+  const handleRegister = () => {
+    console.log(formState.inputValues.email, formState.inputValues.password, formState.inputValues.repetirPassword)
+    if (formState.inputValues.password != formState.inputValues.repetirPassword) {
+      Alert.alert('Las contraseñas no coinciden')
+    } else if (formState.formIsValid) {
+      dispatch(auth.register(formState.inputValues.email, formState.inputValues.password))
+    } else {
+      Alert.alert(
+        'Formulario inválido',
+        'Ingresa email y contraseña válido',
+        [{ text: 'Ok' }]
+      )
+    }
+  }
+
+
+  const onInputChangeHandler = useCallback((inputIdentifier, inputValue, inputValidity) => {
+    formDispatch({
+      type: FORM_INPUT_UPDATE,
+      value: inputValue,
+      isValid: inputValidity,
+      input: inputIdentifier,
+    });
+  }, [formDispatch])
 
 
   return (
@@ -31,8 +109,9 @@ const Register = ({ navigation }) => {
             email
             autoCapitalize='none'
             errorMsg='Por favor ingrese un email'
-            onInputChange={() => { }}
+            onInputChange={onInputChangeHandler}
             initialValue=''
+
           />
           <InputForm
             id='password'
@@ -43,15 +122,31 @@ const Register = ({ navigation }) => {
             minLength={6}
             autoCapitalize='none'
             errorMsg='Cree una contraseña'
-            onInputChange={() => { }}
+            onInputChange={onInputChangeHandler}
             initialValue=''
+
+
+          />
+
+          <InputForm
+            id='repetirPassword'
+            label='Repetir Password'
+            keyboardType='default'
+            secureTextEntry
+            required
+            minLength={6}
+            autoCapitalize='none'
+            onInputChange={onInputChangeHandler}
+            initialValue=''
+
+
           />
 
 
 
 
           <TouchableOpacity onPress={handleRegister}  >
-            <Text style={styles.button}>Entrar</Text>
+            <Text style={styles.button}>Registrarse</Text>
           </TouchableOpacity>
 
         </Card>

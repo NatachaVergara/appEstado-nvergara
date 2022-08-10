@@ -1,53 +1,21 @@
 import React, { useCallback, useReducer } from 'react'
-import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
-
+import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, KeyboardAvoidingView, ImageBackground, View } from 'react-native'
 import Card from '../../Components/Card'
 import InputForm from '../../Components/InputForm'
 import TextLAbel from '../../Components/TextLabel'
 import Title from '../../Components/Title'
-import Colors from '../../Constants/Colors'
+import { IMG_BACKGROUND } from '../../Constants/img'
+//Store
 import { useDispatch } from 'react-redux'
-
 import * as auth from '../../Store/actions/auth.actions'
+//onChange del formulario
+import { useFormReducer } from '../../Constants/formReducer'
+
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE'
-
-const formReducer = (state, action) => {
-  if (action.type === FORM_INPUT_UPDATE) {
-    const updateValues = {
-      ...state.inputValues,
-      [action.input]: action.value,
-    };
-
-    const updateValidities = {
-      ...state.inputValidities,
-      [action.input]: action.isValid
-    };
-
-    let updateFormIsValid = true;
-
-    for (const key in updateValidities) {
-      updateFormIsValid = updateFormIsValid && updateValidities[key]
-    }
-
-    return {
-      formIsValid: updateFormIsValid,
-      inputValidities: updateValidities,
-      inputValues: updateValues,
-
-    }
-  }
-
-
-  return state;
-
-}
-
-
-
 
 const Register = ({ navigation }) => {
   const dispatch = useDispatch()
-  const [formState, formDispatch] = useReducer(formReducer, {
+  const [formState, formDispatch] = useReducer(useFormReducer(FORM_INPUT_UPDATE), {
     inputValues: {
       email: '',
       password: '',
@@ -66,7 +34,7 @@ const Register = ({ navigation }) => {
 
 
   const handleRegister = () => {
-    console.log(formState.inputValues.email, formState.inputValues.password, formState.inputValues.repetirPassword)
+    // console.log(formState.inputValues.email, formState.inputValues.password, formState.inputValues.repetirPassword)
     if (formState.inputValues.password != formState.inputValues.repetirPassword) {
       Alert.alert('Las contraseñas no coinciden')
     } else if (formState.formIsValid) {
@@ -92,71 +60,76 @@ const Register = ({ navigation }) => {
 
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior='height'>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-      >
-        <Title
-          title={'Registro'}
-          style={styles.title}
-        />
-        <Card style={styles.card}>
-          <InputForm
-            id='email'
-            label='Email'
-            keyboardType='email-address'
-            required
-            email
-            autoCapitalize='none'
-            errorMsg='ingrese un email'
-            onInputChange={onInputChangeHandler}
-            initialValue=''
+    <ScrollView
+      showsVerticalScrollIndicator={false}>
+      <KeyboardAvoidingView style={styles.container} behavior='height'>
 
+        <ImageBackground source={IMG_BACKGROUND} resizeMode="cover"
+          style={styles.image}  >
+          <Title
+            title={'Crear cuenta'}
+            style={styles.title}
           />
-          <InputForm
-            id='password'
-            label='Contraseña'
-            keyboardType='default'
-            secureTextEntry
-            required
-            minLength={6}
-            autoCapitalize='none'
-            errorMsg='crea una contraseña'
-            onInputChange={onInputChangeHandler}
-            initialValue=''
+          <Card style={styles.card}>
+            <InputForm
+              id='email'
+              label='Email *'
+              keyboardType='email-address'
+              required
+              email
+              autoCapitalize='none'
+              errorMsg='ingrese un email'
+              onInputChange={onInputChangeHandler}
+              initialValue=''
+
+            />
+            <InputForm
+              id='password'
+              label='Contraseña *'
+              keyboardType='default'
+              secureTextEntry
+              required
+              minLength={6}
+              autoCapitalize='none'
+              errorMsg='Ingrese una contraseña'
+              onInputChange={onInputChangeHandler}
+              initialValue=''
 
 
-          />
+            />
 
-          <InputForm
-            id='repetirPassword'
-            label='Repetir Password'
-            keyboardType='default'
-            secureTextEntry
-            required
-            minLength={6}
-            autoCapitalize='none'
-            onInputChange={onInputChangeHandler}
-            initialValue=''
-
-
-          />
+            <InputForm
+              id='repetirPassword'
+              label='Repita la contraseña *'
+              keyboardType='default'
+              secureTextEntry
+              required
+              minLength={6}
+              autoCapitalize='none'
+              errorMsg='Repita la contraseña'
+              onInputChange={onInputChangeHandler}
+              initialValue=''
 
 
+            />
 
 
-          <TouchableOpacity onPress={handleRegister}  >
-            <Text style={styles.button}>Registrarse</Text>
-          </TouchableOpacity>
 
-        </Card>
-        <TextLAbel
-          text={'Ya tengo cuenta'}
-          change={() => { navigation.navigate('LoginScreen') }}
-          onReturn={() => { navigation.navigate('AuthScreen') }}
-        />
-      </ScrollView>
-    </KeyboardAvoidingView>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity onPress={handleRegister} style={styles.button}  >
+                <Text style={styles.buttonText}>Crear cuenta</Text>
+              </TouchableOpacity>
+            </View>
+            <TextLAbel
+              text={'Ya tengo cuenta'}
+              change={() => { navigation.navigate('LoginScreen') }}
+              onReturn={() => { navigation.navigate('AuthScreen') }}
+            />
+          </Card>
+
+        </ImageBackground>
+      </KeyboardAvoidingView>
+    </ScrollView>
   )
 }
 
@@ -165,29 +138,58 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'column',
 
   },
+  image: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 500
+  },
   title: {
-    marginLeft: 60
+    marginTop: 10,
+    
+    color: "white",    
+    lineHeight: 84,
+    fontWeight: "bold",
+    fontFamily: 'SemiBold',
+    borderRadius: 10,
+    alignSelf: 'center',
+    
   },
 
   card: {
-    marginTop: '20%',
-    width: 300,
+    width: 350,
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: '8%'
+    marginTop: 40,
+    marginBottom: 50,
+
+
   },
 
-  volver: {
-    fontSize: 20,
+  buttonContainer: {
+    width: '100%',
+    justifyContent: 'space-between',
+    alignItems: "center",
+    marginTop: 40,
 
   },
   button: {
-    color: Colors.secondary,
-    fontSize: 20,
-    marginTop: 20,
-    fontFamily: 'CormorantSCBold'
+    backgroundColor: "#000000",
+    borderRadius: 10,
+
+
+  },
+  buttonText: {
+    color: "red",
+    fontSize: 15,
+    fontWeight: "bold",
+    fontFamily: 'SemiBold',
+    padding: 20,
+    alignItems: "center",
+    justifyContent: 'center',
 
   }
 

@@ -22,7 +22,8 @@ const Inicio = ({ navigation }) => {
 
         <SafeAreaView style={styles.container}>
 
-            <ImageBackground source={IMG_BACKGROUND} resizeMode="cover"
+            <ImageBackground
+                source={IMG_BACKGROUND} resizeMode="cover"
                 style={styles.image}
 
             >
@@ -39,12 +40,12 @@ const Inicio = ({ navigation }) => {
                                 <TouchableOpacity
                                     style={styles.button}
                                     onPress={() => { navigation.navigate('LoginScreen') }}>
-                                    <Text style={styles.buttonText}>Login</Text>
+                                    <Text style={styles.buttonText}>Iniciar sesión</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     style={styles.button}
                                     onPress={() => { navigation.navigate('RegisterScreen') }}>
-                                    <Text style={styles.buttonText}>Registro</Text>
+                                    <Text style={styles.buttonText}>Crear cuenta</Text>
                                 </TouchableOpacity>
                             </View>
 
@@ -55,11 +56,11 @@ const Inicio = ({ navigation }) => {
                     :
                     <View>
                         <Card style={styles.cardContainer}>
-                            <View style={styles.buttonContainer}>
+                            <View style={styles.buttonContainerLogout}>
                                 <TouchableOpacity
-                                    style={styles.button}
+                                    style={styles.buttonLogout}
                                     onPress={onLogout}>
-                                    <Text style={styles.buttonText}>Logout</Text>
+                                    <Text style={styles.buttonText}>Cerrar sesión</Text>
                                 </TouchableOpacity>
                             </View>
                         </Card>
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         backgroundColor: "#000000c0",
         color: "white",
-        fontSize: 42,
+        fontSize: 30,
         lineHeight: 84,
         fontWeight: "bold",
         fontFamily: 'SemiBold',
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     card: {
-        width: 300,
+        width: 350,
         justifyContent: 'flex-start',
         alignItems: 'center',
 
@@ -105,21 +106,32 @@ const styles = StyleSheet.create({
     buttonContainer: {
         flexDirection: 'row',
         width: '100%',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: "center",
 
     },
     button: {
         backgroundColor: "#000000",
         borderRadius: 10,
+        margin: 10,
+    },
+    buttonContainerLogout:{
+        flexDirection: 'row',
+        width: '100%',
+       alignItems: 'center',
+    },
+
+    buttonLogout: {
+        backgroundColor: "#000000",
+        borderRadius: 10,
+        margin: 10,
+        alignSelf: 'center'
     },
     buttonText: {
         color: "red",
         fontSize: 15,
-
         fontWeight: "bold",
         fontFamily: 'SemiBold',
-
         padding: 20,
         alignItems: "center",
         justifyContent: 'center',

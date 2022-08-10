@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         flexBasis: '46%',
         padding: 10,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        
     },
     card: {
         shadowColor: '#00000021',
@@ -48,7 +49,8 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         flexBasis: '46%',
         padding: 10,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'space-around'
     },
     image: {
         width: 90,

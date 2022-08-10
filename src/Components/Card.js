@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.50,
         elevation: 5,
         borderRadius: 10,
-       // backgroundColor:'black',
         padding: 50,
         marginTop:'50%'
     }

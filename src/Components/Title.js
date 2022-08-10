@@ -10,8 +10,11 @@ const Title = props => {
 const styles = StyleSheet.create({
     title: {
         marginTop: 20,
-        fontSize: 50,
-        fontFamily: 'CormorantSCBold'
+        fontSize: 30,
+        fontFamily: 'CormorantSCBold',
+        backgroundColor: "#000000c0",
+        width: 300,      
+        textAlign: 'center',
     },
 })
 

@@ -4,7 +4,7 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 
 
 const OrderItem = ({ item, onDelete }) => {
-    console.log('Order ITEM: ', item)
+    // console.log('Order ITEM: ', item)
 
     const formatDate = (time) => {
         const date = new Date(time).toLocaleDateString()

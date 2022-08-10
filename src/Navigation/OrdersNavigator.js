@@ -25,7 +25,7 @@ const OrdersNavigator = () => {
                 name='orders'
                 component={OrdersScreen} 
                 options={{
-                    title: 'Ordenes'
+                    title: 'Ordenes realizadas'
                 }}
             />
 

@@ -40,7 +40,7 @@ const InputForm = props => {
     }, [inputState, onInputChange])
 
     const textChangeHandler = text => {
-     
+
         const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         let isValid = true;
 
@@ -66,7 +66,9 @@ const InputForm = props => {
 
     return (
         <View styles={styles.formControl}>
-            <Text style={styles.label}> {props.label}  </Text>
+            {!inputState.isValid && inputState.touched ? (<View style={styles.errorContainer}>
+                <Text style={styles.errorMsg}> {props.errorMsg}</Text>
+            </View>) : <Text style={styles.label}> {props.label}  </Text>}
             <TextInput
                 {...props}
                 style={styles.input}
@@ -75,9 +77,7 @@ const InputForm = props => {
                 onBlur={onBlurHandler}
             />
 
-            {!inputState.isValid && inputState.touched && (<View style={styles.errorContainer}>
-                <Text style={styles.errorMsg}> {props.errorMsg}</Text>
-            </View>)}
+
         </View>
     )
 }
@@ -89,15 +89,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     label: {
+        fontSize:20,
         fontFamily: 'light',
         marginVertical: 8,
         color: 'white',
+        backgroundColor: "#000000c0",
+        alignSelf: 'center',
+        padding:10
     },
     input: {
         paddingHorizontal: 30,
-        paddingVertical: 5,
+        paddingVertical: 15,
         borderBottomColor: "#ccc",
-        borderBottomWidth: 1,
+        borderBottomWidth: 2,
+        width:200,
         color: 'white',
 
 
@@ -108,7 +113,9 @@ const styles = StyleSheet.create({
     errorMsg: {
         color: 'red',
         fontFamily: 'light',
-        marginVertical: 8
+        marginVertical: 8,
+        fontSize:20,
+        backgroundColor: "#000000c0",
     }
 })
 

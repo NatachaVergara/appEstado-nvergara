@@ -10,7 +10,7 @@ import { addItem } from '../Store/actions/carrito.action'
 const LibroDetailSCreen = () => {
   const dispatch = useDispatch()
   const libro = useSelector(store => store.libros.selected)
-  // console.log('Libro  ',libro)
+  // console.log('ExisteLibro**', libro.titulo)
 
   const libros = useSelector(store => store.libros.libros)
   // console.log('Libros  ',libros)

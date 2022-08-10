@@ -16,6 +16,9 @@ const OrdersScreen = () => {
 
     const userOrder = orders.filter(userID => userID.userId === userId)
 
+    // console.log('USER_ORDERS',userOrder)
+    // console.log('ORDERS',orders)
+    
     useEffect(() => {
         dispatch(getOrders());
     }, [])
@@ -32,8 +35,9 @@ const OrdersScreen = () => {
 
     return (
         <View style={styles.container}>
-            {orders.length <= 0 || orders === undefined ?
-                <Title title={'No hay ordenes procesadas'} style={styles.title} /> :
+            {userOrder.length <= 0 || userOrder === undefined ?
+                <Title title={'No hay ordenes procesadas'} style={styles.title} 
+                refreshing={false} /> :
                 <FlatList
                     data={userOrder}
                     keyExtractor={item => item.id}
@@ -41,6 +45,7 @@ const OrdersScreen = () => {
                     numColumns={1}
                     onRefresh={() => dispatch(getOrders())}
                     refreshing={false}
+                    style={styles.flatList}
                 />}
 
         </View>
@@ -56,6 +61,8 @@ const styles = StyleSheet.create({
         padding: 12,
         paddingBottom: 120,
         backgroundColor: '#fff',
+        alignItems: 'center',
+        
 
     },
     title: {
@@ -64,7 +71,10 @@ const styles = StyleSheet.create({
         color: 'red',
         fontSize: 30,
         marginHorizontal: 50,
-        width: '100%',
+        width: 300,
+    },
+    flatList: {
+        width: 350,
     }
 })
 export default OrdersScreen

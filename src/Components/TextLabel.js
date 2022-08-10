@@ -5,21 +5,30 @@ const TextLAbel = props => {
     return (
         <View {...props} style={styles.container}>
             <Text onPress={props.change} style={styles.label}> {props.text}  </Text>
-            <Text onPress={props.onReturn} style={styles.label}> ⬅️ Inicio </Text>
+            <Text onPress={props.onReturn} style={styles.label}> ⬅️ Volver </Text>
         </View>
     )
 }
 
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
         flex: 1,
         padding: 10,
-        alignItems: "center"
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: "center",
+        width: 500,
+        marginTop: 40,
     },
-    label:{
-        padding:20,
-        fontFamily:'SemiBold'
+    label: {
+        padding: 20,
+        fontFamily: 'SemiBold',
+        fontSize: 15,
+        backgroundColor: "#000000c0",
+        color: "white",
+        margin:10,
+        borderRadius:10,
     }
 })
 

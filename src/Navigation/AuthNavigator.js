@@ -34,14 +34,14 @@ const AuthNavigator = () =>
             name="LoginScreen"
             component={LoginScreen}
             options={{
-                title: 'Login'
+                title: 'Iniciar sesión'
             }}
         />
         <Stack.Screen
             name="RegisterScreen"
             component={RegisterScreen}
             options={{
-                title: 'Registro'
+                title: 'Crear cuenta'
             }}
         />
 

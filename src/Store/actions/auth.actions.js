@@ -2,6 +2,12 @@ import { URL_AUTH_REGISTER, URL_AUTH_LOGIN } from '../../Constants/database'
 
 export const REGISTER = 'REGISTER'
 export const LOGIN = 'LOGIN'
+export const LOGOUT = 'LOGOUT'
+
+
+export const logOut = () => ({
+    type: LOGOUT
+})
 
 export const register = (email, password) => {
     return async dispatch => {
@@ -30,6 +36,8 @@ export const register = (email, password) => {
             throw new Error(message);
         }
 
+        
+
         const data = await response.json();
 
         dispatch({
@@ -37,6 +45,9 @@ export const register = (email, password) => {
             token: data.idToken,
             userId: data.localId,
         })
+
+
+
     }
 }
 
@@ -71,7 +82,7 @@ export const logIn = (email, password) => {
             type: LOGIN,
             token: result.idtoken,
             userId: result.localId,
-           
+
         })
     }
 

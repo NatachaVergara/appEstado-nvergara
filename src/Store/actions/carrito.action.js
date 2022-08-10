@@ -4,6 +4,7 @@ export const ADD_ITEM = 'ADD_ITEM'
 export const REMOVE_ITEM = 'REMOVE_ITEM'
 export const CONFIRM_CARRITO = ' CONFIRM_CARRITO'
 
+
 export const addItem = (item) => ({
     type: ADD_ITEM,
     item
@@ -15,7 +16,7 @@ export const removeItem = (itemID) => ({
 })
 
 
-export const confirmCarrito = (payload, total) => {
+export const confirmCarrito = (payload, total, userId) => {
     return async dispatch => {
         try {
             const response = await fetch(`${URL_API}/ordenes.json`, {
@@ -26,7 +27,8 @@ export const confirmCarrito = (payload, total) => {
                 body: JSON.stringify({
                     date: Date.now(),
                     items: payload,
-                    total
+                    total,
+                    userId,
                 }),
             })
 

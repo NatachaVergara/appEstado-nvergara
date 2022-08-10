@@ -9,10 +9,12 @@ import { removeItem, confirmCarrito } from '../Store/actions/carrito.action'
 const CarritoScreen = () => {
 
     const dispatch = useDispatch()
+
     const items = useSelector(store => store.carrito.carrito)
     const total = useSelector(store => store.carrito.total)
+    const userId = useSelector(store => store.auth.userId)
 
-    const handlerConfirm = () => dispatch(confirmCarrito(items, total))
+    const handlerConfirm = () => dispatch(confirmCarrito(items, total, userId))
     const handleDeleteItem = (id) => dispatch(removeItem(id))
 
     const renderItem = ({ item }) => (
@@ -37,8 +39,8 @@ const CarritoScreen = () => {
                 <TouchableOpacity
                     onPress={handlerConfirm}
                     style={styles.confirm}
-                     disabled={items === undefined || items.length <= 0  ? true : false}
-                    // disabled={true}
+                    disabled={items === undefined || items.length <= 0 ? true : false}
+                // disabled={true}
                 >
                     <Text>Confirmar</Text>
                     <View>

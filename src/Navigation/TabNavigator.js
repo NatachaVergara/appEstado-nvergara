@@ -8,33 +8,26 @@ import ShopNavigator from './ShopNavigator'
 import CarritoNavigator from './CarritoNavigator';
 import OrdersNavigator from './OrdersNavigator';
 // import AuthNavigator from './AuthNavigator';
-
+import { useSelector } from 'react-redux';
+import AuthNavigator from './AuthNavigator';
 
 
 const BottomsTabs = createBottomTabNavigator()
 
 const TabNavigator = () => {
+    const userId = useSelector(store => store.auth.userId)
+    
     return (
         <BottomsTabs.Navigator
             screenOptions={{
                 headerShown: false,
                 tabBarShowLabel: false,
                 tabBarStyle: styles.tabBar
+
             }}>
 
-            {/* <BottomsTabs.Screen
-                name='AuthTab'
-                component={AuthNavigator}
-                options={{
-                    tabBarIcon: () => (
-                        <View style={styles.IconContainer}>
-                            <MaterialIcons name='home' style={styles.icon} />
-                        </View>
-                    ),
-                    tabBarStyle: { display: "none" }
-                }}
 
-            /> */}
+
 
             <BottomsTabs.Screen
                 name="ShopTab"
@@ -78,6 +71,24 @@ const TabNavigator = () => {
                 }}
 
             />
+
+
+
+
+            {userId ? <BottomsTabs.Screen
+                name='AuthTab'
+                component={AuthNavigator}
+                options={{
+                    tabBarIcon: () => (
+                        <View style={styles.IconContainer}>
+                            <MaterialIcons name='logout' style={styles.icon} />
+                        </View>
+                    ),
+
+                }}
+
+            /> : null}
+
         </BottomsTabs.Navigator>
 
 

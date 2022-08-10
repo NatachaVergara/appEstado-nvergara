@@ -12,7 +12,9 @@ const OrdersScreen = () => {
 
     const dispatch = useDispatch()
     const orders = useSelector(store => store.orders.orders)
+    const userId = useSelector(store => store.auth.userId)
 
+    const userOrder = orders.filter(userID => userID.userId === userId)
 
     useEffect(() => {
         dispatch(getOrders());
@@ -33,7 +35,7 @@ const OrdersScreen = () => {
             {orders.length <= 0 || orders === undefined ?
                 <Title title={'No hay ordenes procesadas'} style={styles.title} /> :
                 <FlatList
-                    data={orders}
+                    data={userOrder}
                     keyExtractor={item => item.id}
                     renderItem={renderOrderItem}
                     numColumns={1}
@@ -55,13 +57,13 @@ const styles = StyleSheet.create({
         paddingBottom: 120,
         backgroundColor: '#fff',
 
-    }, 
+    },
     title: {
         justifyContent: 'center',
         alignItems: 'center',
-        color:'red',
+        color: 'red',
         fontSize: 30,
-        marginHorizontal:50,      
+        marginHorizontal: 50,
         width: '100%',
     }
 })

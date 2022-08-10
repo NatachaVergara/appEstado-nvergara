@@ -3,22 +3,40 @@ import { Button, SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import Card from '../../Components/Card'
 import Title from '../../Components/Title'
 import Colors from '../../Constants/Colors'
-const Inicio = ({ navigation }) => {
+import { useSelector, useDispatch } from 'react-redux';
+import { logOut } from '../../Store/actions/auth.actions'
 
+
+
+
+const Inicio = ({ navigation }) => {
+    const userId = useSelector(store => store.auth.userId)
+    const dispatch = useDispatch()
+    const onLogout = () => dispatch(logOut())
 
     return (
-        <SafeAreaView style={styles.container}>
-            <Title
-                title={'Bienvenidos'}
-                style={styles.title}
-            />
-            <Card style={styles.cardContainer}>
-                <View style={styles.buttonContainer}>
-                    <Button title='Login' color={Colors.secondary} onPress={() => { navigation.navigate('LoginScreen') }} />
 
-                    <Button title='Registro' color={Colors.secondary} onPress={() => { navigation.navigate('RegisterScreen') }} />
-                </View>
-            </Card>
+
+        <SafeAreaView style={styles.container}>
+
+            {!userId ? <View>
+                <Title
+                    title={'Bienvenidos'}
+                    style={styles.title}
+                />
+                <Card style={styles.cardContainer}>
+                    <View style={styles.buttonContainer}>
+                        <Button title='Login' color={Colors.secondary} onPress={() => { navigation.navigate('LoginScreen') }} />
+
+                        <Button title='Registro' color={Colors.secondary} onPress={() => { navigation.navigate('RegisterScreen') }} />
+                    </View>
+                </Card></View> :
+                <Card style={styles.cardContainer}>
+                    <View style={styles.buttonContainer}>
+                        <Button title='Logout' color={Colors.secondary} onPress={onLogout} />
+                    </View>
+                </Card>}
+
         </SafeAreaView>
     )
 }

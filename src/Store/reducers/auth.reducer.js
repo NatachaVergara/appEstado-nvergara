@@ -1,4 +1,4 @@
-import { REGISTER } from '../actions/auth.actions'
+import { REGISTER, LOGIN } from '../actions/auth.actions'
 
 const initialState = {
     token: null,
@@ -13,6 +13,13 @@ const AuthReducer = (state = initialState, action) => {
                 token: action.token,
                 userId: action.userId
             };
+        case LOGIN: {
+            return {
+                ...state,
+                token: action.token,
+                userId: action.userId
+            }
+        }
         default:
             return state;
     }

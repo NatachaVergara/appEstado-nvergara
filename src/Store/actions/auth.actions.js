@@ -1,6 +1,7 @@
-import { URL_AUTH_REGISTER } from '../../Constants/database'
+import { URL_AUTH_REGISTER, URL_AUTH_LOGIN } from '../../Constants/database'
 
 export const REGISTER = 'REGISTER'
+export const LOGIN = 'LOGIN'
 
 export const register = (email, password) => {
     return async dispatch => {
@@ -16,16 +17,16 @@ export const register = (email, password) => {
             }),
         });
 
-        
 
-        if(!response.ok){
-        
+
+        if (!response.ok) {
+
             const errorResponse = await response.json();
             console.log(errorResponse)
             const errorID = errorResponse.error.message;
-            
+
             let message = 'No se ha podido registrar';
-            if(errorID === 'EMAIL_EXIST') message = 'Este mail ya está registrado';
+            if (errorID === 'EMAIL_EXIST') message = 'Este mail ya está registrado';
             throw new Error(message);
         }
 
@@ -37,4 +38,41 @@ export const register = (email, password) => {
             userId: data.localId,
         })
     }
+}
+
+export const logIn = (email, password) => {
+    return async dispatch => {
+        const response = await fetch(URL_AUTH_LOGIN, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+            ,
+            body: JSON.stringify({
+                email,
+                password: password,
+                returnSecureToken: true,
+            })
+        })
+
+        if (!response.ok) {
+            const errorresponse = await response.json()
+            const errorID = errorresponse.error.message
+
+            let message = "No se ha podido realizar el logIn, revise la información"
+            if (errorID === 'EMAIL_NOT_FOUND') message = 'No se encuentra registrado ese email';
+            if (errorID === 'INVALID_PASSWORD') message = 'Contraseña incorrecta';
+            if (errorID === 'USER_DISABLED') message = 'La cuenta de usuario ha sido deshabilitada por un administrador';
+
+            throw new Error(message)
+        }
+
+        const result = await response.json();
+
+        dispatch({
+            type: LOGIN,
+            token: result.idtoken,
+            userId: result.localId,
+           
+        })
+    }
+
 }

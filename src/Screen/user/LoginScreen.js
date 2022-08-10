@@ -1,86 +1,157 @@
-import React, { useState } from 'react'
-import { Alert, Button, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import React, { useCallback, useReducer } from 'react'
+import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
 import Card from '../../Components/Card'
-import Input from '../../Components/Input'
+
 import TextLAbel from '../../Components/TextLabel'
 import Title from '../../Components/Title'
 import Colors from '../../Constants/Colors'
-const Login = ({ navigation }) => {
 
-  const [email, onChangeEmail] = useState('')
-  const [password, onChangePassword] = useState('')
+import { useDispatch } from 'react-redux'
+import * as auth from '../../Store/actions/auth.actions'
+import InputForm from '../../Components/InputForm'
+const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE'
 
-  const handleLogin = () => {
+const formReducer = (state, action) => {
+  if (action.type === FORM_INPUT_UPDATE) {
+    const updateValues = {
+      ...state.inputValues,
+      [action.input]: action.value,
+    };
 
-    if (email === '' || password === '') {
-      Alert.alert('No deje campos vacios')
-      return
+    const updateValidities = {
+      ...state.inputValidities,
+      [action.input]: action.isValid
+    };
+
+    let updateFormIsValid = true;
+
+    for (const key in updateValidities) {
+      updateFormIsValid = updateFormIsValid && updateValidities[key]
     }
 
+    return {
+      formIsValid: updateFormIsValid,
+      inputValidities: updateValidities,
+      inputValues: updateValues,
 
-    setTimeout(() => {
-      navigation.navigate('ShopTab')
-    }, 2000)
-
-
+    }
   }
 
 
+  return state;
+
+}
+
+
+
+
+
+
+
+
+const Login = ({ navigation }) => {
+  const dispatch = useDispatch()
+  const [formState, formDispatch] = useReducer(formReducer, {
+    inputValues: {
+      email: '',
+      password: '',
+    },
+    inputValidities: {
+      email: false,
+      password: false,
+    },
+    formIsValid: false,
+  });
+
+
+
+  const handleLogin = () => {
+    console.log(formState.inputValues.email, formState.inputValues.password)
+
+    if (formState.formIsValid) {
+      dispatch(auth.logIn(formState.inputValues.email, formState.inputValues.password))
+    } else {
+      Alert.alert(
+        'Formulario inválido',
+        'Ingresa email y contraseña válido',
+        [{ text: 'Ok' }]
+      )
+    }
+  }
+
+  const onInputChangeHandler = useCallback((inputIdentifier, inputValue, inputValidity) => {
+    formDispatch({
+      type: FORM_INPUT_UPDATE,
+      value: inputValue,
+      isValid: inputValidity,
+      input: inputIdentifier,
+    });
+  }, [formDispatch])
+
+
+
+
   return (
-    <SafeAreaView style={styles.container} >
+    <KeyboardAvoidingView style={styles.container} behavior='height'>
       <ScrollView
         showsVerticalScrollIndicator={false}
       >
         <Title
-          title={'Login'}
+          title={'Registro'}
           style={styles.title}
         />
-        {/* <Text style={styles.title}>Login</Text> */}
         <Card style={styles.card}>
-          <Text style={styles.label}>Email</Text>
-          <Input
-            style={styles.input}
-            blurOnSubmit
+          <InputForm
+            id='email'
+            label='Email'
             keyboardType='email-address'
+            required
+            email
             autoCapitalize='none'
-            autoCorrect={false}
-            value={email}
-            onChangeText={onChangeEmail}
+            errorMsg='ingrese un email'
+            onInputChange={onInputChangeHandler}
+            initialValue=''
+
           />
-          <Text style={styles.label}>Contraseña</Text>
-          <Input
-            style={styles.input}
-            blurOnSubmit
+          <InputForm
+            id='password'
+            label='Contraseña'
             keyboardType='default'
+            secureTextEntry
+            required
+            minLength={6}
             autoCapitalize='none'
-            autoCorrect={false}
-            secureTextEntry={true}
-            value={password}
-            onChangeText={onChangePassword}
+            errorMsg='crea una contraseña'
+            onInputChange={onInputChangeHandler}
+            initialValue=''
+
+
           />
+
           <TouchableOpacity onPress={handleLogin}  >
-            <Text style={styles.button}>Entrar</Text>
+            <Text style={styles.button}>Login</Text>
           </TouchableOpacity>
+
         </Card>
         <TextLAbel
           text={'No tengo cuenta'}
           change={() => { navigation.navigate('RegisterScreen') }}
           onReturn={() => { navigation.navigate('AuthScreen') }}
         />
-
       </ScrollView>
-    </SafeAreaView>
+    </KeyboardAvoidingView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
 
   },
   title: {
-    marginTop: 50,
-    marginLeft: 90
+    marginLeft: 60
   },
 
   card: {
@@ -90,20 +161,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginLeft: '8%'
   },
-  label: {
-    color: Colors.text,
-    margin: 10,
-    fontFamily: 'light'
-  },
-  input: {
-    width: 200,
-    textAlign: 'center',
-    fontSize: 15,
 
-  },
-  labelRegister: {
-    marginTop: 20,
-  },
   volver: {
     fontSize: 20,
 
@@ -113,9 +171,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 20,
     fontFamily: 'CormorantSCBold'
+
   }
 
 
 })
-
 export default Login

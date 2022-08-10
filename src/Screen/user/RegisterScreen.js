@@ -108,7 +108,7 @@ const Register = ({ navigation }) => {
             required
             email
             autoCapitalize='none'
-            errorMsg='Por favor ingrese un email'
+            errorMsg='ingrese un email'
             onInputChange={onInputChangeHandler}
             initialValue=''
 
@@ -121,7 +121,7 @@ const Register = ({ navigation }) => {
             required
             minLength={6}
             autoCapitalize='none'
-            errorMsg='Cree una contraseña'
+            errorMsg='crea una contraseña'
             onInputChange={onInputChangeHandler}
             initialValue=''
 

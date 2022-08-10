@@ -9,7 +9,7 @@ const ImageBackgoundBook = (props) => {
             source={props.source}
             resizeMode={props.resizeMode}
         >
-           
+           {props.children}
 
         </ImageBackground>
     )

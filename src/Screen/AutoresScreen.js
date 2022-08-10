@@ -5,6 +5,7 @@ import GridItem from '../Components/GridItem'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectAutor } from '../Store/actions/autores.action'
 import ImageBackgoundBook from '../Components/ImageBackgoundBook'
+import { IMG_BACKGROUND } from '../Constants/img'
 
 
 
@@ -22,13 +23,13 @@ const AutoresScreen = ({ navigation }) => {
     })
   }
 
-  const img = { uri: 'https://firebasestorage.googleapis.com/v0/b/buscolibro-rn.appspot.com/o/libros%2Fcloseup-books-wellorganized-shelves-bookstore%20(1).jpg?alt=media&token=8103b03d-f530-4cfe-a16b-9d0ad55ac64e' }
+ 
 
   const renderGridItem = ({ item }) => (<GridItem item={item} onSelected={handleAutor} />)
 
   return (
     <SafeAreaView style={styles.container}>
-      <ImageBackgoundBook source={img} resizeMode="cover" style={styles.image}>
+      <ImageBackgoundBook source={IMG_BACKGROUND} resizeMode="cover" style={styles.image}>
         <FlatList
           data={autores}
           keyExtractor={item => item.id}

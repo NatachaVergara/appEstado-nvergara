@@ -9,7 +9,6 @@ import { removeItem, confirmCarrito } from '../Store/actions/carrito.action'
 const CarritoScreen = () => {
 
     const dispatch = useDispatch()
-
     const items = useSelector(store => store.carrito.carrito)
     const total = useSelector(store => store.carrito.total)
     const userId = useSelector(store => store.auth.userId)
@@ -22,7 +21,7 @@ const CarritoScreen = () => {
 
     )
 
-    console.log(items)
+    // console.log(items)
 
     return (
         <SafeAreaView style={styles.container}>

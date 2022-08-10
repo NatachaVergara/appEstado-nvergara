@@ -1,11 +1,17 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { ImageBackground, StyleSheet, View } from 'react-native'
+
 
 const Card = props => {
+   
     return (
+        
         <View {...props} style={[styles.card, props.style]}>
+           
             {props.children}
+           
         </View>
+       
     )
 }
 
@@ -18,7 +24,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.50,
         elevation: 5,
         borderRadius: 10,
-        backgroundColor:'black',
+       // backgroundColor:'black',
         padding: 50,
         marginTop:'50%'
     }

@@ -18,13 +18,32 @@ const AuthNavigator = () =>
 
             headerTintColor: Platform.OS === 'android' ? 'white' : Colors.secondary,
             headerTitleStyle: {
-                fontWeight: 'bold'
+                fontWeight: 'bold',
+                
             }
         }}
     >
-        <Stack.Screen name="AuthScreen" component={InicioScreen} />
-        <Stack.Screen name="LoginScreen" component={LoginScreen} />
-        <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+        <Stack.Screen
+            name="AuthScreen"
+            component={InicioScreen}
+            options={{
+                title: 'Inicio'
+            }}
+        />
+        <Stack.Screen
+            name="LoginScreen"
+            component={LoginScreen}
+            options={{
+                title: 'Login'
+            }}
+        />
+        <Stack.Screen
+            name="RegisterScreen"
+            component={RegisterScreen}
+            options={{
+                title: 'Registro'
+            }}
+        />
 
 
     </Stack.Navigator>

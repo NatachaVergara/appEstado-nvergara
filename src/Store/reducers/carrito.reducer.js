@@ -15,27 +15,22 @@ const CarritoReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_ITEM:
             let updateCarrito = []
-            if (state.carrito.length < 0) {
-                return {
-                    state
-                }
+            if (state.carrito.find(item => item.id === action.item.id)) {
+                updateCarrito = state.carrito.map(item => {
+                    if (item.id === action.item.id) item.cantidad++;
+                    return item;
+                })
             } else {
-                if (state.carrito.find(item => item.id === action.item.id)) {
-                    updateCarrito = state.carrito.map(item => {
-                        if (item.id === action.item.id) item.cantidad++;
-                        return item;
-                    })
-                } else {
-                    const item = { ...action.item, cantidad: 1 }
-                    updateCarrito = [...state.carrito, item]
-                }
-
-                return {
-                    ...state,
-                    carrito: updateCarrito,
-                    total: sumTotal(updateCarrito)
-                };
+                const item = { ...action.item, cantidad: 1 }
+                updateCarrito = [...state.carrito, item]
             }
+
+            return {
+                ...state,
+                carrito: updateCarrito,
+                total: sumTotal(updateCarrito)
+            };
+
 
         case REMOVE_ITEM:
             const carritoFiltrado = state.carrito.filter(item => item.id !== action.itemID)

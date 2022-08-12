@@ -6,14 +6,17 @@ import { useSelector, useDispatch, connect } from 'react-redux'
 import { removeItem, confirmCarrito } from '../Store/actions/carrito.action'
 
 
-const CarritoScreen = () => {
+const CarritoScreen = ({ navigation }) => {
 
     const dispatch = useDispatch()
     const items = useSelector(store => store.carrito.carrito)
+    // console.log(items)
     const total = useSelector(store => store.carrito.total)
     const userId = useSelector(store => store.auth.userId)
 
-    const handlerConfirm = () => dispatch(confirmCarrito(items, total, userId))
+    // const handlerConfirm = () => dispatch(confirmCarrito(items, total, userId))
+    const handlerDireccionFacturacion = () => navigation.navigate('Checkout')
+
     const handleDeleteItem = (id) => dispatch(removeItem(id))
 
     const renderItem = ({ item }) => (
@@ -21,7 +24,7 @@ const CarritoScreen = () => {
 
     )
 
-    // console.log(items)
+
 
     return (
         <SafeAreaView style={styles.container}>
@@ -36,12 +39,13 @@ const CarritoScreen = () => {
             <View style={styles.footer}>
 
                 <TouchableOpacity
-                    onPress={handlerConfirm}
+                    // onPress={handlerConfirm}
+                    onPress={handlerDireccionFacturacion}
                     style={styles.confirm}
                     disabled={items === undefined || items.length <= 0 ? true : false}
                 // disabled={true}
                 >
-                    <Text>Confirmar</Text>
+                    <Text>COMPRAR</Text>
                     <View>
                         <Text style={styles.text}>Total</Text>
                         <Text style={styles.text}>${total}</Text>

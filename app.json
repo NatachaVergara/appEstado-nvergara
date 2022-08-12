@@ -2,14 +2,14 @@
   "expo": {
     "name": "busco-libro-app",
     "slug": "busco-libro-app",
-    "version": "1.0.0",
+    "version": "1.0.0",   
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/img/closeBook2.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/img/closeBook2.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "##a31f05"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -22,12 +22,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./assets/img/closeBook2.png",
+        "backgroundColor": "##a31f05"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/img/closeBook2.png"
     }
   }
 }

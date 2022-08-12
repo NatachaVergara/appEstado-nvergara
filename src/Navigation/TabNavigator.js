@@ -10,13 +10,14 @@ import OrdersNavigator from './OrdersNavigator';
 // import AuthNavigator from './AuthNavigator';
 import { useSelector } from 'react-redux';
 import AuthNavigator from './AuthNavigator';
+import CheckoutNavigator from './CheckoutNavigator';
 
 
 const BottomsTabs = createBottomTabNavigator()
 
 const TabNavigator = () => {
     const userId = useSelector(store => store.auth.userId)
-    
+
     return (
         <BottomsTabs.Navigator
             screenOptions={{
@@ -72,22 +73,20 @@ const TabNavigator = () => {
 
             />
 
+                      {
+                userId ? <BottomsTabs.Screen
+                    name='AuthTab'
+                    component={AuthNavigator}
+                    options={{
+                        tabBarIcon: () => (
+                            <View style={styles.IconContainer}>
+                                <MaterialIcons name='logout' style={styles.icon} />
+                            </View>
+                        ),
 
+                    }}
 
-
-            {userId ? <BottomsTabs.Screen
-                name='AuthTab'
-                component={AuthNavigator}
-                options={{
-                    tabBarIcon: () => (
-                        <View style={styles.IconContainer}>
-                            <MaterialIcons name='logout' style={styles.icon} />
-                        </View>
-                    ),
-
-                }}
-
-            /> : null}
+                /> : null}
 
         </BottomsTabs.Navigator>
 
@@ -118,6 +117,7 @@ const styles = StyleSheet.create({
     },
     icon: {
         fontSize: 30
-    }
+    },
+    
 });
 export default TabNavigator

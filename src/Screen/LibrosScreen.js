@@ -15,7 +15,7 @@ import {
 //Reducer-Store
 import { useSelector, useDispatch } from 'react-redux'
 //actions
-import { selectLibro, filteredLibros } from '../Store/actions/libros.action'
+import { selectLibro, filteredLibros, filteredByCategory } from '../Store/actions/libros.action'
 import ImageBackgoundBook from '../Components/ImageBackgoundBook'
 
 
@@ -30,13 +30,26 @@ const ESPACIO = 10;
 
 const LibrosScreen = ({ navigation }) => {
   const dispatch = useDispatch()
-  const librosFiltrados = useSelector(store => store.libros.filteredLibros)
-  const autor = useSelector(store => store.autores.selected)
 
+  const autor = useSelector(store => store.autores.selected)
+  const categoriaID = useSelector(store => store.categoria.selected)
+  const librosFiltrados = useSelector(store => store.libros.filteredLibros)
+  // console.log('Catergorias en LibrosScreen', categoriaID.id)
+  const filtradoporCategoria = useSelector(store => store.libros.filteredByCategory)
+  // console.log(filtradoporCategoria)
 
   useEffect(() => {
-    dispatch(filteredLibros(autor.id))
-  }, [])
+    if (autor != null) { dispatch(filteredLibros(autor.id)) }
+    if (categoriaID != null) { dispatch(filteredByCategory(categoriaID.id)) }
+
+  }, [autor, categoriaID])
+
+  const lista = librosFiltrados.length > 0 ? librosFiltrados : filtradoporCategoria
+
+
+
+
+
 
   const handleSelected = (item) => {
 
@@ -76,7 +89,7 @@ const LibrosScreen = ({ navigation }) => {
           scrollEventThrottle={16}
 
 
-          data={librosFiltrados}
+          data={lista}
           keyExtractor={item => item.id}
           renderItem={({ item, index }) => {
             const inputRange = [

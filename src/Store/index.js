@@ -7,6 +7,7 @@ import LibrosReducer from './reducers/libros.reducer'
 import CarritoReducer from './reducers/carrito.reducer'
 import OrdersReducer from './reducers/orders.reducer'
 import AuthReducer from './reducers/auth.reducer'
+import CategoriaReducer from './reducers/categoria.reducer'
 
 const RootReducer = combineReducers({
     autores: AutoresReducer,
@@ -14,6 +15,7 @@ const RootReducer = combineReducers({
     carrito: CarritoReducer,
     orders: OrdersReducer,
     auth: AuthReducer,
+    categoria: CategoriaReducer,
 
 })
 

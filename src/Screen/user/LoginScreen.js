@@ -30,7 +30,7 @@ const Login = ({ navigation }) => {
 
 
   const handleLogin = () => {
-   // console.log(formState.inputValues.email, formState.inputValues.password)
+    // console.log(formState.inputValues.email, formState.inputValues.password)
 
     if (formState.formIsValid) {
       dispatch(auth.logIn(formState.inputValues.email, formState.inputValues.password))
@@ -121,18 +121,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
+   
 
   },
   image: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 500
+ flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+   
   },
   title: {
     marginTop: 10,
     backgroundColor: "#000000c0",
     color: "white",
-    
+
     lineHeight: 84,
     fontWeight: "bold",
     fontFamily: 'SemiBold',

@@ -142,20 +142,21 @@ const styles = StyleSheet.create({
 
   },
   image: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    width: 500
+    width: '100%',
   },
   title: {
     marginTop: 10,
-    
-    color: "white",    
+
+    color: "white",
     lineHeight: 84,
     fontWeight: "bold",
     fontFamily: 'SemiBold',
     borderRadius: 10,
     alignSelf: 'center',
-    
+
   },
 
   card: {

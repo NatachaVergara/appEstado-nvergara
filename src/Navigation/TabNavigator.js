@@ -2,7 +2,7 @@ import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from '@expo/vector-icons/Ionicons'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import ShopNavigator from './ShopNavigator'
 
 import CarritoNavigator from './CarritoNavigator';
@@ -10,7 +10,7 @@ import OrdersNavigator from './OrdersNavigator';
 // import AuthNavigator from './AuthNavigator';
 import { useSelector } from 'react-redux';
 import AuthNavigator from './AuthNavigator';
-import CheckoutNavigator from './CheckoutNavigator';
+import UserNavigator from './UserNavigator';
 
 
 const BottomsTabs = createBottomTabNavigator()
@@ -24,11 +24,7 @@ const TabNavigator = () => {
                 headerShown: false,
                 tabBarShowLabel: false,
                 tabBarStyle: styles.tabBar
-
             }}>
-
-
-
 
             <BottomsTabs.Screen
                 name="ShopTab"
@@ -57,9 +53,6 @@ const TabNavigator = () => {
                 }}
             />
 
-
-
-
             <BottomsTabs.Screen
                 name='OrdersTab'
                 component={OrdersNavigator}
@@ -73,7 +66,20 @@ const TabNavigator = () => {
 
             />
 
-                      {
+            <BottomsTabs.Screen
+                name='UserTab'
+                component={UserNavigator}
+                options={{
+                    tabBarIcon: () => (
+                        <View styles={styles.IconContainer}>
+                            <Ionicons name='person-circle-outline' style={styles.icon} />
+                        </View>
+                    )
+                }}
+
+            />
+
+            {
                 userId ? <BottomsTabs.Screen
                     name='AuthTab'
                     component={AuthNavigator}
@@ -118,6 +124,6 @@ const styles = StyleSheet.create({
     icon: {
         fontSize: 30
     },
-    
+
 });
 export default TabNavigator

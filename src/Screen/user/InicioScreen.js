@@ -78,13 +78,14 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+       
 
     },
     image: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        width: 500
+        width: '100%',
     },
     title: {
         marginTop: 10,

@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, ImageBackground, SafeAreaView, StyleSheet } from 'react-native'
+import { FlatList,  SafeAreaView, StyleSheet } from 'react-native'
 import GridItem from '../Components/GridItem'
 //Reducer-Store
 import { useSelector, useDispatch } from 'react-redux'
@@ -12,18 +12,21 @@ import { IMG_BACKGROUND } from '../Constants/img'
 const AutoresScreen = ({ navigation }) => {
 
   const autores = useSelector(store => store.autores.autores)
+  
+  // console.log('AUTORES ', autores)
+ 
   const dispatch = useDispatch()
 
 
   const handleAutor = (item) => {
-    // console.log('item', item)
+    // console.log('AUTORES ITEM', item)
     dispatch(selectAutor(item.id))
     navigation.navigate('LibrosScreen', {
       autor: item.autor
     })
   }
 
- 
+
 
   const renderGridItem = ({ item }) => (<GridItem item={item} onSelected={handleAutor} />)
 

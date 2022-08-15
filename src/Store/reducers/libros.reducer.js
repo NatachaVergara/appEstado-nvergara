@@ -23,7 +23,6 @@ const LibrosReducer = (state = initialState, action) => {
                 filteredLibros: state.libros.filter(libro => libro.autorID === action.autorID)
             }
         case FILTERED_BY_CATEGORY:
-            console.log('ACTION', action.categoriaID)
             return {
                 ...state,
                 filteredByCategory: state.libros.filter(libro => libro.categoria === action.categoriaID)

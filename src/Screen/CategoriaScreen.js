@@ -16,7 +16,9 @@ const CategoriaScreen = ({ navigation }) => {
     const handlerCategoria = (item) => {
         // console.log('CATEGORIA ITEMS', item.categoria)
         dispatch(selectCategoria(item.id))
-        navigation.navigate('LibrosScreen', { categoria: item.categoria })
+        navigation.navigate('FilteredByCategoryScreen', {
+            categoria: `Categoria: ${item.categoria}`
+        })
 
     }
 

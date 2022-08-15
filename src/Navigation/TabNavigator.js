@@ -17,7 +17,7 @@ const BottomsTabs = createBottomTabNavigator()
 
 const TabNavigator = () => {
     const userId = useSelector(store => store.auth.userId)
-
+    //console.log(userId)
     return (
         <BottomsTabs.Navigator
             screenOptions={{

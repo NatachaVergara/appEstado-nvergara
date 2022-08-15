@@ -1,11 +1,11 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AutoresScreen from '../Screen/AutoresScreen';
-import LibrosScreen from '../Screen/LibrosScreen';
 import LibroDetailSCreen from '../Screen/LibroDetailSCreen';
-import { Pressable } from 'react-native';
 import CategoriaScreen from '../Screen/CategoriaScreen';
 import InicioShopScreen from '../Screen/InicioShopScreen';
+import FilteredByCategoryScreen from '../Screen/FilteredByCategoryScreen';
+import FilteredByAutor from '../Screen/FilteredByAutor';
 
 
 
@@ -17,7 +17,6 @@ const ShopNavigator = () => {
     return (
 
         <Stack.Navigator>
-
             <Stack.Screen
                 name='InicioShopScreen'
                 component={InicioShopScreen}
@@ -42,11 +41,21 @@ const ShopNavigator = () => {
             />
 
             <Stack.Screen
-                name='LibrosScreen'
-                component={LibrosScreen}
+                name='FilteredByAutor'
+                component={FilteredByAutor}
                 options={({ route }) => ({
                     title: route.params.autor
                 })}
+            />
+
+
+            <Stack.Screen
+                name='FilteredByCategoryScreen'
+                component={FilteredByCategoryScreen}
+                options={({ route }) => ({
+                    title: route.params.categoria
+                })}
+
             />
             <Stack.Screen
                 name='LibroDetalleScreen'

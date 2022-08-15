@@ -1,10 +1,14 @@
 export const categorias = [
     {
         id: 1,
-        categoria: 'novela'
+        categoria: 'Novela'
     },
     {
         id: 2,
-        categoria: 'infantil'
+        categoria: 'Infantil'
     },
+    {
+        id:3,
+        categoria: 'Adolescentes'
+    }
 ]

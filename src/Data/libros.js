@@ -8,7 +8,7 @@ export const libros = [
         dispobible: 1,
         sinopsis: 'El aviador cuenta que una vez, cuando era un niño, hizo un dibujo de una boa que digería a un elefante; sin embargo, todos los adultos que veían el dibujo lo interpretaban erróneamente como un sombrero. Cuando el aviador trata de corregir esta confusión, se le aconseja que deje de lado los dibujos y se dedique a algo más productivo. El aviador entonces se lamenta de la poca comprensión que tienen los adultos por la creatividad.    Ya de adulto, el aviador se ha convertido en un piloto y un día su avión sufre una avería en el desierto del Sahara, lejos de la civilización. Sin embargo, de la nada aparece un pequeño niño al que el aviador llama «el principito». Este le pide que le dibuje una oveja (o cordero, dependiendo de la traducción) pero en su lugar, el aviador decide mostrarle su viejo dibujo del elefante dentro de la boa, que, para su sorpresa, el príncipe interpreta correctamente. Después de varios intentos fallidos de elaborar una oveja, el aviador, en su frustración, termina por dibujarle una caja y le explica que el cordero se encuentra en su interior; el principito lo acepta y le responde que eso era lo que quería.',
         stock: 10,
-        categoria:2
+        categoria: 2
     },
     {
         id: 2,
@@ -42,7 +42,7 @@ export const libros = [
         dispobible: 1,
         sinopsis: 'El día de su cumpleaños, Harry Potter descubre que es hijo de dos conocidos hechiceros, de los que ha heredado poderes mágicos. Debe asistir a una famosa escuela de magia y hechicería, donde entabla una amistad con dos jóvenes que se convertirán en sus compañeros de aventura. Durante su primer año en Hogwarts, descubre que un malévolo y poderoso mago llamado Voldemort está en busca de una piedra filosofal que alarga la vida de quien la posee.',
         stock: 50,
-        categoria:2
+        categoria: 3
     },
 
     {
@@ -55,7 +55,7 @@ export const libros = [
         dispobible: 0,
         sinopsis: 'Terminado el verano, Harry no ve la hora de abandonar la casa de sus odiosos tíos. Inesperadamente se presenta en su dormitorio Dobby, un elfo doméstico, que le anuncia que correrá un gran peligro si vuelve a Hogwarts.',
         stock: 1,
-        categoria:2
+        categoria: 3
     },
 ]
 

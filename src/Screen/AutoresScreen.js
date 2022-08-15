@@ -21,7 +21,7 @@ const AutoresScreen = ({ navigation }) => {
   const handleAutor = (item) => {
     // console.log('AUTORES ITEM', item)
     dispatch(selectAutor(item.id))
-    navigation.navigate('LibrosScreen', {
+    navigation.navigate('FilteredByAutor', {
       autor: item.autor
     })
   }

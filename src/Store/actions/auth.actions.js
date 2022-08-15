@@ -41,6 +41,7 @@ export const register = (email, password) => {
             type: REGISTER,
             token: data.idToken,
             userId: data.localId,
+            email: data.email,
 
         })
 
@@ -59,6 +60,7 @@ export const logIn = (email, password) => {
                 email,
                 password: password,
                 returnSecureToken: true,
+                
             })
         })
 
@@ -81,6 +83,7 @@ export const logIn = (email, password) => {
             type: LOGIN,
             token: result.idtoken,
             userId: result.localId,
+            email: result.email,
 
 
         })

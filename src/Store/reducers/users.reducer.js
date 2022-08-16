@@ -11,7 +11,7 @@ const UsuariosReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case SELECT_USUARIO:
-            const IndexUser = state.users.findIndex(user => user.id === action.userId)
+            const IndexUser = state.users.findIndex(user => user.email === action.email)
             return {
                 ...state,
                 selected: state.users[IndexUser]

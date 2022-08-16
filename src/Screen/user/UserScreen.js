@@ -1,29 +1,51 @@
-import React, { useEffect } from 'react'
-import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Image, ImagePickerIOS, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { ImageItem } from '../../Components/ImageItem';
 import Title from '../../Components/Title';
+
 // import AuthNavigator from './AuthNavigator';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectUsuario } from '../../Store/actions/users.action'
+import * as ImagePicker from 'expo-image-picker';
 
 
 
 const UserScreen = () => {
     // console.log('USER SCREEN')
     const dispatch = useDispatch()
-    const userId = useSelector(store => store.auth.userId)
     const email = useSelector(store => store.auth.email)
 
     // console.log(userId)
     // console.log(email)
 
     useEffect(() => {
-        dispatch(selectUsuario(userId))
+        dispatch(selectUsuario(email))
     }, [])
 
     const user = useSelector(store => store.usuarios.selected)
     // console.log(user)
+
+    const [image, setImage] = useState('https://via.placeholder.com/150')
+
+
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        console.log(result);
+
+        if (!result.cancelled) {
+            setImage(result.uri);
+        }
+    };
+
+
 
 
 
@@ -37,18 +59,92 @@ const UserScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
             {
-                user === null ?
+                user === null || user === undefined ?
 
-                    <ScrollView>
-                        <View>
-                            <Text style={[styles.text, styles.subText]}>Cargando....</Text>
+                    <ScrollView showsVerticalScrollIndicator={false}>
+                        <View style={{ alignSelf: "center" }}>
+                            <View style={styles.profileImage}>
+                                <Image source={{ uri: image }} style={styles.image} resizeMode="center" />
+                            </View>
+                            <View style={styles.active}></View>
+                            <View style={styles.add}>
+                                <TouchableOpacity onPress={pickImage}>
+                                    <Ionicons name="camera-outline" size={25} color="#DFD8C8" style={{ marginTop: 0, marginLeft: 2 }}></Ionicons>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+
+                        <View style={styles.infoContainer}>
+                            <Text style={[styles.text, { fontWeight: "200", fontSize: 36 }]}>Prueba </Text>
+                        </View>
+
+                        <View style={styles.statsContainer}>
+                            <View style={styles.statsBox}>
+                                <Text style={[styles.text, { fontSize: 24 }]}>4</Text>
+                                <Text style={[styles.text, styles.subText]}>Compras</Text>
+                            </View>
+
+                            <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
+                                <Text style={[styles.text, { fontSize: 24 }]}>16</Text>
+                                <Text style={[styles.text, styles.subText]}>Libros</Text>
+                            </View>
+                            <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
+                                <Text style={[styles.text, { fontSize: 24 }]}>$15,844</Text>
+                                <Text style={[styles.text, styles.subText]}>Total</Text>
+                            </View>
+                        </View>
+
+                        <View style={{ marginTop: 32 }}>
+                            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                                {/* Crear un flatlist con el imageItem*/}
+                                <View style={styles.mediaImageContainer}>
+                                    <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
+                                </View>
+                                <View style={styles.mediaImageContainer}>
+                                    <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
+                                </View>
+                                <View style={styles.mediaImageContainer}>
+                                    <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
+                                </View>
+                                <View style={styles.mediaImageContainer}>
+                                    <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
+                                </View>
+                                <View style={styles.mediaImageContainer}>
+                                    <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
+                                </View>
+                            </ScrollView>
+                        </View>
+
+                        <View style={styles.datosPersonales}>
+                            <ScrollView showsVerticalScrollIndicator={false}>
+                                <View style={{ marginBottom: 30 }} >
+                                    <View style={styles.editDatos}>
+                                        <Title title='Datos Personales' style={[styles.text, { fontWeight: "200", fontSize: 30, paddingBottom: 10 }]} />
+                                        <TouchableOpacity>
+                                            <Ionicons name="create-outline" size={25} color="#DFD8C8" style={{ marginTop: 25, marginLeft: 0 }}></Ionicons>
+                                        </TouchableOpacity>
+                                    </View>
+                                    {/* Crear flatlist */}
+                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Usuario: Lisa2022</Text>
+                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Email: {email} </Text>
+
+
+
+                                    {/* Crear flatlist */}
+                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Nombre completo: prueba  </Text>
+                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Domicilio: prueba </Text>
+                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Documento: prueba </Text>
+                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Teléfono Principal:prueba</Text>
+                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Teléfono Alternativo: prueba </Text>
+                                </View>
+                            </ScrollView>
                         </View>
                     </ScrollView>
                     :
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={{ alignSelf: "center" }}>
                             <View style={styles.profileImage}>
-                                <Image source={{ uri: user.img }} style={styles.image} resizeMode="center"/>
+                                <Image source={{ uri: user.img }} style={styles.image} resizeMode="center" />
                             </View>
                             <View style={styles.active}></View>
                             <View style={styles.add}>

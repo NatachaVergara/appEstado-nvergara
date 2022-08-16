@@ -1,4 +1,4 @@
-import React, { useCallback, useReducer } from 'react'
+import React, { useCallback, useEffect, useReducer } from 'react'
 import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, KeyboardAvoidingView, ImageBackground, View } from 'react-native'
 import Card from '../../Components/Card'
 import TextLAbel from '../../Components/TextLabel'
@@ -8,6 +8,7 @@ import { IMG_BACKGROUND } from '../../Constants/img'
 //Store
 import { useDispatch } from 'react-redux'
 import * as auth from '../../Store/actions/auth.actions'
+
 //onChange del formulario
 import { useFormReducer } from '../../Constants/formReducer'
 
@@ -28,12 +29,12 @@ const Login = ({ navigation }) => {
   });
 
 
-
   const handleLogin = () => {
     // console.log(formState.inputValues.email, formState.inputValues.password)
 
     if (formState.formIsValid) {
       dispatch(auth.logIn(formState.inputValues.email, formState.inputValues.password))
+
     } else {
       Alert.alert(
         'Formulario inválido',
@@ -93,8 +94,6 @@ const Login = ({ navigation }) => {
               errorMsg='ingrese su contraseña'
               onInputChange={onInputChangeHandler}
               initialValue=''
-
-
             />
             <View style={styles.buttonContainer}>
               <TouchableOpacity onPress={handleLogin} style={styles.button}  >
@@ -121,15 +120,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-   
+
 
   },
   image: {
- flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-   
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+
   },
   title: {
     marginTop: 10,

@@ -1,4 +1,4 @@
-import React, { useCallback, useReducer } from 'react'
+import React, { useCallback, useEffect, useReducer } from 'react'
 import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, KeyboardAvoidingView, ImageBackground, View } from 'react-native'
 import Card from '../../Components/Card'
 import InputForm from '../../Components/InputForm'
@@ -19,26 +19,44 @@ const Register = ({ navigation }) => {
     inputValues: {
       email: '',
       password: '',
-      repetirPassword: ''
+      repetirPassword: '',
+      // nombreUsuario: '',
+      // nombre: '',
+      // apellido: '',
+      // documento: '',
+      // domicilio: '',
+      // telefonoPrincipal: '',
+      // telefonoAlternativo: '',
     },
+
     inputValidities: {
       email: false,
       password: false,
-      repetirPassword: false
+      repetirPassword: false,
+      // nombreUsuario: false,
+      // nombre: false,
+      // apellido: false,
+      // domicilio: false,
+      // telefonoPrincipal: false,
     },
     formIsValid: false,
   });
 
-
-
-
-
   const handleRegister = () => {
-    // console.log(formState.inputValues.email, formState.inputValues.password, formState.inputValues.repetirPassword)
+    // console.log(formState.inputValues.email,
+    //   formState.inputValues.nombreUsuario,
+    //   formState.inputValues.nombre,
+    //   formState.inputValues.apellido,
+    //   formState.inputValues.documento,
+    //   formState.inputValues.domicilio,
+    //   formState.inputValues.telefonoPrincipal,
+    //   formState.inputValues.telefonoAlternativo
+    // )
     if (formState.inputValues.password != formState.inputValues.repetirPassword) {
       Alert.alert('Las contraseñas no coinciden')
     } else if (formState.formIsValid) {
       dispatch(auth.register(formState.inputValues.email, formState.inputValues.password))
+
     } else {
       Alert.alert(
         'Formulario inválido',
@@ -109,9 +127,97 @@ const Register = ({ navigation }) => {
               errorMsg='Repita la contraseña'
               onInputChange={onInputChangeHandler}
               initialValue=''
-
-
             />
+            {/* <InputForm
+              id='nombreUsuario'
+              label='Nombre de usuario *'
+              keyboardType='default'
+              required
+              minLength={6}
+              autoCapitalize='none'
+              errorMsg='No deje el campo vacio'
+              onInputChange={onInputChangeHandler}
+              initialValue=''
+            />
+            <InputForm
+              id='nombre'
+              label='Nombre *'
+              keyboardType='default'
+              required
+              minLength={6}
+              autoCapitalize='none'
+              errorMsg='No deje el campo vacio'
+              onInputChange={onInputChangeHandler}
+              initialValue=''
+            />
+            <InputForm
+              id='apellido'
+              label='Apellido *'
+              keyboardType='default'
+              required
+              minLength={6}
+              autoCapitalize='none'
+              errorMsg='No deje el campo vacio'
+              onInputChange={onInputChangeHandler}
+              initialValue=''
+            />
+
+            <InputForm
+              id='documento'
+              label='DNI *'
+              keyboardType='numeric'
+              required
+              minLength={6}
+              autoCapitalize='none'
+              errorMsg='No deje el campo vacio'
+              onInputChange={onInputChangeHandler}
+              initialValue=''
+            />
+            <InputForm
+              id='domicilio'
+              label='Domicilio *'
+              keyboardType='default'
+              required
+              minLength={6}
+              autoCapitalize='none'
+              errorMsg='No deje el campo vacio'
+              onInputChange={onInputChangeHandler}
+              initialValue=''
+            />
+            <InputForm
+              id='telefonoPrincipal'
+              label='Teléfono principal *'
+              keyboardType='phone-pad'
+              required
+              minLength={6}
+              autoCapitalize='none'
+              errorMsg='No deje el campo vacio'
+              onInputChange={onInputChangeHandler}
+              initialValue=''
+            />
+            <InputForm
+              id='telefonoAlternativo'
+              label='Teléfono alternativo '
+              keyboardType='phone-pad'
+              minLength={6}
+              autoCapitalize='none'
+              errorMsg='No deje el campo vacio'
+              onInputChange={onInputChangeHandler}
+              initialValue=''
+            />
+            <InputForm
+              id='imagen'
+              label='Imagen '
+              keyboardType='default'
+              minLength={6}
+              autoCapitalize='none'
+              errorMsg='No deje el campo vacio'
+              onInputChange={onInputChangeHandler}
+              initialValue=''
+            />
+ */}
+
+
 
 
 

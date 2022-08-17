@@ -2,6 +2,7 @@ import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import DirYFactScreen from '../Screen/checkout/DirYFactScreen';
 import PagosScreen from '../Screen/checkout/PagosScreen';
+import FinalizarCompra from '../Screen/checkout/FinalizarCompra';
 
 
 const Stack = createNativeStackNavigator();
@@ -29,6 +30,15 @@ const CheckoutNavigator = () => {
                 options={{
                     title: 'Dirección y Facturación'
                 }}
+            />
+
+            <Stack.Screen
+                name='FinalizarCompra'
+                component={FinalizarCompra}
+                options={{
+                    title: 'Finalizar Compra'
+                }}
+
             />
         </Stack.Navigator >
     )

@@ -1,6 +1,9 @@
-import { libros } from '../../Data/libros'
+ import { libros } from '../../Data/libros'
 
 import { SELECT_LIBRO, FILTERED_LIBRO, FILTERED_BY_CATEGORY } from '../actions/libros.action'
+
+
+
 
 
 const initialState = {
@@ -27,6 +30,7 @@ const LibrosReducer = (state = initialState, action) => {
                 ...state,
                 filteredByCategory: state.libros.filter(libro => libro.categoria === action.categoriaID)
             }
+    
         default:
             return state
     }

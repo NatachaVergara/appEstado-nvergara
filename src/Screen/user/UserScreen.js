@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Image, ImagePickerIOS, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { ImageItem } from '../../Components/ImageItem';
 import Title from '../../Components/Title';
@@ -15,8 +15,6 @@ const UserScreen = () => {
     // console.log('USER SCREEN')
     const dispatch = useDispatch()
     const email = useSelector(store => store.auth.email)
-
-    // console.log(userId)
     // console.log(email)
 
     useEffect(() => {
@@ -47,9 +45,6 @@ const UserScreen = () => {
 
 
 
-
-
-
     //renderiza el item de las imagenes de los libros que fue comprando el usuario
     const renderItem = ({ item, styles }) => {
         <ImageItem item={item} styles={styles} />
@@ -75,21 +70,21 @@ const UserScreen = () => {
                         </View>
 
                         <View style={styles.infoContainer}>
-                            <Text style={[styles.text, { fontWeight: "200", fontSize: 36 }]}>Prueba </Text>
+                            <Text style={[styles.text, { fontWeight: "200", fontSize: 36 }]}>- </Text>
                         </View>
 
                         <View style={styles.statsContainer}>
                             <View style={styles.statsBox}>
-                                <Text style={[styles.text, { fontSize: 24 }]}>4</Text>
+                                <Text style={[styles.text, { fontSize: 24 }]}>-</Text>
                                 <Text style={[styles.text, styles.subText]}>Compras</Text>
                             </View>
 
                             <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
-                                <Text style={[styles.text, { fontSize: 24 }]}>16</Text>
+                                <Text style={[styles.text, { fontSize: 24 }]}>-</Text>
                                 <Text style={[styles.text, styles.subText]}>Libros</Text>
                             </View>
                             <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
-                                <Text style={[styles.text, { fontSize: 24 }]}>$15,844</Text>
+                                <Text style={[styles.text, { fontSize: 24 }]}>$-</Text>
                                 <Text style={[styles.text, styles.subText]}>Total</Text>
                             </View>
                         </View>
@@ -119,23 +114,19 @@ const UserScreen = () => {
                             <ScrollView showsVerticalScrollIndicator={false}>
                                 <View style={{ marginBottom: 30 }} >
                                     <View style={styles.editDatos}>
-                                        <Title title='Datos Personales' style={[styles.text, { fontWeight: "200", fontSize: 30, paddingBottom: 10 }]} />
+                                        <Title title='Crear usuario' style={[styles.text, { fontWeight: "200", fontSize: 30, paddingBottom: 10 }]} />
                                         <TouchableOpacity>
                                             <Ionicons name="create-outline" size={25} color="#DFD8C8" style={{ marginTop: 25, marginLeft: 0 }}></Ionicons>
                                         </TouchableOpacity>
                                     </View>
                                     {/* Crear flatlist */}
-                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Usuario: Lisa2022</Text>
+                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Usuario: -</Text>
                                     <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Email: {email} </Text>
-
-
-
-                                    {/* Crear flatlist */}
-                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Nombre completo: prueba  </Text>
-                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Domicilio: prueba </Text>
-                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Documento: prueba </Text>
-                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Teléfono Principal:prueba</Text>
-                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Teléfono Alternativo: prueba </Text>
+                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Nombre completo: -  </Text>
+                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Domicilio: - </Text>
+                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Documento: - </Text>
+                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Teléfono Principal:-</Text>
+                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Teléfono Alternativo: - </Text>
                                 </View>
                             </ScrollView>
                         </View>
@@ -148,7 +139,7 @@ const UserScreen = () => {
                             </View>
                             <View style={styles.active}></View>
                             <View style={styles.add}>
-                                <TouchableOpacity>
+                                <TouchableOpacity onPress={pickImage}>
                                     <Ionicons name="camera-outline" size={25} color="#DFD8C8" style={{ marginTop: 0, marginLeft: 2 }}></Ionicons>
                                 </TouchableOpacity>
                             </View>
@@ -207,12 +198,8 @@ const UserScreen = () => {
                                     {/* Crear flatlist */}
                                     <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Usuario: Lisa2022</Text>
                                     <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Email: {email} </Text>
-
-
-
-                                    {/* Crear flatlist */}
                                     <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Nombre completo: {user.nombre} {user.apellido} </Text>
-                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Domicilio: {user.domicilio} </Text>
+                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Domicilio: {user.domicilio} {user.edificio_Puerta_Lote} {user.provincia}. {user.codigo_Postal} </Text>
                                     <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Documento: {user.documento} </Text>
                                     <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Teléfono Principal:{user.telefonoPrincipal}</Text>
                                     <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Teléfono Alternativo: {!user.telefonoAlternativo ? 'No' : user.telefonoAlternativo}  </Text>

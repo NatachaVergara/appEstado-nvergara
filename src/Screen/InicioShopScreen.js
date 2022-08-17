@@ -4,6 +4,7 @@ import { FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity } from 'reac
 import ImageBackgoundBook from '../Components/ImageBackgoundBook';
 import { IMG_BACKGROUND } from '../Constants/img';
 
+
 const InicioShopScreen = ({ navigation }) => {
     let list = [{ id: 1, nombre: 'Autores', path: 'AutoresScreen' }, { id: 2, nombre: 'Categorías', path: 'CategoriaScreen' }]
 
@@ -13,6 +14,7 @@ const InicioShopScreen = ({ navigation }) => {
             title: item.name
         })
     }
+
 
     const renderGridItem = ({ item }) => (
 
@@ -26,8 +28,8 @@ const InicioShopScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <ImageBackgoundBook source={IMG_BACKGROUND} resizeMode="cover" 
-            style={styles.image}>
+            <ImageBackgoundBook source={IMG_BACKGROUND} resizeMode="cover"
+                style={styles.image}>
                 <FlatList
                     data={list}
                     keyExtractor={item => item.id}
@@ -39,9 +41,6 @@ const InicioShopScreen = ({ navigation }) => {
 
         </SafeAreaView>
     )
-
-
-
 }
 
 const styles = StyleSheet.create({

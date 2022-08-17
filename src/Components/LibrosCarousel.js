@@ -1,11 +1,9 @@
-import React, {  useRef } from 'react'
+import React, { useRef } from 'react'
 import {
     StyleSheet,
-    Text,
     View,
     Image,
     Dimensions,
-    SafeAreaView,
     Animated,
     Pressable,
 } from 'react-native'

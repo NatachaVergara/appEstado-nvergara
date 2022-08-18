@@ -4,19 +4,28 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Button } from 'react-native-paper';
 import Title from '../../Components/Title';
 
-//import { confirmCarrito } from '../Store/actions/carrito.action'
+import { confirmCarrito } from '../../Store/actions/carrito.action'
 
 
 
 const FinalizarCompra = ({ navigation }) => {
 
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
     const items = useSelector(store => store.carrito.carrito)
     // console.log(items)
 
     const total = useSelector(store => store.carrito.total)
     const userId = useSelector(store => store.auth.userId)
-    // const handlerConfirm = () => dispatch(confirmCarrito(items, total, userId))
+    const info = useSelector(store => store.info_envios.infoEnvios)
+    // console.log('Finalizar Compra INFO',info)
+
+
+    const handlerConfirm = () => {
+        dispatch(confirmCarrito(items, total, userId, info))
+        setTimeout(() => {
+            navigation.navigate('Orders')
+        }, 4000)
+    }
     const onHandlerVolver = () => navigation.navigate('PagoConfirmacion')
 
 
@@ -62,15 +71,15 @@ const FinalizarCompra = ({ navigation }) => {
                     </View>
                 </View>
                 <View style={[styles.inner, styles.infoPersonalContainer]}>
-                    <Text style={[styles.text, { fontSize: 15, margin: 10 }]} >Nombre Completo: Lisa Simpson</Text>
-                    <Text style={[styles.text, { fontSize: 15, margin: 10 }]}>Dirección: Avenida Evergreen 742, CABA. CP 90210</Text>
-                    <Text style={[styles.text, { fontSize: 15, margin: 10 }]}>Notas: NO</Text>
+                    <Text style={[styles.text, { fontSize: 15, margin: 10 }]} >Nombre Completo: {info.nombreCompleto} </Text>
+                    <Text style={[styles.text, { fontSize: 15, margin: 10 }]}>Dirección: {info.direccion} {info.edificio_Puerta_Lote} {info.provincia}. CP {info.codigo_Postal}    </Text>
+                    <Text style={[styles.text, { fontSize: 15, margin: 10 }]}>Notas:{info.notas} </Text>
                     <Text style={[styles.text, { fontSize: 15, margin: 10 }]}>Medio de pago: Tarjeta</Text>
                 </View>
 
                 <View style={[styles.inner, styles.buttonsContainer]}>
                     <Button
-                        onPress={() => null}
+                        onPress={handlerConfirm}
                         style={styles.button}
                         mode="outlined"
                     >

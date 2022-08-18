@@ -1,19 +1,44 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useState } from 'react';
 import { Keyboard, KeyboardAvoidingView, SafeAreaView, ScrollView, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native'
 import { Title, TextInput, Button } from 'react-native-paper';
-
-
+import { useSelector, useDispatch } from 'react-redux';
+import Colors from '../../Constants/Colors';
+import { addDireccion } from '../../Store/actions/info_envios.action'
 
 
 const DirYFactScreen = ({ navigation }) => {
+  const initalState = {
+    nombreCompleto: '',
+    direccion: '',
+    edificio_Puerta_Lote: '',
+    provincia: '',
+    codigo_Postal: '',
+    telefono: '',
+    email: '',
+    notas: '',
+  };
+  const [state, setState] = useState(initalState)
+  const handleChangeText = (value, name) => {
+    setState({ ...state, [name]: value })
+  }
+  // console.log(state)
+
+  const dispatch = useDispatch()
+  //AGREGAR EL ! PARA QUE SEA FALSO
+  const noValidate = (
+    state.nombreCompleto.length && state.direccion.length && state.provincia.length && state.codigo_Postal.length && state.telefono.length && state.email.length > 0
+  )
+  // console.log(noValidate)
 
 
 
 
+  const onHandlerPagar = () => {
+    dispatch(addDireccion(state))
+    navigation.navigate('PagoConfirmacion')
+  }
 
-
-
-  const onHandlerPagar = () => navigation.navigate('PagoConfirmacion')
   const onHandlerVolver = () => navigation.navigate('Carrito')
 
   return (
@@ -25,47 +50,66 @@ const DirYFactScreen = ({ navigation }) => {
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.inner}>
               <Title >Información de envío</Title>
+              <Text style={{ color: Colors.secondary }}>* campos obligatorios</Text>
               <TextInput
-                label="Nombre Completo"
+                label="Nombre Completo *"
                 left={<TextInput.Icon name="account-outline" />}
                 style={styles.textInput}
+                onChangeText={(value) => handleChangeText(value, "nombreCompleto")}
+                value={state.nombreCompleto}
               />
               <TextInput
-                label="Dirección"
+                label="Dirección *"
                 left={<TextInput.Icon name="home" />}
                 style={styles.textInput}
+                onChangeText={(value) => handleChangeText(value, "direccion")}
+                value={state.direccion}
               />
               <TextInput
                 label="Edificio/Puerta/Lote"
                 left={<TextInput.Icon name="home" />}
                 style={styles.textInput}
+                onChangeText={(value) => handleChangeText(value, "edificio_Puerta_Lote")}
+                value={state.edificio_Puerta_Lote}
               />
               <TextInput
-                label="Provincia"
+                label="Provincia *"
                 left={<TextInput.Icon name="earth" />}
                 style={styles.textInput}
+                onChangeText={(value) => handleChangeText(value, "provincia")}
+                value={state.provincia}
               />
               <TextInput
-                label="Código Postal"
+                label="Código Postal *"
                 left={<TextInput.Icon name="map-marker" />}
                 style={styles.textInput}
                 keyboardType="numeric"
+                onChangeText={(value) => handleChangeText(value, "codigo_Postal")}
+                value={state.codigo_Postal}
               />
               <TextInput
-                label="Teléfono"
+                label="Teléfono *"
                 left={<TextInput.Icon name="cellphone" />}
                 style={styles.textInput}
                 keyboardType="phone-pad"
+                onChangeText={(value) => handleChangeText(value, "telefono")}
+                value={state.telefono}
               />
               <TextInput
-                label="Email"
+                label="Email *"
                 left={<TextInput.Icon name="email" />}
                 style={styles.textInput}
+                onChangeText={(value) => handleChangeText(value, "email")}
+                value={state.email}
+                keyboardType="email-address"
+                autoCapitalize='none'
               />
               <TextInput
                 label="Notas"
                 left={<TextInput.Icon name="note-multiple" />}
                 style={styles.textInput}
+                onChangeText={(value) => handleChangeText(value, "notas")}
+                value={state.notas}
               />
             </View>
           </TouchableWithoutFeedback>
@@ -74,6 +118,7 @@ const DirYFactScreen = ({ navigation }) => {
               onPress={onHandlerPagar}
               style={styles.button}
               mode="outlined"
+              disabled={noValidate}
             >
               <Text>Proceder a pagar</Text>
             </Button>
@@ -101,7 +146,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     backgroundColor: 'pink',
-    marginHorizontal: 0,
+
 
   },
   inner: {
@@ -110,6 +155,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: 350,
+    marginTop: 30
 
   },
   textInput: {

@@ -15,14 +15,18 @@ const UserScreen = () => {
     // console.log('USER SCREEN')
     const dispatch = useDispatch()
     const email = useSelector(store => store.auth.email)
+    const orders = useSelector(store => store.orders.orders)
+    const userOrders = orders.filter(orders => orders.email === email)
+
     // console.log(email)
+    console.log(userOrders)
 
     useEffect(() => {
         dispatch(selectUsuario(email))
     }, [])
 
     const user = useSelector(store => store.usuarios.selected)
-    // console.log(user)
+    console.log(user)
 
     const [image, setImage] = useState('https://via.placeholder.com/150')
 

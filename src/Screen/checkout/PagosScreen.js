@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Keyboard, KeyboardAvoidingView, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native'
 import { Title, TextInput, Button } from 'react-native-paper';
 import MaskInput, { Masks } from 'react-native-mask-input';
+import Colors from '../../Constants/Colors';
 
 
 //NPM credit card
@@ -10,7 +11,7 @@ const PagosScreen = ({ navigation }) => {
     const [cNumber, onChangeCNumber] = useState('')
     const [cName, onChangeCName] = useState('Jorge Pérez')
     const [cExpDate, onChangeCExpDate] = useState('----')
-    const [cvc, onChangeCCvc] = useState('222')
+    const [cvc, onChangeCCvc] = useState('')
     const [cardType, onChangecardType] = useState('VISA')
 
 
@@ -23,6 +24,10 @@ const PagosScreen = ({ navigation }) => {
     const onHandlerCheckout = () => navigation.navigate('FinalizarCompra')
 
 
+    const noValidate = !(
+        cNumber.length && cName.length && cExpDate.length && cvc.length && cardType.length > 0
+    )
+
 
 
     return (
@@ -33,16 +38,16 @@ const PagosScreen = ({ navigation }) => {
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <View style={styles.inner}>
                         <Title>Información de Pago</Title>
-
+                        <Text style={{ color: Colors.secondary }}>* campos obligatorios</Text>
                         <TextInput
-                            label="Nombre Completo"
+                            label="Nombre Completo *"
                             value={cName}
                             left={<TextInput.Icon name="account-outline" />}
                             style={styles.textInput}
                             onChangeText={onChangeCName}
                         />
                         <TextInput
-                            label="Tipo de tarjeta"
+                            label="Tipo de tarjeta *"
                             value={cardType}
                             left={<TextInput.Icon name="credit-card" />}
                             style={styles.textInput}
@@ -50,31 +55,34 @@ const PagosScreen = ({ navigation }) => {
                         />
 
                         <View style={[styles.textInput, styles.ccInput]}>
-                            <Text variant="displaySmall">Número de tarjeta</Text>
+                            <Text variant="displaySmall">Número de tarjeta *</Text>
                             <MaskInput
                                 value={cNumber}
                                 onChangeText={onChangeCNumber}
                                 mask={Masks.CREDIT_CARD}
+                                keyboardType="numeric"
                             />
                         </View>
 
                         <View style={[styles.textInput, styles.dateCvc]}>
                             <View style={styles.ccInput}>
-                                <Text variant="displaySmall">Fecha expiración</Text>
+                                <Text variant="displaySmall">Fecha expiración *</Text>
                                 <MaskInput
                                     value={cExpDate}
                                     onChangeText={onChangeCExpDate}
                                     mask={creditcardDateMask}
+                                    keyboardType="numeric"
                                 />
                             </View>
                             <View style={styles.ccInput}>
-                                <Text variant="displaySmall">Código de seguridad</Text>
+                                <Text variant="displaySmall">Código de seguridad *</Text>
                                 <MaskInput
                                     value={cvc}
                                     showObfuscatedValue
                                     obfuscationCharacter="#"
                                     onChangeText={(obfuscated) => { onChangeCCvc(obfuscated) }}
                                     mask={creditCardCVC}
+                                    keyboardType="numeric"
                                 />
                             </View>
                         </View>
@@ -88,6 +96,7 @@ const PagosScreen = ({ navigation }) => {
                         onPress={onHandlerCheckout}
                         style={styles.button}
                         mode="outlined"
+                        disabled={noValidate}
                     >
                         <Text>Finalizar Compra</Text>
                     </Button>
@@ -109,6 +118,7 @@ const PagosScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: 'pink',
     },
     inner: {
         padding: 24,

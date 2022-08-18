@@ -16,7 +16,7 @@ export const removeItem = (itemID) => ({
 })
 
 
-export const confirmCarrito = (payload, total, userId) => {
+export const confirmCarrito = (payload, total, userId, infoCompra) => {
     return async dispatch => {
         try {
             const response = await fetch(`${URL_API}/ordenes.json`, {
@@ -29,6 +29,7 @@ export const confirmCarrito = (payload, total, userId) => {
                     items: payload,
                     total,
                     userId,
+                    infoCompra
                 }),
             })
 

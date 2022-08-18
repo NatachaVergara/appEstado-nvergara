@@ -28,30 +28,35 @@ const CarritoScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.listContainer}>
-                <FlatList
-                    data={items}
-                    keyExtractor={item => item.id}
-                    renderItem={renderItem}
-                />
-            </View>
-
-            <View style={styles.footer}>
-
-                <TouchableOpacity
-                    // onPress={handlerConfirm}
-                    onPress={handlerDireccionFacturacion}
-                    style={styles.confirm}
-                    disabled={items === undefined || items.length <= 0 ? true : false}
-                // disabled={true}
-                >
-                    <Text>COMPRAR</Text>
-                    <View>
-                        <Text style={styles.text}>Total</Text>
-                        <Text style={styles.text}>${total}</Text>
+            {items.length < 0 || items === null | items === undefined ? <Text>No hay libros...</Text>
+                :
+                <>
+                    <View style={styles.listContainer}>
+                        <FlatList
+                            data={items}
+                            keyExtractor={item => item.id}
+                            renderItem={renderItem}
+                        />
                     </View>
-                </TouchableOpacity>
-            </View>
+
+                    <View style={styles.footer}>
+
+                        <TouchableOpacity
+                            // onPress={handlerConfirm}
+                            onPress={handlerDireccionFacturacion}
+                            style={styles.confirm}
+                            disabled={items === undefined || items.length <= 0 ? true : false}
+                        // disabled={true}
+                        >
+                            <Text>COMPRAR</Text>
+                            <View>
+                                <Text style={styles.text}>Total</Text>
+                                <Text style={styles.text}>${total}</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                </>}
+
         </SafeAreaView>
     )
 }

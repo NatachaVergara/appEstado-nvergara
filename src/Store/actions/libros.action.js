@@ -19,4 +19,3 @@ export const filteredByCategory = (id) => ({
     categoriaID: id
 })
 
-

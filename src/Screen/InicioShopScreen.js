@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity } from 'react-native'
 
 import ImageBackgoundBook from '../Components/ImageBackgoundBook';
 import { IMG_BACKGROUND } from '../Constants/img';
+import { getUsuarios } from '../Store/actions/users.action'
+import { useDispatch } from 'react-redux';
 
 
 const InicioShopScreen = ({ navigation }) => {
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(getUsuarios())
+    })
+
     let list = [{ id: 1, nombre: 'Autores', path: 'AutoresScreen' }, { id: 2, nombre: 'Categorías', path: 'CategoriaScreen' }]
 
 
@@ -14,6 +21,8 @@ const InicioShopScreen = ({ navigation }) => {
             title: item.name
         })
     }
+
+
 
 
     const renderGridItem = ({ item }) => (

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FlatList, SafeAreaView, StyleSheet } from 'react-native'
 
 //Reducer-Store
 import { useSelector, useDispatch } from 'react-redux'
 import { selectCategoria } from '../Store/actions/categoria.action'
+
 import ImageBackgoundBook from '../Components/ImageBackgoundBook'
 import { IMG_BACKGROUND } from '../Constants/img'
 import Categoria from '../Components/Categoria';
@@ -12,6 +13,8 @@ const CategoriaScreen = ({ navigation }) => {
     const categorias = useSelector(store => store.categoria.categorias)
     // console.log('CATEGORIAS', categorias)
     const dispatch = useDispatch()
+
+  
 
     const handlerCategoria = (item) => {
         // console.log('CATEGORIA ITEMS', item.categoria)

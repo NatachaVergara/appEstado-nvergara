@@ -6,27 +6,37 @@ import Title from '../../Components/Title';
 
 // import AuthNavigator from './AuthNavigator';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectUsuario } from '../../Store/actions/users.action'
+import { selectUsuario, getUsuarios } from '../../Store/actions/users.action'
+import { getOrders } from '../../Store/actions/orders.action'
 import * as ImagePicker from 'expo-image-picker';
+import CreateUserModal from '../../Components/CreateUserModal';
 
-
+import { Portal, Provider } from 'react-native-paper';
 
 const UserScreen = () => {
+    const [visible, setVisible] = useState(false)
+    const showModal = () => setVisible(true);
+    const hideModal = () => setVisible(false);
     // console.log('USER SCREEN')
     const dispatch = useDispatch()
     const email = useSelector(store => store.auth.email)
+    const userID = useSelector(store => store.auth.userId)
     const orders = useSelector(store => store.orders.orders)
-    const userOrders = orders.filter(orders => orders.email === email)
+    const users = useSelector(store => store.usuarios.users)
+    console.log('USERS', users)
+    const user = users.find(user => user.userId === userID)
+    console.log('USER: ', user)
+    const userOrders = orders.filter(orders => orders.userId === userID)
+    console.log('USER ORDERS: ', userOrders)
 
-    // console.log(email)
-    console.log(userOrders)
 
     useEffect(() => {
-        dispatch(selectUsuario(email))
+        dispatch(selectUsuario(userID))
+        getUsuarios()
+        getOrders()
     }, [])
 
-    const user = useSelector(store => store.usuarios.selected)
-    console.log(user)
+
 
     const [image, setImage] = useState('https://via.placeholder.com/150')
 
@@ -56,164 +66,179 @@ const UserScreen = () => {
 
 
     return (
-        <SafeAreaView style={styles.container}>
-            {
-                user === null || user === undefined ?
+        <Provider>
+            <SafeAreaView style={styles.container}>
+                <CreateUserModal
+                    visible={visible}
+                    hideModal={hideModal}
+                    showModal={showModal}
+                    userId={userID}
+                    setImage={setImage}
+                    pickImage={pickImage}
+                    email={email}
+                    image={image}
+                />
 
-                    <ScrollView showsVerticalScrollIndicator={false}>
-                        <View style={{ alignSelf: "center" }}>
-                            <View style={styles.profileImage}>
-                                <Image source={{ uri: image }} style={styles.image} resizeMode="center" />
-                            </View>
-                            <View style={styles.active}></View>
-                            <View style={styles.add}>
-                                <TouchableOpacity onPress={pickImage}>
-                                    <Ionicons name="camera-outline" size={25} color="#DFD8C8" style={{ marginTop: 0, marginLeft: 2 }}></Ionicons>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
 
-                        <View style={styles.infoContainer}>
-                            <Text style={[styles.text, { fontWeight: "200", fontSize: 36 }]}>- </Text>
-                        </View>
 
-                        <View style={styles.statsContainer}>
-                            <View style={styles.statsBox}>
-                                <Text style={[styles.text, { fontSize: 24 }]}>-</Text>
-                                <Text style={[styles.text, styles.subText]}>Compras</Text>
-                            </View>
+                {
+                    user === null || user === undefined ?
 
-                            <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
-                                <Text style={[styles.text, { fontSize: 24 }]}>-</Text>
-                                <Text style={[styles.text, styles.subText]}>Libros</Text>
-                            </View>
-                            <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
-                                <Text style={[styles.text, { fontSize: 24 }]}>$-</Text>
-                                <Text style={[styles.text, styles.subText]}>Total</Text>
-                            </View>
-                        </View>
-
-                        <View style={{ marginTop: 32 }}>
-                            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                                {/* Crear un flatlist con el imageItem*/}
-                                <View style={styles.mediaImageContainer}>
-                                    <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
+                        <ScrollView showsVerticalScrollIndicator={false}>
+                            <View style={{ alignSelf: "center" }}>
+                                <View style={styles.profileImage}>
+                                    <Image source={{ uri: image }} style={styles.image} resizeMode="center" />
                                 </View>
-                                <View style={styles.mediaImageContainer}>
-                                    <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
+                                <View style={styles.active}></View>
+                                <View style={styles.add}>
+                                    <TouchableOpacity onPress={pickImage}>
+                                        <Ionicons name="camera-outline" size={25} color="#DFD8C8" style={{ marginTop: 0, marginLeft: 2 }}></Ionicons>
+                                    </TouchableOpacity>
                                 </View>
-                                <View style={styles.mediaImageContainer}>
-                                    <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
-                                </View>
-                                <View style={styles.mediaImageContainer}>
-                                    <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
-                                </View>
-                                <View style={styles.mediaImageContainer}>
-                                    <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
-                                </View>
-                            </ScrollView>
-                        </View>
+                            </View>
 
-                        <View style={styles.datosPersonales}>
-                            <ScrollView showsVerticalScrollIndicator={false}>
-                                <View style={{ marginBottom: 30 }} >
-                                    <View style={styles.editDatos}>
-                                        <Title title='Crear usuario' style={[styles.text, { fontWeight: "200", fontSize: 30, paddingBottom: 10 }]} />
-                                        <TouchableOpacity>
-                                            <Ionicons name="create-outline" size={25} color="#DFD8C8" style={{ marginTop: 25, marginLeft: 0 }}></Ionicons>
-                                        </TouchableOpacity>
+                            <View style={styles.infoContainer}>
+                                <Text style={[styles.text, { fontWeight: "200", fontSize: 36 }]}>- </Text>
+                            </View>
+
+                            <View style={styles.statsContainer}>
+                                <View style={styles.statsBox}>
+                                    <Text style={[styles.text, { fontSize: 24 }]}>-</Text>
+                                    <Text style={[styles.text, styles.subText]}>Compras</Text>
+                                </View>
+
+                                <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
+                                    <Text style={[styles.text, { fontSize: 24 }]}>-</Text>
+                                    <Text style={[styles.text, styles.subText]}>Libros</Text>
+                                </View>
+                                <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
+                                    <Text style={[styles.text, { fontSize: 24 }]}>$-</Text>
+                                    <Text style={[styles.text, styles.subText]}>Total</Text>
+                                </View>
+                            </View>
+
+                            <View style={{ marginTop: 32 }}>
+                                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                                    {/* Crear un flatlist con el imageItem*/}
+                                    <View style={styles.mediaImageContainer}>
+                                        <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
                                     </View>
-                                    {/* Crear flatlist */}
-                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Usuario: -</Text>
-                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Email: {email} </Text>
-                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Nombre completo: -  </Text>
-                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Domicilio: - </Text>
-                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Documento: - </Text>
-                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Teléfono Principal:-</Text>
-                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Teléfono Alternativo: - </Text>
-                                </View>
-                            </ScrollView>
-                        </View>
-                    </ScrollView>
-                    :
-                    <ScrollView showsVerticalScrollIndicator={false}>
-                        <View style={{ alignSelf: "center" }}>
-                            <View style={styles.profileImage}>
-                                <Image source={{ uri: user.img }} style={styles.image} resizeMode="center" />
-                            </View>
-                            <View style={styles.active}></View>
-                            <View style={styles.add}>
-                                <TouchableOpacity onPress={pickImage}>
-                                    <Ionicons name="camera-outline" size={25} color="#DFD8C8" style={{ marginTop: 0, marginLeft: 2 }}></Ionicons>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-
-                        <View style={styles.infoContainer}>
-                            <Text style={[styles.text, { fontWeight: "200", fontSize: 36 }]}>{user.nombre} </Text>
-                        </View>
-
-                        <View style={styles.statsContainer}>
-                            <View style={styles.statsBox}>
-                                <Text style={[styles.text, { fontSize: 24 }]}>4</Text>
-                                <Text style={[styles.text, styles.subText]}>Compras</Text>
-                            </View>
-
-                            <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
-                                <Text style={[styles.text, { fontSize: 24 }]}>16</Text>
-                                <Text style={[styles.text, styles.subText]}>Libros</Text>
-                            </View>
-                            <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
-                                <Text style={[styles.text, { fontSize: 24 }]}>$15,844</Text>
-                                <Text style={[styles.text, styles.subText]}>Total</Text>
-                            </View>
-                        </View>
-
-                        <View style={{ marginTop: 32 }}>
-                            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                                {/* Crear un flatlist con el imageItem*/}
-                                <View style={styles.mediaImageContainer}>
-                                    <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
-                                </View>
-                                <View style={styles.mediaImageContainer}>
-                                    <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
-                                </View>
-                                <View style={styles.mediaImageContainer}>
-                                    <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
-                                </View>
-                                <View style={styles.mediaImageContainer}>
-                                    <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
-                                </View>
-                                <View style={styles.mediaImageContainer}>
-                                    <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
-                                </View>
-                            </ScrollView>
-                        </View>
-
-                        <View style={styles.datosPersonales}>
-                            <ScrollView showsVerticalScrollIndicator={false}>
-                                <View style={{ marginBottom: 30 }} >
-                                    <View style={styles.editDatos}>
-                                        <Title title='Datos Personales' style={[styles.text, { fontWeight: "200", fontSize: 30, paddingBottom: 10 }]} />
-                                        <TouchableOpacity>
-                                            <Ionicons name="create-outline" size={25} color="#DFD8C8" style={{ marginTop: 25, marginLeft: 0 }}></Ionicons>
-                                        </TouchableOpacity>
+                                    <View style={styles.mediaImageContainer}>
+                                        <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
                                     </View>
-                                    {/* Crear flatlist */}
-                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Usuario: Lisa2022</Text>
-                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Email: {email} </Text>
-                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Nombre completo: {user.nombre} {user.apellido} </Text>
-                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Domicilio: {user.domicilio} {user.edificio_Puerta_Lote} {user.provincia}. {user.codigo_Postal} </Text>
-                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Documento: {user.documento} </Text>
-                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Teléfono Principal:{user.telefonoPrincipal}</Text>
-                                    <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Teléfono Alternativo: {!user.telefonoAlternativo ? 'No' : user.telefonoAlternativo}  </Text>
-                                </View>
-                            </ScrollView>
-                        </View>
-                    </ScrollView>
-            }
+                                    <View style={styles.mediaImageContainer}>
+                                        <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
+                                    </View>
+                                    <View style={styles.mediaImageContainer}>
+                                        <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
+                                    </View>
+                                    <View style={styles.mediaImageContainer}>
+                                        <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
+                                    </View>
+                                </ScrollView>
+                            </View>
 
-        </SafeAreaView>
+                            <View style={styles.datosPersonales}>
+                                <ScrollView showsVerticalScrollIndicator={false}>
+                                    <View style={{ marginBottom: 30 }} >
+                                        <View style={styles.editDatos}>
+                                            <Title title='Crear usuario' style={[styles.text, { fontWeight: "200", fontSize: 30, paddingBottom: 10 }]} />
+                                            <TouchableOpacity onPress={showModal}>
+                                                <Ionicons name="create-outline" size={25} color="#DFD8C8" style={{ marginTop: 25, marginLeft: 0 }}></Ionicons>
+                                            </TouchableOpacity>
+                                        </View>
+                                        {/* Crear flatlist */}
+                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Email: {email} </Text>
+                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Nombre completo: -  </Text>
+                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Domicilio: - </Text>
+                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Documento: - </Text>
+                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Teléfono Principal:-</Text>
+                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Teléfono Alternativo: - </Text>
+                                    </View>
+                                </ScrollView>
+                            </View>
+                        </ScrollView>
+                        :
+                        <ScrollView showsVerticalScrollIndicator={false}>
+                            <View style={{ alignSelf: "center" }}>
+                                <View style={styles.profileImage}>
+                                    <Image source={{ uri: user.img }} style={styles.image} resizeMode="center" />
+                                </View>
+                                <View style={styles.active}></View>
+                                <View style={styles.add}>
+                                    <TouchableOpacity onPress={pickImage}>
+                                        <Ionicons name="camera-outline" size={25} color="#DFD8C8" style={{ marginTop: 0, marginLeft: 2 }}></Ionicons>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+
+                            <View style={styles.infoContainer}>
+                                <Text style={[styles.text, { fontWeight: "200", fontSize: 36 }]}>{user.nombre} </Text>
+                            </View>
+
+                            <View style={styles.statsContainer}>
+                                <View style={styles.statsBox}>
+                                    <Text style={[styles.text, { fontSize: 24 }]}>{userOrders.length}   </Text>
+                                    <Text style={[styles.text, styles.subText]}>Compras</Text>
+                                </View>
+
+                                <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
+                                    <Text style={[styles.text, { fontSize: 24 }]}>16</Text>
+                                    <Text style={[styles.text, styles.subText]}>Libros</Text>
+                                </View>
+                                <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
+                                    <Text style={[styles.text, { fontSize: 24 }]}>$15,844</Text>
+                                    <Text style={[styles.text, styles.subText]}>Total</Text>
+                                </View>
+                            </View>
+
+                            <View style={{ marginTop: 32 }}>
+                                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                                    {/* Crear un flatlist con el imageItem*/}
+                                    <View style={styles.mediaImageContainer}>
+                                        <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
+                                    </View>
+                                    <View style={styles.mediaImageContainer}>
+                                        <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
+                                    </View>
+                                    <View style={styles.mediaImageContainer}>
+                                        <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
+                                    </View>
+                                    <View style={styles.mediaImageContainer}>
+                                        <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
+                                    </View>
+                                    <View style={styles.mediaImageContainer}>
+                                        <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
+                                    </View>
+                                </ScrollView>
+                            </View>
+
+                            <View style={styles.datosPersonales}>
+                                <ScrollView showsVerticalScrollIndicator={false}>
+                                    <View style={{ marginBottom: 30 }} >
+                                        <View style={styles.editDatos}>
+                                            <Title title='Datos Personales' style={[styles.text, { fontWeight: "200", fontSize: 30, paddingBottom: 10 }]} />
+                                            {user === null || user === undefined ? <TouchableOpacity onPress={showModal}>
+                                                <Ionicons name="create-outline" size={25} color="#DFD8C8" style={{ marginTop: 25, marginLeft: 0 }}></Ionicons>
+                                            </TouchableOpacity> : null}
+
+                                        </View>
+                                        {/* Crear flatlist */}
+                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Email: {user.user.email} </Text>
+                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Nombre completo: {user.user.nombreCompleto}</Text>
+                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Domicilio: {user.user.domicilio} {user.user.edificio_Puerta_Lote} {user.user.provincia}. {user.user.codigo_Postal} </Text>
+                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Documento: {user.user.documento} </Text>
+                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Teléfono Principal:{user.user.telefonoPrincipal}</Text>
+                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Teléfono Alternativo: {!user.user.telefonoAlternativo ? 'No' : user.user.telefonoAlternativo}  </Text>
+                                    </View>
+                                </ScrollView>
+                            </View>
+                        </ScrollView>
+                }
+
+            </SafeAreaView>
+        </Provider>
+
     )
 }
 

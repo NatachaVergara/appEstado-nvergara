@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useReducer } from 'react'
-import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, KeyboardAvoidingView, ImageBackground, View } from 'react-native'
+import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, KeyboardAvoidingView, ImageBackground, View, Platform } from 'react-native'
 import Card from '../../Components/Card'
 import TextLAbel from '../../Components/TextLabel'
 import Title from '../../Components/Title'
@@ -60,7 +60,7 @@ const Login = ({ navigation }) => {
     <ScrollView
       showsVerticalScrollIndicator={false}
     >
-      <KeyboardAvoidingView style={styles.container} behavior='height'>
+      <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : "height"}>
 
         <ImageBackground
           source={IMG_BACKGROUND} resizeMode="cover"

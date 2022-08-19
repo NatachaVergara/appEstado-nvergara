@@ -3,7 +3,7 @@ import { FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from
 import CartItem from '../Components/CartItem'
 //Reducer-Store
 import { useSelector, useDispatch, connect } from 'react-redux'
-import { removeItem, confirmCarrito } from '../Store/actions/carrito.action'
+import { removeItem } from '../Store/actions/carrito.action'
 
 
 const CarritoScreen = ({ navigation }) => {
@@ -14,8 +14,10 @@ const CarritoScreen = ({ navigation }) => {
     const total = useSelector(store => store.carrito.total)
     const userId = useSelector(store => store.auth.userId)
 
-    // const handlerConfirm = () => dispatch(confirmCarrito(items, total, userId))
-    const handlerDireccionFacturacion = () => navigation.navigate('Checkout')
+
+    const handlerDireccionFacturacion = () => {
+        navigation.navigate('Checkout')
+    }
 
     const handleDeleteItem = (id) => dispatch(removeItem(id))
 

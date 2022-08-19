@@ -1,10 +1,28 @@
 import React from 'react'
-import { Image, View } from 'react-native'
+import { Image, StyleSheet, View } from 'react-native'
 
-export const ImageItem = ({ item, styles }) => {
+export const ImageItem = ({ item }) => {
+    
     return (
+
         <View style={styles.mediaImageContainer}>
-            <Image source={item.url} style={styles.image} resizeMode="cover"></Image>
+            <Image source={{ uri: item.url}} style={styles.image} resizeMode="cover">
+            </Image>
         </View>
     )
 }
+const styles = StyleSheet.create({
+    mediaImageContainer: {
+        width: 100,
+        height: 100,
+        borderRadius: 12,
+        overflow: "hidden",
+        marginHorizontal: 10,
+    },
+    image: {
+        flex: 1,       
+    },
+
+
+
+});

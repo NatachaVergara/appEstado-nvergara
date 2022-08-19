@@ -26,7 +26,7 @@ const DirYFactScreen = ({ navigation }) => {
 
   const dispatch = useDispatch()
   //AGREGAR EL ! PARA QUE SEA FALSO
-  const noValidate = (
+  const noValidate = !(
     state.nombreCompleto.length && state.direccion.length && state.provincia.length && state.codigo_Postal.length && state.telefono.length && state.email.length > 0
   )
   // console.log(noValidate)

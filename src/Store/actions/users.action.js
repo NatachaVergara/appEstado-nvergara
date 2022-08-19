@@ -24,7 +24,7 @@ export const getUsuarios = () => {
                 ...result[key],
                 id: key,
             }))
-            console.log('RESULT USUARIOS', users)
+            //console.log('RESULT USUARIOS', users)
 
 
             dispatch({

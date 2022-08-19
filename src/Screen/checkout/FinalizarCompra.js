@@ -12,7 +12,7 @@ const FinalizarCompra = ({ navigation }) => {
 
     const dispatch = useDispatch()
     const items = useSelector(store => store.carrito.carrito)
-    // console.log(items)
+    console.log('items', items)
 
     const total = useSelector(store => store.carrito.total)
     const userId = useSelector(store => store.auth.userId)
@@ -23,7 +23,7 @@ const FinalizarCompra = ({ navigation }) => {
     const handlerConfirm = () => {
         dispatch(confirmCarrito(items, total, userId, info))
         setTimeout(() => {
-            navigation.navigate('Orders')
+            navigation.navigate('PerfilUsuario')
         }, 4000)
     }
     const onHandlerVolver = () => navigation.navigate('PagoConfirmacion')
@@ -39,32 +39,8 @@ const FinalizarCompra = ({ navigation }) => {
                     style={styles.title}
                 />
 
-                <View style={{ marginTop: 32 }}>
-                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                        {/* Crear un flatlist con el imageItem*/}
-                        <View style={styles.mediaImageContainer}>
-                            <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
-                        </View>
-                        <View style={styles.mediaImageContainer}>
-                            <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
-                        </View>
-                        <View style={styles.mediaImageContainer}>
-                            <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
-                        </View>
-                        <View style={styles.mediaImageContainer}>
-                            <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
-                        </View>
-                        <View style={styles.mediaImageContainer}>
-                            <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
-                        </View>
-                    </ScrollView>
-                </View>
-                <View style={styles.statsContainer}>
 
-                    <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
-                        <Text style={[styles.text, { fontSize: 24 }]}>{items.length} </Text>
-                        <Text style={[styles.text, styles.subText]}>Libros</Text>
-                    </View>
+                <View style={styles.statsContainer}>
                     <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
                         <Text style={[styles.text, { fontSize: 24 }]}>${total}</Text>
                         <Text style={[styles.text, styles.subText]}>Monto Final</Text>

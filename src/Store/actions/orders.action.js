@@ -17,7 +17,7 @@ export const getOrders = () => {
                 id: key,
             }));
 
-            console.log(orders)
+            // console.log(orders)
 
             dispatch({
                 type: GET_ORDERS,
@@ -52,8 +52,6 @@ export const deleteOrder = (id) => {
         }
 
     }
-
-
-
-
 }
+
+

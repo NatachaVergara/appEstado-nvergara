@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { FlatList, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { ImageItem } from '../../Components/ImageItem';
 import Title from '../../Components/Title';
@@ -7,35 +7,64 @@ import Title from '../../Components/Title';
 // import AuthNavigator from './AuthNavigator';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectUsuario, getUsuarios } from '../../Store/actions/users.action'
-import { getOrders } from '../../Store/actions/orders.action'
+import { getOrders, filterItems } from '../../Store/actions/orders.action'
 import * as ImagePicker from 'expo-image-picker';
 import CreateUserModal from '../../Components/CreateUserModal';
 
 import { Portal, Provider } from 'react-native-paper';
 
 const UserScreen = () => {
+
+    useEffect(() => {
+        dispatch(selectUsuario(userID))
+        dispatch(getUsuarios())
+        dispatch(getOrders())
+    }, [])
+
     const [visible, setVisible] = useState(false)
     const showModal = () => setVisible(true);
     const hideModal = () => setVisible(false);
     // console.log('USER SCREEN')
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(selectUsuario(userID))
+        dispatch(getUsuarios())
+        dispatch(getOrders())
+    }, [])
+    //Traigo los datos que necesito de mis store
     const email = useSelector(store => store.auth.email)
     const userID = useSelector(store => store.auth.userId)
     const orders = useSelector(store => store.orders.orders)
     const users = useSelector(store => store.usuarios.users)
-    console.log('USERS', users)
+    // console.log('USERS', users)
     const user = users.find(user => user.userId === userID)
-    console.log('USER: ', user)
+    // console.log('USER: ', user)
     const userOrders = orders.filter(orders => orders.userId === userID)
-    console.log('USER ORDERS: ', userOrders)
+    // console.log('USER ORDERS ITEMS: ', userOrders)
 
 
-    useEffect(() => {
-        dispatch(selectUsuario(userID))
-        getUsuarios()
-        getOrders()
-    }, [])
 
+
+    //Sumo el total de las compras realizadas por el usuario  
+    let sumaTotal = []
+    userOrders.map(x => sumaTotal.push(x.total))
+    let sumaFinal = sumaTotal.reduce((a, b) => a + b, 0)
+    // console.log(sumaFinal)
+    /************************************************************/
+
+    //Agregro las imagenes de los libros que el usuario compro para mostrarlo en un flatlist
+    let imagenes = []
+    let url = []
+    userOrders.map(i => imagenes.push(i.items[0]))
+    imagenes.map((i, x) => url.push({ id: x, url: i.url }))
+    // console.log('IMAGENES', imagenes)
+    // console.log('URL', url)
+
+    //Suma cantidad de libros comprado por el cliente
+    let libros = []
+    userOrders.map(i => libros.push(i.items[0].titulo))
+    console.log('LIBROS', libros.length)
 
 
     const [image, setImage] = useState('https://via.placeholder.com/150')
@@ -56,13 +85,6 @@ const UserScreen = () => {
             setImage(result.uri);
         }
     };
-
-
-
-    //renderiza el item de las imagenes de los libros que fue comprando el usuario
-    const renderItem = ({ item, styles }) => {
-        <ImageItem item={item} styles={styles} />
-    }
 
 
     return (
@@ -162,7 +184,7 @@ const UserScreen = () => {
                         <ScrollView showsVerticalScrollIndicator={false}>
                             <View style={{ alignSelf: "center" }}>
                                 <View style={styles.profileImage}>
-                                    <Image source={{ uri: user.img }} style={styles.image} resizeMode="center" />
+                                    <Image source={{ uri: image }} style={styles.image} resizeMode="center" />
                                 </View>
                                 <View style={styles.active}></View>
                                 <View style={styles.add}>
@@ -183,33 +205,23 @@ const UserScreen = () => {
                                 </View>
 
                                 <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
-                                    <Text style={[styles.text, { fontSize: 24 }]}>16</Text>
+                                    <Text style={[styles.text, { fontSize: 24 }]}>{libros.length} </Text>
                                     <Text style={[styles.text, styles.subText]}>Libros</Text>
                                 </View>
                                 <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
-                                    <Text style={[styles.text, { fontSize: 24 }]}>$15,844</Text>
+                                    <Text style={[styles.text, { fontSize: 24 }]}>${sumaFinal}</Text>
                                     <Text style={[styles.text, styles.subText]}>Total</Text>
                                 </View>
                             </View>
 
                             <View style={{ marginTop: 32 }}>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                                    {/* Crear un flatlist con el imageItem*/}
-                                    <View style={styles.mediaImageContainer}>
-                                        <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
-                                    </View>
-                                    <View style={styles.mediaImageContainer}>
-                                        <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
-                                    </View>
-                                    <View style={styles.mediaImageContainer}>
-                                        <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
-                                    </View>
-                                    <View style={styles.mediaImageContainer}>
-                                        <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
-                                    </View>
-                                    <View style={styles.mediaImageContainer}>
-                                        <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
-                                    </View>
+                                    {url.length < 0 ? <Text>Cargando...</Text> : url.map(i => (
+                                        <View style={styles.mediaImageContainer} key={i.id}>
+                                            <Image source={{ uri: i.url }} style={styles.image} resizeMode="cover">
+                                            </Image>
+                                        </View>
+                                    ))}
                                 </ScrollView>
                             </View>
 

@@ -40,8 +40,12 @@ const CarritoReducer = (state = initialState, action) => {
                 total: sumTotal(carritoFiltrado)
             }
         case CONFIRM_CARRITO:
-            return {
-                state
+            if (action.confirm) {
+                return {
+                    ...state,
+                    items: [],
+                    total: 0
+                }
             }
         default:
             return state

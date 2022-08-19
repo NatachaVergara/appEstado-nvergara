@@ -6,7 +6,7 @@ import Colors from '../Constants/Colors';
 
 
 import { useDispatch } from 'react-redux';
-import { createUser } from '../Store/actions/users.action'
+import { createUser, getUsuarios } from '../Store/actions/users.action'
 
 
 
@@ -16,7 +16,7 @@ const CreateUserModal = ({ visible, hideModal, userId, setImage, pickImage, emai
     const useHeight = height - 150
     // console.log(image)
     const initalState = {
-        nombreCompleto: '',        
+        nombreCompleto: '',
         direccion: '',
         edificio_Puerta_Lote: '',
         provincia: '',
@@ -40,6 +40,8 @@ const CreateUserModal = ({ visible, hideModal, userId, setImage, pickImage, emai
     const dispatch = useDispatch()
     const onClick = () => {
         dispatch(createUser(userId, state))
+        dispatch(getUsuarios())
+
         hideModal()
     }
 

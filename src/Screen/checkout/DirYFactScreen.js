@@ -1,21 +1,28 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
-import { Keyboard, KeyboardAvoidingView, SafeAreaView, ScrollView, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native'
+import { Keyboard, SafeAreaView, ScrollView, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { Title, TextInput, Button } from 'react-native-paper';
 import { useSelector, useDispatch } from 'react-redux';
+
 import Colors from '../../Constants/Colors';
 import { addDireccion } from '../../Store/actions/info_envios.action'
 
 
 const DirYFactScreen = ({ navigation }) => {
+  const email = useSelector(store => store.auth.email)
+
+
+
   const initalState = {
     nombreCompleto: '',
     direccion: '',
     edificio_Puerta_Lote: '',
     provincia: '',
+    pais: '',
     codigo_Postal: '',
     telefono: '',
-    email: '',
+    email: email,
     notas: '',
   };
   const [state, setState] = useState(initalState)
@@ -27,7 +34,7 @@ const DirYFactScreen = ({ navigation }) => {
   const dispatch = useDispatch()
   //AGREGAR EL ! PARA QUE SEA FALSO
   const noValidate = !(
-    state.nombreCompleto.length && state.direccion.length && state.provincia.length && state.codigo_Postal.length && state.telefono.length && state.email.length > 0
+    state.nombreCompleto.length && state.direccion.length && state.provincia.length && state.codigo_Postal.length && state.pais && state.telefono.length && state.email.length > 0
   )
   // console.log(noValidate)
 
@@ -44,7 +51,7 @@ const DirYFactScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        <KeyboardAvoidingView
+        <KeyboardAwareScrollView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -78,6 +85,13 @@ const DirYFactScreen = ({ navigation }) => {
                 style={styles.textInput}
                 onChangeText={(value) => handleChangeText(value, "provincia")}
                 value={state.provincia}
+              />
+              <TextInput
+                label="País *"
+                left={<TextInput.Icon name="earth" />}
+                style={styles.textInput}
+                onChangeText={(value) => handleChangeText(value, "pais")}
+                value={state.pais}
               />
               <TextInput
                 label="Código Postal *"
@@ -133,7 +147,7 @@ const DirYFactScreen = ({ navigation }) => {
               <Text>Volver</Text>
             </Button>
           </View>
-        </KeyboardAvoidingView>
+        </KeyboardAwareScrollView>
       </ScrollView>
     </SafeAreaView>
   )

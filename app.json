@@ -18,9 +18,13 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.natacha.places",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.natacha.places",
+      "versionCode": "1",
       "adaptiveIcon": {
         "foregroundImage": "./assets/img/closeBook2.png",
         "backgroundColor": "##a31f05"
@@ -28,6 +32,16 @@
     },
     "web": {
       "favicon": "./assets/img/closeBook2.png"
+    },
+    "permissions": [
+      "CAMERA",
+      "ACCESS_FINE_LOCATION",
+      "WRITE_EXTERNAL_STORAGE"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "e86d3fb9-983e-4d41-a6a6-c3699e1bace6"
+      }
     }
   }
 }

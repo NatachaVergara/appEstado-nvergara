@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Keyboard, KeyboardAvoidingView, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { Title, TextInput, Button } from 'react-native-paper';
 import MaskInput, { Masks } from 'react-native-mask-input';
 import Colors from '../../Constants/Colors';
@@ -32,7 +33,7 @@ const PagosScreen = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <KeyboardAvoidingView style={styles.container}
+            <KeyboardAwareScrollView style={styles.container}
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
             >
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -111,7 +112,7 @@ const PagosScreen = ({ navigation }) => {
                         <Text>Volver</Text>
                     </Button>
                 </View>
-            </KeyboardAvoidingView>
+            </KeyboardAwareScrollView>
         </ScrollView>
     )
 }

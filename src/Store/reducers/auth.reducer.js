@@ -4,6 +4,7 @@ const initialState = {
     token: null,
     userId: null,
     email: null,
+    error:null
 
 }
 

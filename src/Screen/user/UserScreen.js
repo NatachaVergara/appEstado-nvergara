@@ -1,37 +1,26 @@
 import React, { useEffect, useState } from 'react'
-import { FlatList, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { ImageItem } from '../../Components/ImageItem';
+import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Ionicons } from "@expo/vector-icons";
 import Title from '../../Components/Title';
 
 // import AuthNavigator from './AuthNavigator';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectUsuario, getUsuarios } from '../../Store/actions/users.action'
-import { getOrders, filterItems } from '../../Store/actions/orders.action'
+import { getOrders } from '../../Store/actions/orders.action'
 import * as ImagePicker from 'expo-image-picker';
 import CreateUserModal from '../../Components/CreateUserModal';
 
-import { Portal, Provider } from 'react-native-paper';
+import { Provider } from 'react-native-paper';
 
 const UserScreen = () => {
-
-    useEffect(() => {
-        dispatch(selectUsuario(userID))
-        dispatch(getUsuarios())
-        dispatch(getOrders())
-    }, [])
-
+    //MODAL
     const [visible, setVisible] = useState(false)
     const showModal = () => setVisible(true);
     const hideModal = () => setVisible(false);
+
+
     // console.log('USER SCREEN')
     const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(selectUsuario(userID))
-        dispatch(getUsuarios())
-        dispatch(getOrders())
-    }, [])
     //Traigo los datos que necesito de mis store
     const email = useSelector(store => store.auth.email)
     const userID = useSelector(store => store.auth.userId)
@@ -44,8 +33,6 @@ const UserScreen = () => {
     // console.log('USER ORDERS ITEMS: ', userOrders)
 
 
-
-
     //Sumo el total de las compras realizadas por el usuario  
     let sumaTotal = []
     userOrders.map(x => sumaTotal.push(x.total))
@@ -53,13 +40,6 @@ const UserScreen = () => {
     // console.log(sumaFinal)
     /************************************************************/
 
-    //Agregro las imagenes de los libros que el usuario compro para mostrarlo en un flatlist
-    let imagenes = []
-    let url = []
-    userOrders.map(i => imagenes.push(i.items[0]))
-    imagenes.map((i, x) => url.push({ id: x, url: i.url }))
-    // console.log('IMAGENES', imagenes)
-    // console.log('URL', url)
 
     //Suma cantidad de libros comprado por el cliente
     let libros = []
@@ -86,6 +66,11 @@ const UserScreen = () => {
         }
     };
 
+    useEffect(() => {
+        dispatch(selectUsuario(userID))
+        dispatch(getUsuarios())
+        dispatch(getOrders())
+    }, [])
 
     return (
         <Provider>
@@ -130,35 +115,11 @@ const UserScreen = () => {
                                 </View>
 
                                 <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
-                                    <Text style={[styles.text, { fontSize: 24 }]}>-</Text>
-                                    <Text style={[styles.text, styles.subText]}>Libros</Text>
-                                </View>
-                                <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
                                     <Text style={[styles.text, { fontSize: 24 }]}>$-</Text>
                                     <Text style={[styles.text, styles.subText]}>Total</Text>
                                 </View>
                             </View>
 
-                            <View style={{ marginTop: 32 }}>
-                                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                                    {/* Crear un flatlist con el imageItem*/}
-                                    <View style={styles.mediaImageContainer}>
-                                        <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
-                                    </View>
-                                    <View style={styles.mediaImageContainer}>
-                                        <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
-                                    </View>
-                                    <View style={styles.mediaImageContainer}>
-                                        <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
-                                    </View>
-                                    <View style={styles.mediaImageContainer}>
-                                        <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
-                                    </View>
-                                    <View style={styles.mediaImageContainer}>
-                                        <Image source={require("../../../assets/img/closeBook1.png")} style={styles.image} resizeMode="cover"></Image>
-                                    </View>
-                                </ScrollView>
-                            </View>
 
                             <View style={styles.datosPersonales}>
                                 <ScrollView showsVerticalScrollIndicator={false}>

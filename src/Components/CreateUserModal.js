@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Title, Modal, Portal, Button, TextInput } from 'react-native-paper';
 import { Keyboard, KeyboardAvoidingView, SafeAreaView, ScrollView, StyleSheet, Text, TouchableWithoutFeedback, View, useWindowDimensions, TouchableOpacity, Image } from 'react-native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import Colors from '../Constants/Colors';
 
@@ -41,7 +42,6 @@ const CreateUserModal = ({ visible, hideModal, userId, setImage, pickImage, emai
     const onClick = () => {
         dispatch(createUser(userId, state))
         dispatch(getUsuarios())
-
         hideModal()
     }
 
@@ -49,10 +49,10 @@ const CreateUserModal = ({ visible, hideModal, userId, setImage, pickImage, emai
     return (
 
         <Portal>
-            <Modal visible={visible} style={[styles.container, { height: useHeight }]}>
+            <Modal visible={visible} style={[styles.container]}>
                 <SafeAreaView >
                     <ScrollView style={styles.scrollView}>
-                        <KeyboardAvoidingView
+                        <KeyboardAwareScrollView
                             behavior={Platform.OS === "ios" ? "padding" : "height"}
                         >
                             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -146,7 +146,7 @@ const CreateUserModal = ({ visible, hideModal, userId, setImage, pickImage, emai
                             <Button onPress={hideModal}>
                                 Cerrar
                             </Button>
-                        </KeyboardAvoidingView>
+                        </KeyboardAwareScrollView>
                     </ScrollView>
                 </SafeAreaView>
 
@@ -157,7 +157,7 @@ const CreateUserModal = ({ visible, hideModal, userId, setImage, pickImage, emai
     )
 }
 const styles = StyleSheet.create({
-    container: { flex: 1, paddingBottom: 10 },
+    container: { flex: 1, paddingBottom: 50},
     scrollView: {
         backgroundColor: 'pink',
 

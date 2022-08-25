@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/img/closeBook2.png",
       "resizeMode": "contain",
-      "backgroundColor": "##a31f05"
+      "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -27,7 +27,7 @@
       "versionCode": "1",
       "adaptiveIcon": {
         "foregroundImage": "./assets/img/closeBook2.png",
-        "backgroundColor": "##a31f05"
+        "backgroundColor": "#FFFFFF"
       }
     },
     "web": {

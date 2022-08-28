@@ -5,7 +5,7 @@ import MapPreview from '../Components/MapPreview';
 
 import { useNavigation } from '@react-navigation/native';
 
-const LocationSelector = ({ onLocation, mapLocation }) => {
+const LocationSelector = (props) => {
     const [pickedLocation, setPickedLocation] = useState();
     const navigation = useNavigation();
 
@@ -16,17 +16,18 @@ const LocationSelector = ({ onLocation, mapLocation }) => {
         }
 
         const location = await Location.getCurrentPositionAsync({
-            timeout: 2000,
+            timeout: 5000,
         });
+        console.log(location)
 
         setPickedLocation({
             lat: location.coords.latitude,
             lng: location.coords.longitude,
         });
-        onLocation({
-            lat: location.coords.latitude,
-            lng: location.coords.longitude,
-        })
+        // onLocation({
+        //     lat: location.coords.latitude,
+        //     lng: location.coords.longitude,
+        // })
     }
 
     const verifyPermissions = async () => {
@@ -51,27 +52,29 @@ const LocationSelector = ({ onLocation, mapLocation }) => {
 
     }
 
-    useEffect(() => {
-        if (mapLocation) {
-            setPickedLocation(mapLocation)
-            onLocation(mapLocation)
-        }
-    }, [mapLocation])
+    // useEffect(() => {
+    //     if (mapLocation) {
+    //         setPickedLocation(mapLocation)
+    //         onLocation(mapLocation)
+    //     }
+    // }, [mapLocation])
 
     return (
         <View style={styles.container}>
             <MapPreview location={pickedLocation} style={styles.preview}>
-                <Text>Location en proceso...</Text>
+                <Text>Buscando dirección...</Text>
             </MapPreview>
+
+
             <View style={styles.actions}>
                 <Button
                     title='Obtener location'
                     onPress={handleGetLocation}
                 />
-                <Button
+                {/* <Button
                     title='Elegir del mapa'
                     onPress={handlePickOnMap}
-                />
+                /> */}
             </View>
         </View>
     )
@@ -87,7 +90,8 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 1
+        borderWidth: 1,
+
     },
     image: {
         width: '100%',

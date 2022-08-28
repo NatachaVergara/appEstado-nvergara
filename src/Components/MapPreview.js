@@ -3,8 +3,9 @@ import { View, Image, StyleSheet } from 'react-native';
 import { API_MAPS_KEY } from '../Constants/database';
 
 const MapPreview = props => {
-    const mapPreviewUrl = props?.location
-        ? `https://maps.googleapis.com/maps/api/staticmap?center=${props?.location.lat},${props?.location.lng}&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C${props?.location.lat},${props?.location.lng}&key=${API_MAPS_KEY}`
+    console.log('MAP PREVIEW', props.location)
+
+    const mapPreviewUrl = props?.location ? `https://maps.googleapis.com/maps/api/staticmap?center=${props?.location.lat},${props?.location.lng}&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C${props?.location.lat},${props?.location.lng}&key=${API_MAPS_KEY}`
         : '';
 
     return (
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     mapImage: {
-        width: '100%',
+        width: 300,
         height: '100%',
     },
 })

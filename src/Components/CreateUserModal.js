@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { createUser, getUsuarios } from '../Store/actions/users.action'
 import LocationSelector from './LocationSelector';
 import MapScreen from './MapScreen';
+import MapPreview from './MapPreview';
 
 
 
@@ -67,8 +68,9 @@ const CreateUserModal = ({ visible, hideModal, userId, email, image }) => {
                                         onChangeText={(value) => handleChangeText(value, "nombreCompleto")}
                                         value={state.nombreCompleto}
                                     />
-                                    <MapScreen/>
-                                    <LocationSelector onLocation={setLocation} />
+                                    
+                                    <LocationSelector />
+
 
                                     <TextInput
                                         label="Teléfono Principal*"

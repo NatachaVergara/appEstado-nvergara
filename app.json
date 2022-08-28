@@ -35,6 +35,11 @@
         "WRITE_EXTERNAL_STORAGE"
       ]
     },
+    "config": {
+      "googleMaps": {
+        "apiKey": "AIzaSyAV0IICQwgK1FQAK821fVNq-EBn9rIfOa0"
+      }
+    },
     "web": {
       "favicon": "./assets/img/closeBook2.png"
     },

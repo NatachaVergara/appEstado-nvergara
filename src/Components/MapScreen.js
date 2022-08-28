@@ -12,11 +12,11 @@ const MapScreen = ({ navigation }) => {
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
     }
-    const handleSaveLocation = () => {
-        if (selectedLocation) {
-            navigation.navigate('Nuevo', { mapLocation: selectedLocation })
-        }
-    }
+    // const handleSaveLocation = () => {
+    //     if (selectedLocation) {
+    //         navigation.navigate('Nuevo', { mapLocation: selectedLocation })
+    //     }
+    // }
 
     const handleSelectLocation = event => {
         setSelectedLocation({

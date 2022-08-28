@@ -5,7 +5,14 @@ import MainNavigation from './src/Navigation/MainNavigation';
 //Redux
 import { Provider } from 'react-redux'
 import store from './src/Store'
+import { init } from './src/db/index'
 
+init()
+  .then(() => console.log('database initialized'))
+  .catch((err) => {
+    console.log('database fail connect')
+    console.log(err.message)
+  })
 
 export default function App() {
 

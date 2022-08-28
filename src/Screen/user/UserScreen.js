@@ -27,7 +27,7 @@ const UserScreen = () => {
     const orders = useSelector(store => store.orders.orders)
     const users = useSelector(store => store.usuarios.users)
     // console.log('USERS', users)
-    const user = users.find(user => user.userId === userID)
+    const user = users === undefined ? null : users.find(user => user.userId === userID)
     // console.log('USER: ', user)
     const userOrders = orders.filter(orders => orders.userId === userID)
     // console.log('USER ORDERS ITEMS: ', userOrders)
@@ -67,7 +67,7 @@ const UserScreen = () => {
     };
 
     useEffect(() => {
-        dispatch(selectUsuario(userID))
+        users === undefined ? null : dispatch(selectUsuario(userID))
         dispatch(getUsuarios())
         dispatch(getOrders())
     }, [])

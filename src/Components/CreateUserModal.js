@@ -2,30 +2,27 @@ import React, { useState } from 'react';
 import { Title, Modal, Portal, Button, TextInput } from 'react-native-paper';
 import { Keyboard, KeyboardAvoidingView, SafeAreaView, ScrollView, StyleSheet, Text, TouchableWithoutFeedback, View, useWindowDimensions, TouchableOpacity, Image } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import Colors from '../Constants/Colors';
 
 
 import { useDispatch } from 'react-redux';
 import { createUser, getUsuarios } from '../Store/actions/users.action'
+import LocationSelector from './LocationSelector';
+import MapScreen from './MapScreen';
 
 
 
-const CreateUserModal = ({ visible, hideModal, userId, setImage, pickImage, email, image }) => {
+const CreateUserModal = ({ visible, hideModal, userId, email, image }) => {
     const { height, width } = useWindowDimensions();
+    const [location, setLocation] = useState(null);
 
     const useHeight = height - 150
     // console.log(image)
     const initalState = {
         nombreCompleto: '',
-        direccion: '',
-        edificio_Puerta_Lote: '',
-        provincia: '',
-        codigo_Postal: '',
         telefonoPrincipal: '',
-        telefonoAlternativo: '',
         email: email,
-        documento: ''
+
 
 
     };
@@ -35,12 +32,16 @@ const CreateUserModal = ({ visible, hideModal, userId, setImage, pickImage, emai
     }
 
     const noValidate = !(
-        state.nombreCompleto.length && state.direccion.length && state.provincia.length && state.codigo_Postal.length && state.telefonoPrincipal.length && state.email.length && state.documento.length > 0
+        state.nombreCompleto.length && state.telefonoPrincipal.length && state.email.length > 0
     )
 
     const dispatch = useDispatch()
     const onClick = () => {
-        dispatch(createUser(userId, state))
+        // console.log(
+        //     'USER ID', userId,
+        //     'STATE', state,
+        //     'IMAGE', image)
+        dispatch(createUser(userId, state.nombreCompleto, state.telefonoPrincipal, state.email, location, image))
         dispatch(getUsuarios())
         hideModal()
     }
@@ -66,43 +67,9 @@ const CreateUserModal = ({ visible, hideModal, userId, setImage, pickImage, emai
                                         onChangeText={(value) => handleChangeText(value, "nombreCompleto")}
                                         value={state.nombreCompleto}
                                     />
-                                    <TextInput
-                                        label="Dirección *"
-                                        left={<TextInput.Icon name="home" />}
-                                        style={styles.textInput}
-                                        onChangeText={(value) => handleChangeText(value, "direccion")}
-                                        value={state.direccion}
-                                    />
-                                    <TextInput
-                                        label="Edificio/Puerta/Lote"
-                                        left={<TextInput.Icon name="home" />}
-                                        style={styles.textInput}
-                                        onChangeText={(value) => handleChangeText(value, "edificio_Puerta_Lote")}
-                                        value={state.edificio_Puerta_Lote}
-                                    />
-                                    <TextInput
-                                        label="Provincia *"
-                                        left={<TextInput.Icon name="earth" />}
-                                        style={styles.textInput}
-                                        onChangeText={(value) => handleChangeText(value, "provincia")}
-                                        value={state.provincia}
-                                    />
-                                    <TextInput
-                                        label="Código Postal *"
-                                        left={<TextInput.Icon name="map-marker" />}
-                                        style={styles.textInput}
-                                        keyboardType="numeric"
-                                        onChangeText={(value) => handleChangeText(value, "codigo_Postal")}
-                                        value={state.codigo_Postal}
-                                    />
-                                    <TextInput
-                                        label="Número de documento *"
-                                        left={<TextInput.Icon name="card-account-details" />}
-                                        style={styles.textInput}
-                                        keyboardType="numeric"
-                                        onChangeText={(value) => handleChangeText(value, "documento")}
-                                        value={state.documento}
-                                    />
+                                    <MapScreen/>
+                                    <LocationSelector onLocation={setLocation} />
+
                                     <TextInput
                                         label="Teléfono Principal*"
                                         left={<TextInput.Icon name="cellphone" />}
@@ -111,14 +78,7 @@ const CreateUserModal = ({ visible, hideModal, userId, setImage, pickImage, emai
                                         onChangeText={(value) => handleChangeText(value, "telefonoPrincipal")}
                                         value={state.telefonoPrincipal}
                                     />
-                                    <TextInput
-                                        label="Teléfono Alternativo"
-                                        left={<TextInput.Icon name="cellphone" />}
-                                        style={styles.textInput}
-                                        keyboardType="phone-pad"
-                                        onChangeText={(value) => handleChangeText(value, "telefonoAlternativo")}
-                                        value={state.telefonoAlternativo}
-                                    />
+
                                     <TextInput
                                         label="Email *"
                                         left={<TextInput.Icon name="email" />}
@@ -128,18 +88,12 @@ const CreateUserModal = ({ visible, hideModal, userId, setImage, pickImage, emai
                                         keyboardType="email-address"
                                         autoCapitalize='none'
                                     />
-                                    {/* <View style={styles.profileImage}>
-                                        <Image source={{ uri: state.image }} style={styles.image} resizeMode="center" />
-                                    </View> */}
+
+
 
                                 </View>
                             </TouchableWithoutFeedback>
-                            {/* <View style={styles.add}>
-                                <TouchableOpacity onPress={pickImage}>
-                                    <Ionicons name="camera-outline" size={25} color="#DFD8C8" style={{ marginTop: 0, marginLeft: 2 }}>
-                                    </Ionicons>
-                                </TouchableOpacity>
-                            </View> */}
+
                             <Button style={{ marginTop: 30 }} onPress={onClick} >
                                 Crear usuario
                             </Button>
@@ -157,7 +111,7 @@ const CreateUserModal = ({ visible, hideModal, userId, setImage, pickImage, emai
     )
 }
 const styles = StyleSheet.create({
-    container: { flex: 1, paddingBottom: 50},
+    container: { flex: 1, paddingBottom: 50 },
     scrollView: {
         backgroundColor: 'pink',
 

@@ -3,29 +3,25 @@ import { Title, Modal, Portal, Button, TextInput } from 'react-native-paper';
 import { Keyboard, KeyboardAvoidingView, SafeAreaView, ScrollView, StyleSheet, Text, TouchableWithoutFeedback, View, useWindowDimensions, TouchableOpacity, Image } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Colors from '../Constants/Colors';
-
-
+import * as ImagePicker from 'expo-image-picker';
+import { Ionicons } from "@expo/vector-icons";
 import { useDispatch } from 'react-redux';
 import { createUser, getUsuarios } from '../Store/actions/users.action'
-import LocationSelector from './LocationSelector';
-import MapScreen from './MapScreen';
-import MapPreview from './MapPreview';
 
 
 
-const CreateUserModal = ({ visible, hideModal, userId, email, image }) => {
+
+const CreateUserModal = ({ visible, hideModal, userId, email, title, nombre, direccion, cell, img }) => {
     const { height, width } = useWindowDimensions();
-    const [location, setLocation] = useState(null);
+    const [image, setImage] = useState(img)
 
     const useHeight = height - 150
     // console.log(image)
     const initalState = {
-        nombreCompleto: '',
-        telefonoPrincipal: '',
+        nombre: nombre,
         email: email,
-
-
-
+        direccion: direccion,
+        cell: cell,
     };
     const [state, setState] = useState(initalState)
     const handleChangeText = (value, name) => {
@@ -33,20 +29,31 @@ const CreateUserModal = ({ visible, hideModal, userId, email, image }) => {
     }
 
     const noValidate = !(
-        state.nombreCompleto.length && state.telefonoPrincipal.length && state.email.length > 0
+        state.nombre.length && state.cell.length && state.email.length && state.direccion.length && image.length > 0
     )
 
     const dispatch = useDispatch()
     const onClick = () => {
-        // console.log(
-        //     'USER ID', userId,
-        //     'STATE', state,
-        //     'IMAGE', image)
-        dispatch(createUser(userId, state.nombreCompleto, state.telefonoPrincipal, state.email, location, image))
+        dispatch(createUser(userId, state.nombre, state.email, state.direccion, state.cell, image))
         dispatch(getUsuarios())
         hideModal()
     }
 
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        console.log(result);
+
+        if (!result.cancelled) {
+            setImage(result.uri);
+        }
+    };
 
     return (
 
@@ -59,27 +66,16 @@ const CreateUserModal = ({ visible, hideModal, userId, email, image }) => {
                         >
                             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                                 <View style={styles.inner}>
-                                    <Title >Información de envío</Title>
+                                    <Title >{title}</Title>
                                     <Text style={{ color: Colors.secondary }}>* campos obligatorios</Text>
                                     <TextInput
                                         label="Nombre Completo *"
                                         left={<TextInput.Icon name="account" />}
                                         style={styles.textInput}
-                                        onChangeText={(value) => handleChangeText(value, "nombreCompleto")}
-                                        value={state.nombreCompleto}
+                                        onChangeText={(value) => handleChangeText(value, "nombre")}
+                                        value={state.nombre}
                                     />
-                                    
-                                    <LocationSelector />
 
-
-                                    <TextInput
-                                        label="Teléfono Principal*"
-                                        left={<TextInput.Icon name="cellphone" />}
-                                        style={styles.textInput}
-                                        keyboardType="phone-pad"
-                                        onChangeText={(value) => handleChangeText(value, "telefonoPrincipal")}
-                                        value={state.telefonoPrincipal}
-                                    />
 
                                     <TextInput
                                         label="Email *"
@@ -92,6 +88,37 @@ const CreateUserModal = ({ visible, hideModal, userId, email, image }) => {
                                     />
 
 
+                                    <TextInput
+                                        label="Dirección(ciudad, prov , cp) *"
+                                        left={<TextInput.Icon name="home" />}
+                                        style={[styles.textInput, styles.textInputAddres]}
+                                        onChangeText={(value) => handleChangeText(value, "direccion")}
+                                        value={state.direccion}
+
+
+                                    />
+
+                                    <TextInput
+                                        label="Teléfono Principal*"
+                                        left={<TextInput.Icon name="cellphone" />}
+                                        style={styles.textInput}
+                                        keyboardType="phone-pad"
+                                        onChangeText={(value) => handleChangeText(value, "cell")}
+                                        value={state.cell}
+                                    />
+
+                                    <View style={{ alignSelf: "center" }}>
+                                        {image ? <View style={styles.profileImage}>
+                                            <Image source={{ uri: image }} style={styles.image} resizeMode="center" />
+                                        </View> : <Text>Elegir imagen</Text>}
+
+                                        <View style={styles.active}></View>
+                                        <View style={styles.add}>
+                                            <TouchableOpacity onPress={pickImage}>
+                                                <Ionicons name="camera-outline" size={25} color="#DFD8C8" style={{ marginTop: 0, marginLeft: 2 }}></Ionicons>
+                                            </TouchableOpacity>
+                                        </View>
+                                    </View>
 
                                 </View>
                             </TouchableWithoutFeedback>
@@ -123,13 +150,13 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         width: 350,
-
-
-
     },
     textInput: {
         width: 300,
         margin: 10
+    },
+    textInputAddres: {
+        height: 100
     },
     buttonsContainer: {
         padding: 0,

@@ -5,9 +5,9 @@ import Title from '../../Components/Title';
 
 // import AuthNavigator from './AuthNavigator';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectUsuario, getUsuarios } from '../../Store/actions/users.action'
+import { selectUsuario, getUsuarios, deleteUserInfo } from '../../Store/actions/users.action'
 import { getOrders } from '../../Store/actions/orders.action'
-import * as ImagePicker from 'expo-image-picker';
+
 import CreateUserModal from '../../Components/CreateUserModal';
 
 import { Provider } from 'react-native-paper';
@@ -28,7 +28,7 @@ const UserScreen = () => {
     const users = useSelector(store => store.usuarios.users)
     // console.log('USERS', users)
     const user = users === undefined ? null : users.find(user => user.userId === userID)
-    // console.log('USER: ', user)
+    console.log('USER: ', user)
     const userOrders = orders.filter(orders => orders.userId === userID)
     // console.log('USER ORDERS ITEMS: ', userOrders)
 
@@ -50,40 +50,35 @@ const UserScreen = () => {
     const [image, setImage] = useState('https://via.placeholder.com/150')
 
 
-    const pickImage = async () => {
-        // No permissions request is necessary for launching the image library
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1,
-        });
 
-        console.log(result);
 
-        if (!result.cancelled) {
-            setImage(result.uri);
-        }
-    };
+    const deleteUserInformation = (id) => {
+        console.log(id)
+        dispatch(deleteUserInfo(id))
+    }
 
     useEffect(() => {
-        users === undefined ? null : dispatch(selectUsuario(userID))
         dispatch(getUsuarios())
         dispatch(getOrders())
     }, [])
 
     return (
         <Provider>
-            <SafeAreaView style={styles.container}>
+            <SafeAreaView style={styles.container} refreshing={false}>
                 <CreateUserModal
                     visible={visible}
                     hideModal={hideModal}
                     showModal={showModal}
                     userId={userID}
-                    setImage={setImage}
-                    pickImage={pickImage}
+
+                    title={"Información de Perfil"}
+                    nombre={user != undefined ? user.nombre : ''}
+                    direccion={user != undefined ? user.direccion : ''}
                     email={email}
-                    image={image}
+                    cell={user != undefined ? user.cell : ''}
+                    img={user != undefined ? user.image : ''}
+
+
                 />
 
 
@@ -97,11 +92,6 @@ const UserScreen = () => {
                                     <Image source={{ uri: image }} style={styles.image} resizeMode="center" />
                                 </View>
                                 <View style={styles.active}></View>
-                                <View style={styles.add}>
-                                    <TouchableOpacity onPress={pickImage}>
-                                        <Ionicons name="camera-outline" size={25} color="#DFD8C8" style={{ marginTop: 0, marginLeft: 2 }}></Ionicons>
-                                    </TouchableOpacity>
-                                </View>
                             </View>
 
                             <View style={styles.infoContainer}>
@@ -125,7 +115,7 @@ const UserScreen = () => {
                                 <ScrollView showsVerticalScrollIndicator={false}>
                                     <View style={{ marginBottom: 30 }} >
                                         <View style={styles.editDatos}>
-                                            <Title title='Crear usuario' style={[styles.text, { fontWeight: "200", fontSize: 30, paddingBottom: 10 }]} />
+                                            <Title title='Crear Perfil' style={[styles.text, { fontWeight: "200", fontSize: 30, paddingBottom: 10 }]} />
                                             <TouchableOpacity onPress={showModal}>
                                                 <Ionicons name="create-outline" size={25} color="#DFD8C8" style={{ marginTop: 25, marginLeft: 0 }}></Ionicons>
                                             </TouchableOpacity>
@@ -134,25 +124,20 @@ const UserScreen = () => {
                                         <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Email: {email} </Text>
                                         <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Nombre completo: -  </Text>
                                         <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Domicilio: - </Text>
-                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Documento: - </Text>
                                         <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Teléfono Principal:-</Text>
-                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Teléfono Alternativo: - </Text>
+
                                     </View>
                                 </ScrollView>
                             </View>
                         </ScrollView>
                         :
-                        <ScrollView showsVerticalScrollIndicator={false}>
+                        <ScrollView showsVerticalScrollIndicator={false}  >
                             <View style={{ alignSelf: "center" }}>
                                 <View style={styles.profileImage}>
-                                    <Image source={{ uri: image }} style={styles.image} resizeMode="center" />
+                                    <Image source={{ uri: user.image }} style={styles.image} resizeMode="center" />
                                 </View>
                                 <View style={styles.active}></View>
-                                <View style={styles.add}>
-                                    <TouchableOpacity onPress={pickImage}>
-                                        <Ionicons name="camera-outline" size={25} color="#DFD8C8" style={{ marginTop: 0, marginLeft: 2 }}></Ionicons>
-                                    </TouchableOpacity>
-                                </View>
+
                             </View>
 
                             <View style={styles.infoContainer}>
@@ -165,17 +150,17 @@ const UserScreen = () => {
                                     <Text style={[styles.text, styles.subText]}>Compras</Text>
                                 </View>
 
-                                <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
+                                {/* <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
                                     <Text style={[styles.text, { fontSize: 24 }]}>{libros.length} </Text>
                                     <Text style={[styles.text, styles.subText]}>Libros</Text>
-                                </View>
+                                </View> */}
                                 <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
                                     <Text style={[styles.text, { fontSize: 24 }]}>${sumaFinal}</Text>
                                     <Text style={[styles.text, styles.subText]}>Total</Text>
                                 </View>
                             </View>
 
-                            <View style={{ marginTop: 32 }}>
+                            {/* <View style={{ marginTop: 32 }}>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                                     {url.length < 0 ? <Text>Cargando...</Text> : url.map(i => (
                                         <View style={styles.mediaImageContainer} key={i.id}>
@@ -184,7 +169,7 @@ const UserScreen = () => {
                                         </View>
                                     ))}
                                 </ScrollView>
-                            </View>
+                            </View> */}
 
                             <View style={styles.datosPersonales}>
                                 <ScrollView showsVerticalScrollIndicator={false}>
@@ -197,12 +182,17 @@ const UserScreen = () => {
 
                                         </View>
                                         {/* Crear flatlist */}
-                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Email: {user.user.email} </Text>
-                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Nombre completo: {user.user.nombreCompleto}</Text>
-                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Domicilio: {user.user.domicilio} {user.user.edificio_Puerta_Lote} {user.user.provincia}. {user.user.codigo_Postal} </Text>
-                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Documento: {user.user.documento} </Text>
-                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Teléfono Principal:{user.user.telefonoPrincipal}</Text>
-                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Teléfono Alternativo: {!user.user.telefonoAlternativo ? 'No' : user.user.telefonoAlternativo}  </Text>
+                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Email: {user.email} </Text>
+                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Nombre completo: {user.nombre}</Text>
+                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Domicilio: {user.direccion}  </Text>
+                                        {/*                                         
+                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Documento: {user.user.documento} </Text>  */}
+                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Teléfono Principal:{user.cell}</Text>
+
+
+                                        <TouchableOpacity onPress={() => deleteUserInformation(user.id)}>
+                                            <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Eliminar Perfil</Text>
+                                        </TouchableOpacity>
                                     </View>
                                 </ScrollView>
                             </View>

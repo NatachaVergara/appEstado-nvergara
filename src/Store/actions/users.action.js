@@ -1,9 +1,10 @@
 import * as FileSystem from 'expo-file-system';
-import { addUser, fetchUsers } from '../../db/index'
+import { addUser, fetchUsers, deleteUser } from '../../db/index'
 
 export const SELECT_USUARIO = 'SELECT_USUARIO'
 export const CREATE_USUARIO = 'CREATE_USUARIO'
 export const GET_USUARIOS = 'GET_USUARIOS'
+export const DELETE_USUARIO = 'DELETE_USUARIO'
 
 
 export const selectUsuario = (email) => ({
@@ -17,12 +18,12 @@ export const getUsuarios = () => {
     return async dispatch => {
         try {
             const result = await fetchUsers()
-            console.log('GET USUARIOS TRY', result)
-
+            console.log('GET USUARIOS TRY', result.rows._array)
+            const usersArray = result.rows._array
 
             dispatch({
                 type: GET_USUARIOS,
-                users: result.rows.array,
+                users: usersArray,
             })
         } catch (error) {
             console.log('GET USUARIOS CATCH', error)
@@ -31,36 +32,27 @@ export const getUsuarios = () => {
 }
 
 
-export const createUser = (userId, nombre, location, email, cell, image) => {
+export const createUser = (userId, nombre, email, direccion, cell, img) => {
     return async dispatch => {
         // console.log('USER INFO ACTION', userInfo)
-        // console.log('IMAGE ACTION', image)
-        const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.lat},${location.lng}&key=${API_MAPS_KEY}`);
-        if (!response.ok) throw new Error('No se ha podido comunicar con Google Maps API')
+        console.log('IMAGE ACTION', img)
 
-
-        const resData = await response.json();
-        if (!resData.results) throw new Error('No se ha podido obtener la dirección')
-
-        const address = resData.results[0].formatted_address;
-        const fileName = image.split('/').pop()
-        const imagen = FileSystem.documentDirectory + fileName
+        const fileName = img.split('/').pop()
+        const Path = FileSystem.documentDirectory + fileName
 
         try {
             await FileSystem.moveAsync({
-                from: image,
-                to: imagen
+                from: img,
+                to: Path
             })
 
             const result = await addUser(
                 userId,
                 nombre,
-                address,
-                location.lat,
-                location.lng,
                 email,
+                direccion,
                 cell,
-                imagen
+                Path
             )
             console.log('ACTION RESPONSE NEW USER', result)
 
@@ -69,14 +61,13 @@ export const createUser = (userId, nombre, location, email, cell, image) => {
             dispatch({
                 type: CREATE_USUARIO,
                 user: {
-                    id: newUser.insertId,
+                    id: result.insertId,
                     userId,
                     nombre,
-                    lat: location.lat,
-                    lng: location.lng,
+                    direccion,
                     email,
-                    cell,
-                    imagen
+                    cell, 
+                    image:Path
                 },
             })
 
@@ -88,3 +79,26 @@ export const createUser = (userId, nombre, location, email, cell, image) => {
 }
 
 
+export const deleteUserInfo = (id) => {
+    return async dispatch => {
+        try {
+            const deleteuser = await deleteUser(id);
+            console.log('ACTION RESPONSE DELETE USER', deleteuser)
+
+            const result = await fetchUsers()
+            console.log('ACTION RESPONSE UPDATE USER', result.rows._array)
+            const usersArray = result.rows._array
+
+
+            dispatch({
+                type: DELETE_USUARIO,
+                users: usersArray,
+            })
+
+
+        } catch (error) {
+            console.log('ACTION DELETE CATCH ERROR', error.message)
+            throw error
+        }
+    }
+}

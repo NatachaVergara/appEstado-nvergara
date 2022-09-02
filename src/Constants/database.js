@@ -1,6 +1,6 @@
-const API_WEB = 'AIzaSyDRxsWvw5F7Nv1BQIdYumiBNP3PlnoCfik'
+const API_WEB = 'AIzaSyBvtG8mSYpIua_nUxhmwDyKiWosjbehrSI'
 
-export const URL_API = 'https://buscolibro-rn-default-rtdb.firebaseio.com/'
+export const URL_API = 'https://buscolibro-rn-6f4f7-default-rtdb.firebaseio.com/'
 
 export const URL_AUTH_REGISTER = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_WEB}`
 

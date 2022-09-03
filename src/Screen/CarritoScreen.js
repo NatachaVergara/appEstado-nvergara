@@ -7,11 +7,11 @@ import { removeItem } from '../Store/actions/carrito.action'
 
 
 const CarritoScreen = ({ navigation }) => {
-    console.log('CARRITO SCREEN')
+    // console.log('CARRITO SCREEN')
 
     const dispatch = useDispatch()
     const items = useSelector(store => store.carrito.carrito)
-    console.log('CARRITO SCREEN ITEMS', items)
+    // console.log('CARRITO SCREEN ITEMS', items)
     const total = useSelector(store => store.carrito.total)
     // const userId = useSelector(store => store.auth.userId)
 

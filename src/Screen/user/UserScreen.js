@@ -70,15 +70,13 @@ const UserScreen = () => {
                     hideModal={hideModal}
                     showModal={showModal}
                     userId={userID}
-
+                    
                     title={"Información de Perfil"}
                     nombre={user != undefined ? user.nombre : ''}
                     direccion={user != undefined ? user.direccion : ''}
                     email={email}
                     cell={user != undefined ? user.cell : ''}
                     img={user != undefined ? user.image : ''}
-
-
                 />
 
 

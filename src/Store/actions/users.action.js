@@ -1,4 +1,5 @@
 import * as FileSystem from 'expo-file-system';
+import { URL_API } from '../../Constants/database';
 import { addUser, fetchUsers, deleteUser } from '../../db/index'
 
 export const SELECT_USUARIO = 'SELECT_USUARIO'
@@ -35,7 +36,7 @@ export const getUsuarios = () => {
 export const createUser = (userId, nombre, email, direccion, cell, img) => {
     return async dispatch => {
         // console.log('USER INFO ACTION', userInfo)
-        console.log('IMAGE ACTION', img)
+        // console.log('IMAGE ACTION', img)
 
         const fileName = img.split('/').pop()
         const Path = FileSystem.documentDirectory + fileName
@@ -45,6 +46,43 @@ export const createUser = (userId, nombre, email, direccion, cell, img) => {
                 from: img,
                 to: Path
             })
+
+            const createUserFirebase = await fetch(`${URL_API}/users.json`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    date: Date.now(),
+                    user: {
+                        userId,
+                        nombre,
+                        email,
+                        direccion,
+                        cell,
+                        Path
+                    }
+                }),
+            })
+
+            const newUserResponse = await createUserFirebase.json();
+            console.log(newUserResponse)
+
+            const getUpdateUsersFirebase = await fetch(`${URL_API}/users.json`, {
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            const responseGetUsers = await getUpdateUsersFirebase.json();
+            console.log("RESPONSE GET USERS FROM FIREBASE", responseGetUsers)
+
+
+            const usuarios = Object.keys(responseGetUsers).map(
+                key => ({
+                    ...responseGetUsers[key], id: key
+                }))
+
+
+            console.log("USUARIOS", usuarios)
 
             const result = await addUser(
                 userId,
@@ -66,8 +104,8 @@ export const createUser = (userId, nombre, email, direccion, cell, img) => {
                     nombre,
                     direccion,
                     email,
-                    cell, 
-                    image:Path
+                    cell,
+                    image: Path
                 },
             })
 
@@ -85,9 +123,9 @@ export const deleteUserInfo = (id) => {
             const deleteuser = await deleteUser(id);
             console.log('ACTION RESPONSE DELETE USER', deleteuser)
 
-            const result = await fetchUsers()
-            console.log('ACTION RESPONSE UPDATE USER', result.rows._array)
-            const usersArray = result.rows._array
+            const resertUsersList = await fetchUsers()
+            console.log('ACTION RESPONSE UPDATE USER', resertUsersList.rows._array)
+            const usersArray = resertUsersList.rows._array
 
 
             dispatch({

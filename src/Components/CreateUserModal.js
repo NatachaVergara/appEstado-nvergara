@@ -48,7 +48,7 @@ const CreateUserModal = ({ visible, hideModal, userId, email, title, nombre, dir
             quality: 1,
         });
 
-        console.log(result);
+        // console.log(result);
 
         if (!result.cancelled) {
             setImage(result.uri);

@@ -1,4 +1,3 @@
-
 import { ADD_ITEM, REMOVE_ITEM, CONFIRM_CARRITO } from '../actions/carrito.action'
 
 const initialState = {
@@ -14,7 +13,7 @@ const sumTotal = (carrito) => carrito
 const CarritoReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_ITEM:
-            let updateCarrito = []
+            let updateCarrito = [];
             if (state.carrito.find(item => item.id === action.item.id)) {
                 updateCarrito = state.carrito.map(item => {
                     if (item.id === action.item.id) item.cantidad++;

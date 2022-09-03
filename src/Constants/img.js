@@ -1,1 +1,1 @@
-export const IMG_BACKGROUND = { uri: 'https://firebasestorage.googleapis.com/v0/b/buscolibro-rn.appspot.com/o/libros%2Fcloseup-books-wellorganized-shelves-bookstore%20(1).jpg?alt=media&token=8103b03d-f530-4cfe-a16b-9d0ad55ac64e' }
+export const IMG_BACKGROUND = { uri: 'https://firebasestorage.googleapis.com/v0/b/buscolibro-rn-6f4f7.appspot.com/o/background%2Fcloseup-books-wellorganized-shelves-bookstore%20(1).jpg?alt=media&token=cfb8368b-f473-4ef1-a22e-254a90f54ad3' }

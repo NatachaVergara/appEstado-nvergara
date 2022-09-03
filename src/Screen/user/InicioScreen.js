@@ -21,7 +21,6 @@ const Inicio = ({ navigation }) => {
 
 
         <SafeAreaView style={styles.container}>
-
             <ImageBackground
                 source={IMG_BACKGROUND} resizeMode="cover"
                 style={styles.image}

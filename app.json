@@ -4,6 +4,10 @@
     "slug": "busco-libro-app",
     "version": "1.0.0",
     "orientation": "portrait",
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "icon": "./assets/img/closeBook2.png",
     "userInterfaceStyle": "light",
     "splash": {
@@ -34,11 +38,6 @@
         "ACCESS_FINE_LOCATION",
         "WRITE_EXTERNAL_STORAGE"
       ]
-    },
-    "config": {
-      "googleMaps": {
-        "apiKey": "AIzaSyAV0IICQwgK1FQAK821fVNq-EBn9rIfOa0"
-      }
     },
     "web": {
       "favicon": "./assets/img/closeBook2.png"

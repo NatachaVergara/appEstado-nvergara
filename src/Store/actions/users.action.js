@@ -18,9 +18,33 @@ export const selectUsuario = (email) => ({
 export const getUsuarios = () => {
     return async dispatch => {
         try {
+
+
+            // const getUpdateUsersFirebase = await fetch(`${URL_API}/users.json`, {
+            //     headers: { 'Content-Type': 'application/json' }
+            // });
+
+            // const responseGetUsers = await getUpdateUsersFirebase.json();
+            // // console.log("RESPONSE GET USERS FROM FIREBASE", responseGetUsers)
+
+
+            // const usuariosFirebase = Object.keys(responseGetUsers).map(
+            //     key => ({
+            //         ...responseGetUsers[key], id: key
+            //     }))
+
+
+            // console.log("USUARIOS DESDE FIREBASE", usuariosFirebase)
+            // console.log("USUARIOS DESDE FIREBASE typeOf", typeof usuariosFirebase)
+
+
+
+
             const result = await fetchUsers()
-            console.log('GET USUARIOS TRY', result.rows._array)
+            // console.log('GET USUARIOS TRY', result.rows._array)
             const usersArray = result.rows._array
+                // console.log(usersArray)
+
 
             dispatch({
                 type: GET_USUARIOS,

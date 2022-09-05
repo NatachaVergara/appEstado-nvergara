@@ -11,6 +11,7 @@ import { getOrders } from '../../Store/actions/orders.action'
 import CreateUserModal from '../../Components/CreateUserModal';
 
 import { Provider } from 'react-native-paper';
+import UserInfo from '../../Components/UserInfo';
 
 const UserScreen = () => {
     //MODAL
@@ -27,12 +28,13 @@ const UserScreen = () => {
     const orders = useSelector(store => store.orders.orders)
     const users = useSelector(store => store.usuarios.users)
     // console.log('USERS', users)
-    const user = users === undefined ? null : users.find(user => user.userId === userID)
-    console.log('USER: ', user)
+    const user = users === undefined ? null : users.find(e => e.userId === userID)
+    //    console.log('USER: ', user)
+
+
+
     const userOrders = orders.filter(orders => orders.userId === userID)
-    // console.log('USER ORDERS ITEMS: ', userOrders)
-
-
+    // console.log('USER ORDERS ITEMS: ', userOrders)    
     //Sumo el total de las compras realizadas por el usuario  
     let sumaTotal = []
     userOrders.map(x => sumaTotal.push(x.total))
@@ -44,22 +46,23 @@ const UserScreen = () => {
     //Suma cantidad de libros comprado por el cliente
     let libros = []
     userOrders.map(i => libros.push(i.items[0].titulo))
-    console.log('LIBROS', libros.length)
+    // console.log('LIBROS', libros.length)
 
 
-    const [image, setImage] = useState('https://via.placeholder.com/150')
+    const [image] = useState('https://via.placeholder.com/150')
 
 
 
 
     const deleteUserInformation = (id) => {
-        console.log(id)
+        // console.log(id)
         dispatch(deleteUserInfo(id))
     }
 
     useEffect(() => {
         dispatch(getUsuarios())
         dispatch(getOrders())
+
     }, [])
 
     return (
@@ -70,7 +73,7 @@ const UserScreen = () => {
                     hideModal={hideModal}
                     showModal={showModal}
                     userId={userID}
-                    
+
                     title={"Información de Perfil"}
                     nombre={user != undefined ? user.nombre : ''}
                     direccion={user != undefined ? user.direccion : ''}
@@ -118,11 +121,16 @@ const UserScreen = () => {
                                                 <Ionicons name="create-outline" size={25} color="#DFD8C8" style={{ marginTop: 25, marginLeft: 0 }}></Ionicons>
                                             </TouchableOpacity>
                                         </View>
-                                        {/* Crear flatlist */}
-                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Email: {email} </Text>
-                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Nombre completo: -  </Text>
-                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Domicilio: - </Text>
-                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Teléfono Principal:-</Text>
+
+                                        <UserInfo
+                                            user={user}
+                                            nombre={user != undefined ? user.nombre : ''}
+                                            direccion={user != undefined ? user.direccion : ''}
+                                            email={email}
+                                            cell={user != undefined ? user.cell : ''}
+                                            styles={styles}
+                                        />
+
 
                                     </View>
                                 </ScrollView>
@@ -148,26 +156,12 @@ const UserScreen = () => {
                                     <Text style={[styles.text, styles.subText]}>Compras</Text>
                                 </View>
 
-                                {/* <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
-                                    <Text style={[styles.text, { fontSize: 24 }]}>{libros.length} </Text>
-                                    <Text style={[styles.text, styles.subText]}>Libros</Text>
-                                </View> */}
                                 <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
                                     <Text style={[styles.text, { fontSize: 24 }]}>${sumaFinal}</Text>
                                     <Text style={[styles.text, styles.subText]}>Total</Text>
                                 </View>
                             </View>
 
-                            {/* <View style={{ marginTop: 32 }}>
-                                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                                    {url.length < 0 ? <Text>Cargando...</Text> : url.map(i => (
-                                        <View style={styles.mediaImageContainer} key={i.id}>
-                                            <Image source={{ uri: i.url }} style={styles.image} resizeMode="cover">
-                                            </Image>
-                                        </View>
-                                    ))}
-                                </ScrollView>
-                            </View> */}
 
                             <View style={styles.datosPersonales}>
                                 <ScrollView showsVerticalScrollIndicator={false}>
@@ -179,18 +173,19 @@ const UserScreen = () => {
                                             </TouchableOpacity> : null}
 
                                         </View>
-                                        {/* Crear flatlist */}
-                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Email: {user.email} </Text>
-                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Nombre completo: {user.nombre}</Text>
-                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Domicilio: {user.direccion}  </Text>
-                                        {/*                                         
-                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Documento: {user.user.documento} </Text>  */}
-                                        <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Teléfono Principal:{user.cell}</Text>
+                                        <UserInfo
+                                            email={user.email}
+                                            nombre={user.nombre}
+                                            direccion={user.direccion}
+                                            cell={user.cell}
+                                            deleteUserInformation={deleteUserInformation}
+                                            styles={styles}
+                                            user={user}
+                                            id={user.id}
+
+                                        />
 
 
-                                        <TouchableOpacity onPress={() => deleteUserInformation(user.id)}>
-                                            <Text style={[styles.text, { fontSize: 15, marginLeft: 10 }]}>Eliminar Perfil</Text>
-                                        </TouchableOpacity>
                                     </View>
                                 </ScrollView>
                             </View>

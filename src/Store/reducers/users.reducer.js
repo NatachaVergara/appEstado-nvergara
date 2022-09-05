@@ -11,18 +11,19 @@ const UsuariosReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case GET_USUARIOS:
+          //  console.log('GET USUARIO reducer', action.users)
             return {
                 ...state,
                 users: action.users
             }
-        case SELECT_USUARIO:
-            const IndexUser = state.users.findIndex(user => user.userId === action.userId)
+        case SELECT_USUARIO:                    
+            const IndexUser = state.users.findIndex(e => e.user.email === action.email)
             return {
                 ...state,
                 selected: state.users[IndexUser]
             }
         case CREATE_USUARIO:
-            console.log('REDUCER CREAR USUARIO', action.user)
+            // console.log('REDUCER CREAR USUARIO', action.user)
             const newUser = { id: action.user.id.toString(), user: action.user }
             return {
                 ...state,

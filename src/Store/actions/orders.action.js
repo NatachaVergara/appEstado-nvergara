@@ -9,7 +9,7 @@ export const getOrders = () => {
                 headers: { 'Content-Type': 'application/json' }
             });
             const result = await response.json();
-            console.log('Get orders.action*********', result)
+            // console.log('Get orders.action*********', result)
 
 
             const orders = Object.keys(result).map(key => ({

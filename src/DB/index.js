@@ -56,7 +56,7 @@ export const addUser = (
 
 
 export const updateUser = (id, userId, nombre, email, direccion, cell, image) => {
-    console.log(id, userId, nombre, email, direccion, cell, image)
+    // console.log(id, userId, nombre, email, direccion, cell, image)
 
     let query = `UPDATE users SET userId= ?, nombre= ?, email= ?, direccion= ?, cell= ?, image= ? WHERE id= ?`;
     let params = [userId, nombre, email, direccion, cell, image, id];

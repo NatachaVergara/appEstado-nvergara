@@ -8,10 +8,10 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 const UserInfo = ({ visible, hideModal, showModal, user, email, nombre, direccion, cell, id, deleteUserInformation, styles, img, userId }) => {
-    
 
-console.log(userId)
-  
+
+    // console.log(img)
+
 
     return (
 
@@ -29,7 +29,7 @@ console.log(userId)
                 img={img}
                 btnText='Actualizar'
                 userId={userId}
-               
+
             />
 
 

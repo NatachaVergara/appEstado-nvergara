@@ -12,16 +12,6 @@ export const init = () => {
                 (_, err) => { reject(err); })
         })
 
-    
-
-    //    const promise = new Promise((resolve, reject) => {
-    //     db.transaction(tx => {
-    //         tx.executeSql(`
-    //             DROP TABLE users`,
-    //             [],
-    //             () => { resolve() },
-    //             (_, err) => { reject(err); })
-    //     })
 
     });
 
@@ -65,6 +55,22 @@ export const addUser = (
 }
 
 
+export const updateUser = (id, userId, nombre, email, direccion, cell, image) => {
+    console.log(id, userId, nombre, email, direccion, cell, image)
+
+    let query = `UPDATE users SET userId= ?, nombre= ?, email= ?, direccion= ?, cell= ?, image= ? WHERE id= ?`;
+    let params = [userId, nombre, email, direccion, cell, image, id];
+    const promise = new Promise((resolve, reject) => {
+        db.transaction((tx) => {
+            tx.executeSql(query, params, (_, result) => { resolve(result) },
+                (_, err) => { reject(err) }
+            )
+        })
+    })
+    return promise
+}
+
+
 export const fetchUsers = () => {
     const promise = new Promise((resolve, reject) => {
         db.transaction((tx) => {
@@ -77,6 +83,10 @@ export const fetchUsers = () => {
     })
     return promise
 }
+
+
+
+
 
 export const deleteUser = (id) => {
     const promise = new Promise((resolve, reject) => {

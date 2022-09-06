@@ -1,4 +1,4 @@
-import { SELECT_USUARIO, CREATE_USUARIO, GET_USUARIOS, DELETE_USUARIO } from '../actions/users.action'
+import { SELECT_USUARIO, CREATE_USUARIO, GET_USUARIOS, DELETE_USUARIO, UPDATE_USUARIO } from '../actions/users.action'
 
 
 const initialState = {
@@ -11,12 +11,12 @@ const UsuariosReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case GET_USUARIOS:
-          //  console.log('GET USUARIO reducer', action.users)
+            //  console.log('GET USUARIO reducer', action.users)
             return {
                 ...state,
                 users: action.users
             }
-        case SELECT_USUARIO:                    
+        case SELECT_USUARIO:
             const IndexUser = state.users.findIndex(e => e.user.email === action.email)
             return {
                 ...state,
@@ -32,7 +32,11 @@ const UsuariosReducer = (state = initialState, action) => {
                     newUser
                 ]
             }
-
+        case UPDATE_USUARIO:
+            return {
+                ...state,
+                users: action.users
+            }
         case DELETE_USUARIO:
             return {
                 ...state,

@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
-import { Title, Modal, Portal, Button, TextInput } from 'react-native-paper';
-import { Keyboard, KeyboardAvoidingView, SafeAreaView, ScrollView, StyleSheet, Text, TouchableWithoutFeedback, View, useWindowDimensions, TouchableOpacity, Image } from 'react-native'
+import { Title, Modal, Portal, TextInput } from 'react-native-paper';
+import { Keyboard, SafeAreaView, ScrollView, StyleSheet, Text, TouchableWithoutFeedback, View, useWindowDimensions, TouchableOpacity, Image } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Colors from '../Constants/Colors';
 import * as ImagePicker from 'expo-image-picker';
 import { Ionicons } from "@expo/vector-icons";
 import { useDispatch } from 'react-redux';
-import { createUser, getUsuarios } from '../Store/actions/users.action'
+import { createUser, getUsuarios, updateUsuario } from '../Store/actions/users.action'
+import ButtonModal from './Button';
 
 
 
 
-const CreateUserModal = ({ visible, hideModal, userId, email, title, nombre, direccion, cell, img }) => {
-    const { height, width } = useWindowDimensions();
-    const [image, setImage] = useState(img)
+const CreateUserModal = ({ id, visible, hideModal, userId, email, title, nombre, direccion, cell, img, btnText, user }) => {
+    const [image, setImage] = useState('')
 
-    const useHeight = height - 150
-    // console.log(image)
+
+    //    console.log('MODAL', user)
+
     const initalState = {
         nombre: nombre,
         email: email,
@@ -27,15 +28,28 @@ const CreateUserModal = ({ visible, hideModal, userId, email, title, nombre, dir
     const handleChangeText = (value, name) => {
         setState({ ...state, [name]: value })
     }
-
     const noValidate = !(
         state.nombre.length && state.cell.length && state.email.length && state.direccion.length && image.length > 0
     )
 
     const dispatch = useDispatch()
-    const onClick = () => {
+
+    const onCreateClick = () => {
+        console.log('create')
         dispatch(createUser(userId, state.nombre, state.email, state.direccion, state.cell, image))
-        dispatch(getUsuarios())
+        setTimeout(() => {
+            dispatch(getUsuarios())
+            hideModal()
+        }, 1000)
+
+    }
+
+
+
+    const onUpdateClick = () => {
+        console.log('Update')
+        // console.log(user.id, userId, state.nombre, state.email, state.direccion, state.cell, image)
+        dispatch(updateUsuario(user.id, userId, state.nombre, state.email, state.direccion, state.cell, image))
         hideModal()
     }
 
@@ -48,7 +62,6 @@ const CreateUserModal = ({ visible, hideModal, userId, email, title, nombre, dir
             quality: 1,
         });
 
-        // console.log(result);
 
         if (!result.cancelled) {
             setImage(result.uri);
@@ -123,12 +136,19 @@ const CreateUserModal = ({ visible, hideModal, userId, email, title, nombre, dir
                                 </View>
                             </TouchableWithoutFeedback>
 
-                            <Button style={{ marginTop: 30 }} onPress={onClick} >
-                                Crear usuario
-                            </Button>
-                            <Button onPress={hideModal}>
-                                Cerrar
-                            </Button>
+                            <ButtonModal
+                                styles={{ marginTop: 30 }}
+                                onClick={user ? onUpdateClick : onCreateClick}
+                                btnText={btnText}
+                                disabled={noValidate}
+
+                            />
+                            <ButtonModal
+                                onClick={hideModal}
+                                btnText='Cerrar'
+                            />
+
+
                         </KeyboardAwareScrollView>
                     </ScrollView>
                 </SafeAreaView>

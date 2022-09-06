@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, refreshControl, RefreshControl } from 'react-native'
 import { Ionicons } from "@expo/vector-icons";
 import Title from '../../Components/Title';
 
@@ -51,13 +51,11 @@ const UserScreen = () => {
 
     const [image] = useState('https://via.placeholder.com/150')
 
-
-
-
     const deleteUserInformation = (id) => {
-        // console.log(id)
         dispatch(deleteUserInfo(id))
     }
+
+
 
     useEffect(() => {
         dispatch(getUsuarios())
@@ -67,19 +65,21 @@ const UserScreen = () => {
 
     return (
         <Provider>
-            <SafeAreaView style={styles.container} refreshing={false}>
+            <SafeAreaView style={styles.container} >
                 <CreateUserModal
                     visible={visible}
                     hideModal={hideModal}
                     showModal={showModal}
                     userId={userID}
-
                     title={"Información de Perfil"}
                     nombre={user != undefined ? user.nombre : ''}
                     direccion={user != undefined ? user.direccion : ''}
                     email={email}
                     cell={user != undefined ? user.cell : ''}
                     img={user != undefined ? user.image : ''}
+                    btnText='Crear usuario'
+                    user={user != undefined ? true : false}
+                    id={user != undefined ? user.id : ''}
                 />
 
 
@@ -87,7 +87,14 @@ const UserScreen = () => {
                 {
                     user === null || user === undefined ?
 
-                        <ScrollView showsVerticalScrollIndicator={false}>
+                        <ScrollView showsVerticalScrollIndicator={false}
+                            refreshControl={
+                                <RefreshControl
+                                    refreshing={false}
+
+                                />
+                            }
+                        >
                             <View style={{ alignSelf: "center" }}>
                                 <View style={styles.profileImage}>
                                     <Image source={{ uri: image }} style={styles.image} resizeMode="center" />
@@ -129,6 +136,7 @@ const UserScreen = () => {
                                             email={email}
                                             cell={user != undefined ? user.cell : ''}
                                             styles={styles}
+                                            img={user != undefined ? user.image : ''}
                                         />
 
 
@@ -137,7 +145,12 @@ const UserScreen = () => {
                             </View>
                         </ScrollView>
                         :
-                        <ScrollView showsVerticalScrollIndicator={false}  >
+                        <ScrollView showsVerticalScrollIndicator={false} refreshControl={
+                            <RefreshControl
+                                refreshing={false}
+
+                            />
+                        }>
                             <View style={{ alignSelf: "center" }}>
                                 <View style={styles.profileImage}>
                                     <Image source={{ uri: user.image }} style={styles.image} resizeMode="center" />
@@ -182,6 +195,11 @@ const UserScreen = () => {
                                             styles={styles}
                                             user={user}
                                             id={user.id}
+                                            hideModal={hideModal}
+                                            showModal={showModal}
+                                            visible={visible}
+                                            img={user.image}
+                                            userId={user.userId}
 
                                         />
 

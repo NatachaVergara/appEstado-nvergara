@@ -6,6 +6,7 @@ import MainNavigation from './src/Navigation/MainNavigation';
 import { Provider } from 'react-redux'
 import store from './src/Store'
 import { init } from './src/db/index'
+import { heroku_API } from './src/Constants/database';
 
 init()
   .then(() => console.log('database initialized'))
@@ -14,7 +15,10 @@ init()
     console.log(err.message)
   })
 
+
+
 export default function App() {
+
 
   const [loaded] = useFonts({ CormorantSCBold: require('./assets/fonts/CormorantSC-Bold.ttf'), SemiBold: require('./assets/fonts/CormorantSC-SemiBold.ttf'), light: require('./assets/fonts/CormorantSC-Light.ttf') })
 

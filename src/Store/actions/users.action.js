@@ -2,17 +2,12 @@ import * as FileSystem from 'expo-file-system';
 import { URL_API } from '../../Constants/database';
 import { addUser, fetchUsers, deleteUser, updateUser } from '../../db/index'
 
-export const SELECT_USUARIO = 'SELECT_USUARIO'
+
 export const CREATE_USUARIO = 'CREATE_USUARIO'
 export const GET_USUARIOS = 'GET_USUARIOS'
 export const UPDATE_USUARIO = 'UPDATE_USUARIO'
 export const DELETE_USUARIO = 'DELETE_USUARIO'
 
-
-export const selectUsuario = (email) => ({
-    type: SELECT_USUARIO,
-    email: email
-})
 
 
 
@@ -72,42 +67,42 @@ export const createUser = (userId, nombre, email, direccion, cell, img) => {
                 to: Path
             })
 
-            const createUserFirebase = await fetch(`${URL_API}/users.json`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    date: Date.now(),
-                    user: {
-                        userId,
-                        nombre,
-                        email,
-                        direccion,
-                        cell,
-                        Path
-                    }
-                }),
-            })
+            // const createUserFirebase = await fetch(`${URL_API}/users.json`, {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify({
+            //         date: Date.now(),
+            //         user: {
+            //             userId,
+            //             nombre,
+            //             email,
+            //             direccion,
+            //             cell,
+            //             Path
+            //         }
+            //     }),
+            // })
 
-            const newUserResponse = await createUserFirebase.json();
-            console.log(newUserResponse)
+            // const newUserResponse = await createUserFirebase.json();
+            // console.log(newUserResponse)
 
-            const getUpdateUsersFirebase = await fetch(`${URL_API}/users.json`, {
-                headers: { 'Content-Type': 'application/json' }
-            });
+            // const getUpdateUsersFirebase = await fetch(`${URL_API}/users.json`, {
+            //     headers: { 'Content-Type': 'application/json' }
+            // });
 
-            const responseGetUsers = await getUpdateUsersFirebase.json();
-            console.log("RESPONSE GET USERS FROM FIREBASE", responseGetUsers)
-
-
-            const usuarios = Object.keys(responseGetUsers).map(
-                key => ({
-                    ...responseGetUsers[key], id: key
-                }))
+            // const responseGetUsers = await getUpdateUsersFirebase.json();
+            // console.log("RESPONSE GET USERS FROM FIREBASE", responseGetUsers)
 
 
-            console.log("USUARIOS", usuarios)
+            // const usuarios = Object.keys(responseGetUsers).map(
+            //     key => ({
+            //         ...responseGetUsers[key], id: key
+            //     }))
+
+
+            // console.log("USUARIOS", usuarios)
 
             const result = await addUser(
                 userId,

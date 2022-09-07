@@ -2,12 +2,10 @@ import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import { Button } from 'react-native-paper';
 import CreateUserModal from './CreateUserModal';
-import { useState } from 'react';
 
-// import AuthNavigator from './AuthNavigator';
-import { useSelector, useDispatch } from 'react-redux';
 
-const UserInfo = ({ visible, hideModal, showModal, user, email, nombre, direccion, cell, id, deleteUserInformation, styles, img, userId }) => {
+
+const UserInfo = ({ visible, hideModal, showModal, user, email, nombre, direccion, cell, id, deleteUserInformation, styles, userId }) => {
 
 
     // console.log(img)
@@ -22,11 +20,7 @@ const UserInfo = ({ visible, hideModal, showModal, user, email, nombre, direccio
                 hideModal={hideModal}
                 showModal={showModal}
                 title={"Actualizar de Perfil"}
-                nombre={nombre}
-                direccion={direccion}
                 email={email}
-                cell={cell}
-                img={img}
                 btnText='Actualizar'
                 userId={userId}
 

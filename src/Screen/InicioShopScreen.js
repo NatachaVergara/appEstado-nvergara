@@ -8,10 +8,10 @@ import { useDispatch } from 'react-redux';
 
 
 const InicioShopScreen = ({ navigation }) => {
-    // const dispatch = useDispatch()
-    // useEffect(() => {
-    //     dispatch(getUsuarios())
-    // })
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(getUsuarios())
+    })
 
     let list = [{ id: 1, nombre: 'Autores', path: 'AutoresScreen' }, { id: 2, nombre: 'Categorías', path: 'CategoriaScreen' }]
 

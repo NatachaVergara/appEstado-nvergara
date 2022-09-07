@@ -12,17 +12,17 @@ import ButtonModal from './Button';
 
 
 
-const CreateUserModal = ({ id, visible, hideModal, userId, email, title, nombre, direccion, cell, img, btnText, user }) => {
+const CreateUserModal = ({ visible, hideModal, userId, email, title, btnText, user }) => {
     const [image, setImage] = useState('')
 
 
     //    console.log('MODAL', user)
 
     const initalState = {
-        nombre: nombre,
+        nombre: '',
         email: email,
-        direccion: direccion,
-        cell: cell,
+        direccion: '',
+        cell: '',
     };
     const [state, setState] = useState(initalState)
     const handleChangeText = (value, name) => {
@@ -35,7 +35,6 @@ const CreateUserModal = ({ id, visible, hideModal, userId, email, title, nombre,
     const dispatch = useDispatch()
 
     const onCreateClick = () => {
-        console.log('create')
         dispatch(createUser(userId, state.nombre, state.email, state.direccion, state.cell, image))
         setTimeout(() => {
             dispatch(getUsuarios())
@@ -47,8 +46,6 @@ const CreateUserModal = ({ id, visible, hideModal, userId, email, title, nombre,
 
 
     const onUpdateClick = () => {
-        console.log('Update')
-        // console.log(user.id, userId, state.nombre, state.email, state.direccion, state.cell, image)
         dispatch(updateUsuario(user.id, userId, state.nombre, state.email, state.direccion, state.cell, image))
         hideModal()
     }
@@ -90,18 +87,6 @@ const CreateUserModal = ({ id, visible, hideModal, userId, email, title, nombre,
                                         onChangeText={(value) => handleChangeText(value, "nombre")}
                                         value={state.nombre}
                                     />
-
-
-                                    <TextInput
-                                        label="Email *"
-                                        left={<TextInput.Icon name="email" />}
-                                        style={styles.textInput}
-                                        onChangeText={(value) => handleChangeText(value, "email")}
-                                        value={state.email}
-                                        keyboardType="email-address"
-                                        autoCapitalize='none'
-                                    />
-
 
                                     <TextInput
                                         label="Dirección(ciudad, prov , cp) *"

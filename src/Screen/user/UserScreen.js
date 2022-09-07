@@ -5,7 +5,7 @@ import Title from '../../Components/Title';
 
 // import AuthNavigator from './AuthNavigator';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectUsuario, getUsuarios, deleteUserInfo } from '../../Store/actions/users.action'
+import { getUsuarios, deleteUserInfo } from '../../Store/actions/users.action'
 import { getOrders } from '../../Store/actions/orders.action'
 
 import CreateUserModal from '../../Components/CreateUserModal';
@@ -24,13 +24,13 @@ const UserScreen = () => {
     const dispatch = useDispatch()
     //Traigo los datos que necesito de mis store
     const email = useSelector(store => store.auth.email)
+    // console.log(email)
     const userID = useSelector(store => store.auth.userId)
     const orders = useSelector(store => store.orders.orders)
     const users = useSelector(store => store.usuarios.users)
     // console.log('USERS', users)
-    const user = users === undefined ? null : users.find(e => e.userId === userID)
-    //    console.log('USER: ', user)
-
+    const user = users === undefined ? null : users.find(e => e.email === email)
+    // console.log('USER: ', user)
 
 
     const userOrders = orders.filter(orders => orders.userId === userID)
@@ -72,14 +72,9 @@ const UserScreen = () => {
                     showModal={showModal}
                     userId={userID}
                     title={"Información de Perfil"}
-                    nombre={user != undefined ? user.nombre : ''}
-                    direccion={user != undefined ? user.direccion : ''}
                     email={email}
-                    cell={user != undefined ? user.cell : ''}
-                    img={user != undefined ? user.image : ''}
                     btnText='Crear usuario'
                     user={user != undefined ? true : false}
-                    id={user != undefined ? user.id : ''}
                 />
 
 

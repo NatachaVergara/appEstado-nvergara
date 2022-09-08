@@ -4,13 +4,16 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Title, TextInput, Button } from 'react-native-paper';
 import MaskInput, { Masks } from 'react-native-mask-input';
 import Colors from '../../Constants/Colors';
-
+import { useSelector, useDispatch } from 'react-redux';
 
 //NPM credit card
 
 const PagosScreen = ({ navigation }) => {
+    const users = useSelector(store => store.usuarios.users)
+    const user = users === undefined ? null : users.find(e => e.email === email)
+    let nombre = user.nombre
     const [cNumber, onChangeCNumber] = useState('')
-    const [cName, onChangeCName] = useState('')
+    const [cName, onChangeCName] = useState(nombre)
     const [cExpDate, onChangeCExpDate] = useState('----')
     const [cvc, onChangeCCvc] = useState('')
     const [cardType, onChangecardType] = useState('VISA')

@@ -10,7 +10,7 @@ import Colors from '../../Constants/Colors';
 
 const PagosScreen = ({ navigation }) => {
     const [cNumber, onChangeCNumber] = useState('')
-    const [cName, onChangeCName] = useState('Jorge Pérez')
+    const [cName, onChangeCName] = useState('')
     const [cExpDate, onChangeCExpDate] = useState('----')
     const [cvc, onChangeCCvc] = useState('')
     const [cardType, onChangecardType] = useState('VISA')

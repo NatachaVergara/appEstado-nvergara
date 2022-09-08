@@ -11,17 +11,19 @@ import { addDireccion } from '../../Store/actions/info_envios.action'
 
 const DirYFactScreen = ({ navigation }) => {
   const email = useSelector(store => store.auth.email)
+  const users = useSelector(store => store.usuarios.users)
+  const user = users === undefined ? null : users.find(e => e.email === email)
 
 
 
   const initalState = {
-    nombreCompleto: '',
+    nombreCompleto: user.nombre,
     direccion: '',
     edificio_Puerta_Lote: '',
     provincia: '',
     pais: '',
     codigo_Postal: '',
-    telefono: '',
+    telefono: user.cell,
     email: email,
     notas: '',
   };

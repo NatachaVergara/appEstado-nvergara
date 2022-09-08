@@ -12,7 +12,7 @@ const FinalizarCompra = ({ navigation }) => {
 
     const dispatch = useDispatch()
     const items = useSelector(store => store.carrito.carrito)
-    console.log('items', items)
+    // console.log('items', items)
 
     const total = useSelector(store => store.carrito.total)
     const userId = useSelector(store => store.auth.userId)
@@ -23,9 +23,10 @@ const FinalizarCompra = ({ navigation }) => {
     const handlerConfirm = () => {
         dispatch(confirmCarrito(items, total, userId, info))
         setTimeout(() => {
-            navigation.navigate('PerfilUsuario')
-        }, 4000)
+            navigation.navigate('confirmacion')
+        }, 2000)
     }
+
     const onHandlerVolver = () => navigation.navigate('PagoConfirmacion')
 
 

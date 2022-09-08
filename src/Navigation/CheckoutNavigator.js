@@ -3,6 +3,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import DirYFactScreen from '../Screen/checkout/DirYFactScreen';
 import PagosScreen from '../Screen/checkout/PagosScreen';
 import FinalizarCompra from '../Screen/checkout/FinalizarCompra';
+import UserScreen from '../Screen/user/UserScreen';
+import InicioShopScreen from '../Screen/InicioShopScreen';
+import PagoRealizadoExito from '../Screen/Confirmacion/PagoRealizadoExito';
 
 
 const Stack = createNativeStackNavigator();
@@ -40,6 +43,30 @@ const CheckoutNavigator = () => {
                 }}
 
             />
+
+
+            <Stack.Screen
+                name='confirmacion'
+                component={PagoRealizadoExito}
+
+            />
+
+            <Stack.Screen
+                name='PerfilUsuario'
+                component={UserScreen}
+                options={{
+                    title: 'Perfil de usuario'
+                }}
+            />
+
+            <Stack.Screen
+                name='InicioShopScreen'
+                component={InicioShopScreen}
+                options={{
+                    title: 'Shop'
+                }}
+            />
+
         </Stack.Navigator >
     )
 }

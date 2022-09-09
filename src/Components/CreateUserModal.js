@@ -52,8 +52,8 @@ const CreateUserModal = ({ visible, hideModal, userId, email, title, btnText, us
 
 
     const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
-    console.log('STATUS', status)
-    console.log('requestPermission', requestPermission)
+    // console.log('STATUS', status)
+    // console.log('requestPermission', requestPermission)
 
 
     const pickImage = async () => {

@@ -50,8 +50,18 @@ const CreateUserModal = ({ visible, hideModal, userId, email, title, btnText, us
         hideModal()
     }
 
+
+    const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
+    console.log('STATUS', status)
+    console.log('requestPermission', requestPermission)
+
+
     const pickImage = async () => {
-        // No permissions request is necessary for launching the image library
+        requestPermission()
+        if (!status.granted) {
+            console.log('Permiso denegado')
+        }
+
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
@@ -65,7 +75,15 @@ const CreateUserModal = ({ visible, hideModal, userId, email, title, btnText, us
         } else {
             setImage('')
         }
-    };
+
+
+    }
+
+
+
+
+
+
 
     return (
 

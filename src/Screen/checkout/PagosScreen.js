@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 //NPM credit card
 
 const PagosScreen = ({ navigation }) => {
+    const email = useSelector(store => store.auth.email)
     const users = useSelector(store => store.usuarios.users)
     const user = users === undefined ? null : users.find(e => e.email === email)
     let nombre = user.nombre
@@ -29,7 +30,7 @@ const PagosScreen = ({ navigation }) => {
 
 
     const noValidate = !(
-        cNumber.length && cName.length && cExpDate.length && cvc.length && cardType.length > 0
+        cNumber.length && cName.length && cExpDate.length && cvc.length  && cardType.length > 0
     )
 
 

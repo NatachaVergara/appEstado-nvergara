@@ -36,7 +36,7 @@ const FinalizarCompra = ({ navigation }) => {
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.scrollView}>
                 <Title
-                    title='Finalizar compra'
+                    title='Tu pedido'
                     style={styles.title}
                 />
 
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
 
     },
     inner: {
-        padding: 24,
+        padding: 30,
         flexDirection: 'column',
         justifyContent: "center",
         alignItems: "center",
